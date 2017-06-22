@@ -1,8 +1,123 @@
 <html>
-	<head>
-	<title>WADM</title>	
-	</head>
-	<body>
-		<centre><h1> Welcome To WADM</h1></centre>
-	</body>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WADM</title>
+
+<link rel="stylesheet" type="text/css"
+	href="libs/bootstrap-dist/css/bootstrap.min.css">
+<!-- Optional Bootstrap theme -->
+<link rel="stylesheet"
+	href="libs/bootstrap-dist/css/bootstrap-theme.min.css">
+<link rel="stylesheet" type="text/css"
+	href="libs/imgareaselect/css/imgareaselect-default.css" />
+
+<style type="text/css">
+.headerClass {
+	background-image: url("images/kit.jpg");
+}
+
+* {
+	margin: 0;
+}
+
+html, body {
+	height: 100%;
+}
+
+.wrapper {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -150px;
+	/* the bottom margin is the negative value of the footer's height */
+}
+
+.footer, .push {
+	height: 155px; /* .push must be the same height as .footer */
+}
+</style>
+
+</head>
+
+<body onload="loadDefaultPage()">
+
+	<nav class="navbar navbar-default">
+		<div class="container-fluid"
+			style="background-color: #019682; color: white">
+			<div class="navbar-header" style="background-color: #fff;">
+				<a class="navbar-brand" href="#"><img
+					style="max-width: 100px; margin-top: -13px;" src="images/kit.jpg"></a>
+			</div>
+			<ul class="nav navbar-nav navbar-right">
+				<li id="act1" class="active"><a id="1" style="color: white;">Home</a></li>
+				<li id="act2"><a id="2" style="color: white;">Image Annotations</a></li>
+				<li id="act3"><a id="3" style="color: white;">WorkFlow Annotations</a></li>
+				<li id="act4"><a id="4" style="color: white;">Documentations</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div class="wrapper" id="appDiv">
+
+		<!-- <div class="push"></div> -->
+	</div>
+	<div class="footer" style="background-color: black; color: white;">
+		<p>Copyright (c) 2008</p>
+	</div>
+
+
+	<script type="text/javascript"
+		src="libs/imgareaselect/scripts/jquery.imgareaselect.js"></script>
+	<script src="libs/jquery-3.2.1.js"></script>
+	<script src="libs/bootstrap-dist/js/bootstrap.js"></script>
+	<script>
+		$(document).ready(function() {
+			$("a").click(function() {
+				var id = $(this).attr('id');
+				var urlPage = "homePage";
+					if(id==2)
+						urlPage = "imageAnnotation";
+					if(id==3)
+						urlPage = "workfolwAnnotation";
+					if(id==4)
+						urlPage = "documentations";
+					
+				$.ajax({
+					url : urlPage+".html",
+					success : function(result) {
+						$("#appDiv").html(result);
+						for (var i = 1; i < 5; i++) {
+							if(id==i){
+								$("#act"+i).addClass('active');
+								$("#"+i).css({"color":"black"});
+							}else{
+								$("#act"+i).removeClass('active');
+								$("#"+i).css({"color":"white"});
+							}
+						}
+					}
+				});
+			});
+		});
+		
+		function loadDefaultPage(){
+			$.ajax({
+				url : "homePage.html",
+				success : function(result) {
+					$("#appDiv").html(result);
+					for (var i = 1; i < 5; i++) {
+						if(i==1){
+							$("#act"+i).addClass('active');
+							$("#"+i).css({"color":"black"});
+						}else{
+							$("#act"+i).removeClass('active');
+							$("#"+i).css({"color":"white"});
+						}
+					}
+				}
+			});
+		}
+	</script>
+</body>
 </html>
