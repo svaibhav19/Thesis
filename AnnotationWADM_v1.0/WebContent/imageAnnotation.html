@@ -1,10 +1,158 @@
+<style>
+.btn-file {
+	position: relative;
+	overflow: hidden;
+}
 
-<h1>imageAnnotation.html</h1>
+.btn-file input[type=file] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	min-width: 100%;
+	min-height: 100%;
+	font-size: 100px;
+	text-align: right;
+	filter: alpha(opacity = 0);
+	opacity: 0;
+	outline: none;
+	background: white;
+	cursor: inherit;
+	display: block;
+}
 
-
+#img-upload {
+	width: 100%;
+}
+</style>
+<div class="row">
+	<div class="col-xs-11 col-sm-11 col-md-11 col-lg-11 headerText">
+		Image Annotations</div>
+	<div class="col-md-6">
+		<div class="form-group">
+			<label>Upload Image</label>
+			<div class="input-group">
+				<span class="input-group-btn"> <span
+					class="btn btn-default btn-file"> Browse… <input type="file"
+						id="imgInp">
+				</span>
+				</span> <input type="text" class="form-control" readonly>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-11 col-sm-8 col-md-8 col-lg-8"
+		style="border-right: 1px solid black;">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 subHeadings">
+				Image Annotation Sections</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 content">
+				<img id='img-upload' /></div>
+		</div>
+	</div>
+	<div class="col-xs-11 col-sm-4 col-md-4 col-lg-4">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 subHeadings2">
+				Annotated Image Details</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">all
+				previous annotation goes here</div>
+		</div>
+	</div>
+</div>
 <script>
-	var app = new annotator.App();
-	app.include(annotatorImageSelect, {
-		element : $('.content img'),
-	});
+	$(document).ready(
+			function() {
+				$(document).on(
+						'change',
+						'.btn-file :file',
+						function() {
+							var input = $(this), label = input.val().replace(
+									/\\/g, '/').replace(/.*\//, '');
+							input.trigger('fileselect', [ label ]);
+						});
+
+				$('.btn-file :file').on(
+						'fileselect',
+						function(event, label) {
+
+							var input = $(this).parents('.input-group').find(
+									':text'), log = label;
+
+							if (input.length) {
+								input.val(log);
+							} else {
+								if (log)
+									alert(log);
+							}
+
+						});
+				function readURL(input) {
+					if (input.files && input.files[0]) {
+						var reader = new FileReader();
+
+						reader.onload = function(e) {
+							$('#img-upload').attr('src', e.target.result);
+						}
+
+						reader.readAsDataURL(input.files[0]);
+					}
+				}
+
+				$("#imgInp").change(function() {
+					readURL(this);
+				});
+			});
 </script>
+ <script type="text/javascript">
+ var content = $('#content').annotator();
+ content.annotator('addPlugin', 'Store', {
+   // The endpoint of the store on your server.
+   prefix: 'http://localhost:8080/AnnotationWADM_v1.0/rest/test',
+
+   // Attach the uri of the current page to all annotations to allow search.
+   annotationData: {
+     'uri': 'http://localhost:8080/AnnotationWADM_v1.0/rest/test'
+   },
+
+ });
+ 
+      $( document ).ready()
+        if (typeof annotator === 'undefined') {
+          alert("Oops! Something went wrong and Annotator isn't loaded.");
+      } else {
+        var app = new annotator.App();
+        app.include(annotator.ui.main,{
+              element: document.querySelector('.content .inner'),
+            })
+            .include(annotatorImageSelect, {
+              element: $('.content img'),
+           })
+           .include(annotator.storage.http)
+           .include(annotator.storage.debug);
+          app.start();
+          console.log("Status:"+app);
+      }
+      /*
+    //  code for auto complete feture further can be used for vocab validations from url https://github.com/openannotation/annotator/issues/92#issuecomment-3985124
+      
+      jQuery(function ($) {
+  $('#elementToAnnotate').annotator().annotator('addPlugin', 'Tags');
+
+  var availableTags = [
+    "Tag1",
+    "OtherTag",
+    "Tag2",
+  ];
+
+  $('#elementToAnnotate').data('annotator').plugins.Tags.input.autocomplete({
+    source: availableTags
+  });
+
+});
+      */
+    </script>
