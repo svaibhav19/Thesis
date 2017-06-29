@@ -13,6 +13,9 @@
 	href="libs/bootstrap-dist/css/bootstrap-theme.min.css">
 <link rel="stylesheet" type="text/css"
 	href="libs/imgareaselect/css/imgareaselect-default.css" />
+<link rel="stylesheet" type="text/css"
+	href="libs/marginalia/annotator.marginalia.min.css" />
+	 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
 <style type="text/css">
 .headerClass {
 	background-image: url("images/kit.jpg");
@@ -59,7 +62,28 @@ html, body {
 	background-color: silver;
 }
 </style>
-
+<style>
+      body {
+        font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+        letter-spacing: 0.01rem;
+        font-size: 22px;
+        line-height: 1.5;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+      }
+      header, article {
+        width: 740px;
+        margin: 2em auto;
+        position: relative;
+        z-index: 2;
+      }
+      .highlight {
+        background: rgba(255, 10, 10, 0.3);
+      }
+      .inner{
+        background: white;
+      }
+    </style>
 </head>
 
 <body onload="loadDefaultPage()">
@@ -94,6 +118,10 @@ html, body {
 	<script type="text/javascript"
 		src="libs/imgareaselect/scripts/jquery.imgareaselect.js"></script>
 	<script src="libs/annotator.imgselect.js"></script>
+
+	<script type="text/javascript" src="libs/marginalia/bootstrap.dropdown.js"></script>
+	<script type="text/javascript" src="libs/marginalia/annotator.marginalia.min.js"></script>
+	<script type="text/javascript" src="libs/marginalia/moment.min.js"></script>
 	<script>
 		$(document).ready(function() {
 			$("a").click(function() {

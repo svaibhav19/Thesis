@@ -42,27 +42,38 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-xs-11 col-sm-8 col-md-8 col-lg-8"
+	<div class="col-xs-11 col-sm-11 col-md-11 col-lg-11"
 		style="border-right: 1px solid black;">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 subHeadings">
 				Image Annotation Sections</div>
+				
 		</div>
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 content">
-				<img id='img-upload' /></div>
+			<section class="inner">
+				<img id='img-upload' />
+				</section>
+				</div>
 		</div>
 	</div>
-	<div class="col-xs-11 col-sm-4 col-md-4 col-lg-4">
+	<div class="col-xs-11 col-sm-1 col-md-1 col-lg-1">
+	<div class="in-page-controls"></div>
+	</div>
+	<!-- <div class="col-xs-11 col-sm-4 col-md-4 col-lg-4">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 subHeadings2">
 				Annotated Image Details</div>
 		</div>
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">all
-				previous annotation goes here</div>
+				previous annotation goes here
+				<br>
+				<div class="in-page-controls"></div> control container
+				
+				</div>
 		</div>
-	</div>
+	</div> -->
 </div>
 <script>
 	$(document).ready(
@@ -108,8 +119,9 @@
 				});
 			});
 </script>
+
  <script type="text/javascript">
- var content = $('#content').annotator();
+/*  var content = $('#content').annotator();
  content.annotator('addPlugin', 'Store', {
    // The endpoint of the store on your server.
    prefix: 'http://localhost:8080/AnnotationWADM_v1.0/rest/test',
@@ -119,12 +131,13 @@
      'uri': 'http://localhost:8080/AnnotationWADM_v1.0/rest/test'
    },
 
- });
+ }) */;
  
       $( document ).ready()
         if (typeof annotator === 'undefined') {
           alert("Oops! Something went wrong and Annotator isn't loaded.");
       } else {
+    	 var _marginalia = annotatorMarginalia();
         var app = new annotator.App();
         app.include(annotator.ui.main,{
               element: document.querySelector('.content .inner'),
@@ -133,10 +146,34 @@
               element: $('.content img'),
            })
            .include(annotator.storage.http)
-           .include(annotator.storage.debug);
+           .include(annotator.storage.debug)
+           .include(customPlugin).include(annotatorMarginalia, {
+               show_update_date: true,
+               show_author: true
+             });
           app.start();
+       // simulate empty data load since demo has no annotation store
+          _marginalia.annotationsLoaded([]);
           console.log("Status:"+app);
+      };
+      function customPlugin(){
+    	  return {
+    	        annotationCreated: function (annotation) {
+    	            console.log(annotation);
+    	            /* var output = '';
+    	            for (var property in object) {
+    	              output += property + ': ' + object[property]+'; ';
+    	            }
+    	            console.log(output); */
+    	        },
+    	  annotationUpdated: function (annotation){
+    		  console.log(annotation);
+    	  }
+    	    };
+    	  
       }
+      
+      //annotationUpdated
       /*
     //  code for auto complete feture further can be used for vocab validations from url https://github.com/openannotation/annotator/issues/92#issuecomment-3985124
       
@@ -155,4 +192,44 @@
 
 });
       */
+    </script>
+    <script>
+     /*  if (typeof annotator === 'undefined') {
+        alert("Oops! it looks like you haven't built Annotator. " +
+              "Either download a tagged release from GitHub, or build the " +
+              "package by running `make`");
+      } else {
+
+    function generate_id() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
+        // set fake date, id, and author in order to demonstrate footer,
+        // since demo operates without an annotate store
+        var fakeData = function () {
+          return {
+            beforeAnnotationCreated: function (ann) {
+              ann.updated = new Date();
+              ann.user = 'anon';
+              ann.id = generate_id();
+            }
+          };
+        };
+
+        var _marginalia = annotatorMarginalia();
+        var app = new annotator.App()
+          .include(annotator.ui.main)
+          .include(fakeData)
+          .include(annotatorMarginalia, {
+            show_update_date: true,
+            show_author: true
+          });
+
+        app.start();
+
+        // simulate empty data load since demo has no annotation store
+        _marginalia.annotationsLoaded([]);
+
+      } */
     </script>
