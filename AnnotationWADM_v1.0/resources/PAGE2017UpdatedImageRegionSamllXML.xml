@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<PcGts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schema.primaresearch.org/PAGE/gts/pagecontent/2017-07-15 http://schema.primaresearch.org/PAGE/gts/pagecontent/2017-07-15/pagecontent.xsd" xmlns="http://schema.primaresearch.org/PAGE/gts/pagecontent/2017-07-15">
+    <Metadata>
+        <Creator>SWATI Workflow-Version 1.3</Creator>
+        <Created>2017-07-30T10:20:56</Created>
+        <LastChange>2017-07-30T10:20:56</LastChange>
+        <Comments>PageXml created according to 2017 schema</Comments>
+    </Metadata>
+    <Page custom="MeasurementUnit:Pixel" imageFilename="T Hs 1108 55 4°_00037_T_0.tif" imageHeight="3816" imageWidth="2935">
+        <Border>
+            <Coords points="2560,320 2560,3670 0,3670 0,320"/>
+        </Border>
+        <UserDefined>
+            <UserAttribute name="pageModelWidth" type="xsd:float" value="19.492"/>
+            <UserAttribute name="pageModelHeight" type="xsd:float" value="28.2"/>
+        </UserDefined>
+        <TextRegion id="r1">
+            <Coords points="1235,360 1235,445 1105,445 1105,360"/>
+            <UserDefined>
+                <UserAttribute name="SaturationFGColorHue_STD_DEV" type="xsd:string" value="36.0855543215451"/>
+                <UserAttribute name="SaturationBGColorBrightness_STD_DEV" type="xsd:string" value="4.228982534104257"/>
+                <UserAttribute name="BrightnessFGColorHue_SKEWNESS" type="xsd:string" value="7.580089635490754"/>
+                <UserAttribute name="SaturationBGColorHue_STD_DEV" type="xsd:string" value="19.1574705042715"/>
+                <UserAttribute name="BrightnessFGColorHue_STD_DEV" type="xsd:string" value="57.57303630843714"/>
+            </UserDefined>
+            <TextEquiv>
+                <Unicode/>
+            </TextEquiv>
+        </TextRegion>
+        <TextRegion id="r2">
+            <Coords points="2015,515 2015,1370 285,1370 285,515"/>
+            <UserDefined>
+                <UserAttribute name="SaturationFGColorHue_STD_DEV" type="xsd:string" value="35.93184909466317"/>
+                <UserAttribute name="BrightnessFGColorHue_STD_DEV" type="xsd:string" value="57.246947492264766"/>
+            </UserDefined>
+            <TextEquiv>
+                <Unicode/>
+            </TextEquiv>
+        </TextRegion>
+
+        <UnknownRegion custom="RedArea" id="r67">
+            <Coords points="845,3150 845,3165 835,3165 835,3150"/>
+            <UserDefined>
+                <UserAttribute name="SaturationFGColorHue_STD_DEV" type="xsd:string" value="0.773255375301411"/>
+                <UserAttribute name="BrightnessFGColorSaturation_MEDIAN" type="xsd:string" value="52.94117647058824"/>
+                <UserAttribute name="SaturationBGColorHue_STD_DEV" type="xsd:string" value="0.0"/>
+                <UserAttribute name="BrightnessFGColorHue_STD_DEV" type="xsd:string" value="1.9965367939384873"/>
+            </UserDefined>
+        </UnknownRegion>
+    </Page>
+</PcGts>

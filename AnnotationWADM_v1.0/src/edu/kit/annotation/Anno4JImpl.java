@@ -38,6 +38,7 @@ public class Anno4JImpl {
 			
 			System.out.println("objets Created");
 
+			
 
 			// setting the motivations
 //			Motivation motivation = MotivationFactory.getCommenting(anno4j);
@@ -75,6 +76,9 @@ public class Anno4JImpl {
 			Motivation taggingMotivation = MotivationFactory.getTagging(anno4j);
 			txtBody1.addPurpose(taggingMotivation);
 			txtBody1.setValue("love");
+			
+			
+			
 //			adding to body type choice having multiple body inside it
 			Choice choice = anno4j.createObject(Choice.class);
 //			1 of 2 multiple bodies
@@ -98,6 +102,7 @@ public class Anno4JImpl {
 			multiBody.add(choice);
 //			multiBody.add(txtBody2);
 			annotation.setBodies(multiBody);
+			
 //			annotation.addBody(txtBody1);
 //			annotation.addBody(choice);
 			
@@ -115,6 +120,21 @@ public class Anno4JImpl {
 			annotation.addTarget(specific);
 		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 			System.out.println("JSONLD FORMAT>>>>>>>>>>>>>\n"+annotation.getTriples(RDFFormat.JSONLD));
+			
+			System.out.println("+++++++++++++++++++++++++------------+++++++++++++++++++++++++++++++++++++++++");
+			/*ObjectParser objectParser = new ObjectParser();
+			List<Annotation> annotations = objectParser.parse(annotation.getTriples(RDFFormat.JSONLD).toString(), new URL("http://www.w3.org/1999/02/22-rdf-syntax-ns#"), RDFFormat.JSONLD);
+			System.out.println("---------------------"+annotations.size());
+			System.out.println(annotations.get(0).getTriples(RDFFormat.RDFXML));
+			*/
+//			DatasetAccessor da = DatasetAccessorFactory.createHTTP("http://localhost:3030/kit/abc");
+//			Model model = ModelFactory.createDefaultModel();
+//			 model.read(new FileInputStream("E://rdfttl.ttl"),null,"TTL");
+//			InputStream stream = new ByteArrayInputStream(annotation.getTriples(RDFFormat.TURTLE).toString().getBytes(StandardCharsets.UTF_8));
+//			InputStream stream = new ByteArrayInputStream(annotation.getTriples(RDFFormat.RDFXML).toString().getBytes(StandardCharsets.UTF_8));
+//			 model.read(stream,null,"RDFXML");
+//			da.putModel("abcde", model);
+			
 		} catch (RepositoryException e) {
 			e.printStackTrace();
 		} catch (RepositoryConfigException e) {
@@ -123,6 +143,5 @@ public class Anno4JImpl {
 			e.printStackTrace();
 		} catch (InstantiationException e) {
 			e.printStackTrace();
-		}
-	}
+		} 	}
 }

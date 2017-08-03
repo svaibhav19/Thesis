@@ -51,14 +51,14 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 content">
-			<section class="inner">
+			<!-- <section class="inner"> -->
 				<img id='img-upload' />
-				</section>
+				<!-- </section> -->
 				</div>
 		</div>
 	</div>
 	<div class="col-xs-11 col-sm-1 col-md-1 col-lg-1">
-	<div class="in-page-controls"></div>
+	<!-- <div class="in-page-controls"></div> -->
 	</div>
 	<!-- <div class="col-xs-11 col-sm-4 col-md-4 col-lg-4">
 		<div class="row">
@@ -137,7 +137,7 @@
         if (typeof annotator === 'undefined') {
           alert("Oops! Something went wrong and Annotator isn't loaded.");
       } else {
-    	 var _marginalia = annotatorMarginalia();
+    	/*var _marginalia = annotatorMarginalia();*/
         var app = new annotator.App();
         app.include(annotator.ui.main,{
               element: document.querySelector('.content .inner'),
@@ -147,27 +147,34 @@
            })
            .include(annotator.storage.http)
            .include(annotator.storage.debug)
-           .include(customPlugin).include(annotatorMarginalia, {
+            .include(customPlugin);/*.include(annotatorMarginalia, {
                show_update_date: true,
                show_author: true
-             });
+             }); */
           app.start();
        // simulate empty data load since demo has no annotation store
-          _marginalia.annotationsLoaded([]);
+         // _marginalia.annotationsLoaded([]);
           console.log("Status:"+app);
       };
       function customPlugin(){
     	  return {
     	        annotationCreated: function (annotation) {
-    	            console.log(annotation);
+    	            //console.log(annotation);
     	            /* var output = '';
     	            for (var property in object) {
     	              output += property + ': ' + object[property]+'; ';
     	            }
     	            console.log(output); */
+    	            console.log("-----created------");
+    	            var myJSON = JSON.stringify(annotation);
+    	            alert(myJSON);
+    	            console.log(myJSON);
     	        },
     	  annotationUpdated: function (annotation){
-    		  console.log(annotation);
+    		  console.log("Updaed"+annotation);
+    		  var myJSON = JSON.stringify(annotation);
+	            alert(myJSON);
+	            console.log(myJSON);
     	  }
     	    };
     	  
