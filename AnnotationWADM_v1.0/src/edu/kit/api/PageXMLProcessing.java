@@ -22,19 +22,19 @@ import org.apache.jena.query.DatasetAccessor;
 import org.apache.jena.query.DatasetAccessorFactory;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.openrdf.query.MalformedQueryException;
-import org.openrdf.query.UpdateExecutionException;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.config.RepositoryConfigException;
 import org.openrdf.rio.RDFFormat;
 
 import com.github.anno4j.Anno4j;
 import com.github.anno4j.model.Annotation;
+import com.github.anno4j.model.Motivation;
+import com.github.anno4j.model.MotivationFactory;
 import com.github.anno4j.model.State;
-import com.github.anno4j.model.impl.ResourceObject;
 import com.github.anno4j.model.impl.agent.Software;
 import com.github.anno4j.model.impl.body.TextualBody;
 import com.github.anno4j.model.impl.multiplicity.Choice;
+import com.github.anno4j.model.impl.selector.SvgSelector;
 import com.github.anno4j.model.impl.state.HttpRequestState;
 import com.github.anno4j.model.impl.targets.SpecificResource;
 
@@ -104,7 +104,7 @@ public class PageXMLProcessing {
 		// processing the xml file and converting the xml to WADM
 		Annotation processedAnnotations = processXML(pcgtsTypeObj);
 		// Storing the created Annotaions into apache Jena
-//		String message = storeAnnoataions(processedAnnotations);
+		String message = storeAnnoataions(processedAnnotations);
 
 	}
 
@@ -158,6 +158,7 @@ public class PageXMLProcessing {
 			try {
 				regionAnnotations = anno4j.createObject(Annotation.class);
 				addAgent(regionAnnotations, pcgtsTypeObj);
+				regionAnnotations.addMotivation(addMotivation());
 
 				TextualBody textBody = anno4j.createObject(TextualBody.class);
 				textBody.setValue("Coords points=" + regionType.getCoords().getPoints());
@@ -184,7 +185,7 @@ public class PageXMLProcessing {
 				regionAnnotations.addBody(textBody);
 				regionAnnotations.addBody(choice);
 
-				SpecificResource specific = getTarget(regionAnnotations, pcgtsTypeObj);
+				SpecificResource specific = getTarget(regionAnnotations, regionType.getCoords().getPoints());
 
 				regionAnnotations.addTarget(specific);
 				
@@ -245,6 +246,7 @@ public class PageXMLProcessing {
 			Annotation pageAnnoataion = anno4j.createObject(Annotation.class);
 
 			addAgent(pageAnnoataion, pcgtsTypeObj);
+			pageAnnoataion.addMotivation(addMotivation());
 
 			TextAnnotationBody textBody = anno4j.createObject(TextAnnotationBody.class);
 			textBody.setValue("Coords points=" + pcgtsTypeObj.getPage().getBorder().getCoords().getPoints());
@@ -265,7 +267,7 @@ public class PageXMLProcessing {
 			pageAnnoataion.addBody(textBody);
 			pageAnnoataion.addBody(choice);
 
-			SpecificResource specific = getTarget(pageAnnoataion, pcgtsTypeObj);
+			SpecificResource specific = getTarget(pageAnnoataion, pcgtsTypeObj.getPage().getBorder().getCoords().getPoints());
 
 			pageAnnoataion.addTarget(specific);
 			
@@ -278,6 +280,10 @@ public class PageXMLProcessing {
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private Motivation addMotivation() throws RepositoryException, IllegalAccessException, InstantiationException {
+		return MotivationFactory.getDescribing(anno4j);
 	}
 
 	private void storeAnnotationToJena(Annotation pageAnnoataion, String id) {
@@ -317,14 +323,19 @@ public class PageXMLProcessing {
 		
 	}
 
-	private SpecificResource getTarget(Annotation pageAnnoataion, PcGtsType pcgtsTypeObj) {
+	private SpecificResource getTarget(Annotation pageAnnoataion, String points) {
 		SpecificResource specific;
 		try {
 			specific = anno4j.createObject(SpecificResource.class);
-			ResourceObject source = anno4j.createObject(ResourceObject.class);
+			/*ResourceObject source = anno4j.createObject(ResourceObject.class);
 			source.setResourceAsString("http://example.com/document1#points="
-					+ pcgtsTypeObj.getPage().getBorder().getCoords().getPoints().replaceAll(" ", "_"));
-			specific.setSource(source);
+					+ points);
+			specific.setSource(source);*/
+			SvgSelector svg = anno4j.createObject(SvgSelector.class);
+			svg.setValue(points);
+			specific.setSelector(svg);
+			
+			
 			State state = anno4j.createObject(State.class);
 			HttpRequestState reqState = anno4j.createObject(HttpRequestState.class);
 			reqState.setValue("Accept: application/xml");
@@ -336,11 +347,7 @@ public class PageXMLProcessing {
 			e1.printStackTrace();
 		} catch (InstantiationException e1) {
 			e1.printStackTrace();
-		} catch (MalformedQueryException e) {
-			e.printStackTrace();
-		} catch (UpdateExecutionException e) {
-			e.printStackTrace();
-		}
+		} 
 
 		return null;
 	}

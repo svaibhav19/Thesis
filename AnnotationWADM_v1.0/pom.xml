@@ -39,11 +39,11 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.w3c/dom -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>xml-apis</groupId>
 			<artifactId>xml-apis</artifactId>
 			<version>1.4.01</version>
-		</dependency>
+		</dependency> -->
 
 		<dependency>
 			<groupId>org.apache.jena</groupId>
@@ -63,8 +63,6 @@
 			<artifactId>jena-arq</artifactId>
 			<version>3.1.1</version>
 		</dependency>
-
-
 		<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.containers/jersey-container-servlet-core -->
 		<dependency>
 			<groupId>org.glassfish.jersey.containers</groupId>
@@ -72,22 +70,20 @@
 			<version>2.26-b03</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
-		<dependency>
-			<groupId>javax.ws.rs</groupId>
-			<artifactId>javax.ws.rs-api</artifactId>
-			<version>2.1-m09</version>
-		</dependency>
-		<!-- Swagger api from https://github.com/swagger-api/swagger-core/wiki/Swagger-Core-Jersey-1.X-Project-Setup-1.5 -->
-		<dependency>
-			<groupId>io.swagger</groupId>
-			<artifactId>swagger-jersey-jaxrs</artifactId>
-			<version>1.5.0</version>
-		</dependency>
+		<!-- <dependency> <groupId>javax.ws.rs</groupId> <artifactId>javax.ws.rs-api</artifactId> 
+			<version>2.1-m09</version> </dependency> -->
 		<!-- https://mvnrepository.com/artifact/xerces/xercesImpl -->
 		<dependency>
 			<groupId>xerces</groupId>
 			<artifactId>xercesImpl</artifactId>
 			<version>2.8.0</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.2</version>
+		</dependency>
+
 	</dependencies>
 </project>
