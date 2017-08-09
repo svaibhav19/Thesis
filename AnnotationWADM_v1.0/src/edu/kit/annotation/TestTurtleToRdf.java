@@ -8,6 +8,7 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.config.RepositoryConfigException;
 import org.openrdf.rio.RDFFormat;
 
+import com.github.anno4j.Anno4j;
 import com.github.anno4j.io.ObjectParser;
 import com.github.anno4j.model.Annotation;
 
@@ -30,14 +31,28 @@ public class TestTurtleToRdf {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
+	Anno4j anno4j = null;
+	try {
+		anno4j = new Anno4j();
+	} catch (RepositoryException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	} catch (RepositoryConfigException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
 
 	ObjectParser objectParser = null;
 	try {
 		objectParser = new ObjectParser();
-	} catch (RepositoryException | RepositoryConfigException e) {
+//		objectParser = anno4j.createObject(ObjectParser.class);
+	} catch (RepositoryException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-	}
+	} catch (RepositoryConfigException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} 
 	List<Annotation> annotations = objectParser.parse(TURTLE, url, RDFFormat.TURTLE);
 	System.out.println("--------------------------------");
 	

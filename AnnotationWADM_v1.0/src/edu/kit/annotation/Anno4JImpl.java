@@ -1,6 +1,9 @@
 package edu.kit.annotation;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.openrdf.repository.RepositoryException;
@@ -9,6 +12,7 @@ import org.openrdf.repository.object.RDFObject;
 import org.openrdf.rio.RDFFormat;
 
 import com.github.anno4j.Anno4j;
+import com.github.anno4j.io.ObjectParser;
 import com.github.anno4j.model.Annotation;
 import com.github.anno4j.model.Body;
 import com.github.anno4j.model.Motivation;
@@ -19,6 +23,8 @@ import com.github.anno4j.model.impl.ResourceObject;
 import com.github.anno4j.model.impl.agent.Person;
 import com.github.anno4j.model.impl.agent.Software;
 import com.github.anno4j.model.impl.body.TextualBody;
+import com.github.anno4j.model.impl.collection.AnnotationCollection;
+import com.github.anno4j.model.impl.collection.AnnotationPage;
 import com.github.anno4j.model.impl.multiplicity.Choice;
 import com.github.anno4j.model.impl.state.HttpRequestState;
 import com.github.anno4j.model.impl.targets.SpecificResource;
@@ -30,7 +36,7 @@ import com.github.anno4j.model.impl.targets.SpecificResource;
  */
 public class Anno4JImpl {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws MalformedURLException {
 		
 		try {
 			Anno4j anno4j = new Anno4j();
@@ -118,15 +124,17 @@ public class Anno4JImpl {
 			specific.addState(state);
 			
 			annotation.addTarget(specific);
+			
 		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-			System.out.println("JSONLD FORMAT>>>>>>>>>>>>>\n"+annotation.getTriples(RDFFormat.JSONLD));
+			System.out.println("JSONLD FORMAT>>>>>>>>>>>>>\n"+annotation.getTriples(RDFFormat.NTRIPLES));
 			
 			System.out.println("+++++++++++++++++++++++++------------+++++++++++++++++++++++++++++++++++++++++");
-			/*ObjectParser objectParser = new ObjectParser();
-			List<Annotation> annotations = objectParser.parse(annotation.getTriples(RDFFormat.JSONLD).toString(), new URL("http://www.w3.org/1999/02/22-rdf-syntax-ns#"), RDFFormat.JSONLD);
+			ObjectParser objectParser = new ObjectParser();
+			List<Annotation> annotations = objectParser.parse(annotation.getTriples(RDFFormat.JSONLD), new URL("http://www.w3.org/"), RDFFormat.JSONLD);
+//			List<Annotation> annotations = objectParser.parse(annotation.getTriples(RDFFormat.NTRIPLES).toString(), new URL("http://www.example.com/"), RDFFormat.NTRIPLES);
 			System.out.println("---------------------"+annotations.size());
 			System.out.println(annotations.get(0).getTriples(RDFFormat.RDFXML));
-			*/
+			
 //			DatasetAccessor da = DatasetAccessorFactory.createHTTP("http://localhost:3030/kit/abc");
 //			Model model = ModelFactory.createDefaultModel();
 //			 model.read(new FileInputStream("E://rdfttl.ttl"),null,"TTL");
@@ -134,6 +142,8 @@ public class Anno4JImpl {
 //			InputStream stream = new ByteArrayInputStream(annotation.getTriples(RDFFormat.RDFXML).toString().getBytes(StandardCharsets.UTF_8));
 //			 model.read(stream,null,"RDFXML");
 //			da.putModel("abcde", model);
+//			AnnotationCollection annoCollection = anno4j.createObject(AnnotationCollection.class);
+			
 			
 		} catch (RepositoryException e) {
 			e.printStackTrace();

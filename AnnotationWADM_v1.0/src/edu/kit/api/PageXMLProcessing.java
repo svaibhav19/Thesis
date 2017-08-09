@@ -33,6 +33,8 @@ import com.github.anno4j.model.MotivationFactory;
 import com.github.anno4j.model.State;
 import com.github.anno4j.model.impl.agent.Software;
 import com.github.anno4j.model.impl.body.TextualBody;
+import com.github.anno4j.model.impl.collection.AnnotationCollection;
+import com.github.anno4j.model.impl.collection.AnnotationPage;
 import com.github.anno4j.model.impl.multiplicity.Choice;
 import com.github.anno4j.model.impl.selector.SvgSelector;
 import com.github.anno4j.model.impl.state.HttpRequestState;
@@ -71,9 +73,10 @@ public class PageXMLProcessing {
 	private String digitalObjId;
 	private String xmlString;
 	final String ServiceURI = "http://localhost:3030/kit/";
-	String annoID="http://kit.edu/anno/12345";
+	String annoID = "http://kit.edu/anno/12345";
 	Model model = ModelFactory.createDefaultModel();
-	
+	private AnnotationPage annoPage;
+
 	Anno4j anno4j;
 
 	public PageXMLProcessing(String digitalObjId, String xmlString) {
@@ -93,19 +96,49 @@ public class PageXMLProcessing {
 
 		try {
 			anno4j = new Anno4j();
+			annoPage = anno4j.createObject(AnnotationPage.class);
 		} catch (RepositoryException e) {
 			e.printStackTrace();
 		} catch (RepositoryConfigException e) {
 			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
 		}
+
 
 		// converting normal String to xmlObject
 		PcGtsType pcgtsTypeObj = parseXML();
 		// processing the xml file and converting the xml to WADM
 		Annotation processedAnnotations = processXML(pcgtsTypeObj);
 		// Storing the created Annotaions into apache Jena
-		String message = storeAnnoataions(processedAnnotations);
+//		 String message = storeAnnoataions(processedAnnotations);
+		try {
+			annotationCollections(pcgtsTypeObj);
+		} catch (RepositoryException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		}
 
+	}
+
+	private void annotationCollections(PcGtsType pcgtsTypeObj) throws RepositoryException, IllegalAccessException, InstantiationException {
+		Annotation anno = anno4j.createObject(Annotation.class);
+		addAgent(anno, pcgtsTypeObj);
+		anno.addMotivation(addMotivation());
+		AnnotationCollection annoCollection = anno4j.createObject(AnnotationCollection.class);
+		annoCollection.setTotal(4);
+		annoCollection.setFirstPage(annoPage);
+		
+		System.out.println("---------------AnnoataionPage---------");
+		System.out.println(annoCollection.getTriples(RDFFormat.RDFXML));
+		System.out.println("====================");
+		System.out.println(annoPage.getTriples(RDFFormat.RDFXML));
+		
 	}
 
 	/**
@@ -116,16 +149,16 @@ public class PageXMLProcessing {
 	 * @return success/error Message.
 	 */
 	private String storeAnnoataions(Annotation processedAnnotations) {
-		
-		
+
 		DatasetAccessor accessor = DatasetAccessorFactory.createHTTP(ServiceURI);
-//		if(!accessor.containsModel(annoID)){
-			accessor.putModel(annoID,model);
-//			accessor.add(model);
-//		}else
-//		{
-//			throw new Exception("Prospective graph for the givern workflow id already exists in store");
-//		}
+		// if(!accessor.containsModel(annoID)){
+		accessor.putModel(annoID, model);
+		// accessor.add(model);
+		// }else
+		// {
+		// throw new Exception("Prospective graph for the givern workflow id
+		// already exists in store");
+		// }
 
 		return null;
 	}
@@ -138,16 +171,17 @@ public class PageXMLProcessing {
 	 * @return annotations object
 	 */
 	private Annotation processXML(PcGtsType pcgtsTypeObj) {
-		
+
 		createPageAnnoatations(pcgtsTypeObj);
 		createAllRegion(pcgtsTypeObj);
 		return null;
 	}
 
 	/**
-	 * This method is used to convert all the sections of page xml to annotations.
-	 * This method uses some of the new namespaces from
+	 * This method is used to convert all the sections of page xml to
+	 * annotations. This method uses some of the new namespaces from
 	 * http://dublincore.org/documents/2012/06/14/dcmi-terms/
+	 * 
 	 * @param pcgtsTypeObj
 	 */
 	private void createAllRegion(PcGtsType pcgtsTypeObj) {
@@ -175,10 +209,10 @@ public class PageXMLProcessing {
 					txtBody2.setName(userAttribuets.getName());
 					txtBody2.setSubject(getType(regionType));
 					txtBody2.setIdentifier(regionType.getId());
-					
-					if(null != regionType.getCustom())
+
+					if (null != regionType.getCustom())
 						txtBody2.setConformsTo(regionType.getCustom());
-					
+
 					choice.addItem(txtBody2);
 				}
 
@@ -188,9 +222,9 @@ public class PageXMLProcessing {
 				SpecificResource specific = getTarget(regionAnnotations, regionType.getCoords().getPoints());
 
 				regionAnnotations.addTarget(specific);
-				
+
 				storeAnnotationToJena(regionAnnotations, regionType.getId());
-				
+
 			} catch (RepositoryException e) {
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {
@@ -205,6 +239,7 @@ public class PageXMLProcessing {
 
 	/**
 	 * This method returns the type of Region has be present in the tag.
+	 * 
 	 * @param regionType
 	 * @return
 	 */
@@ -250,9 +285,9 @@ public class PageXMLProcessing {
 
 			TextAnnotationBody textBody = anno4j.createObject(TextAnnotationBody.class);
 			textBody.setValue("Coords points=" + pcgtsTypeObj.getPage().getBorder().getCoords().getPoints());
-			if(null != pcgtsTypeObj.getPage().getCustom())
-				textBody.setConformsTo(pcgtsTypeObj.getPage().getCustom());
-			
+			/*if (null != pcgtsTypeObj.getPage().getCustom())
+				textBody.setConformsTo(pcgtsTypeObj.getPage().getCustom());*/
+
 			// adding multiples bodies with their properties and values and
 			// types ...
 			Choice choice = anno4j.createObject(Choice.class);
@@ -264,14 +299,15 @@ public class PageXMLProcessing {
 				choice.addItem(txtBody2);
 			}
 
-			pageAnnoataion.addBody(textBody);
+//			pageAnnoataion.addBody(textBody);
 			pageAnnoataion.addBody(choice);
 
-			SpecificResource specific = getTarget(pageAnnoataion, pcgtsTypeObj.getPage().getBorder().getCoords().getPoints());
+			SpecificResource specific = getTarget(pageAnnoataion,
+					pcgtsTypeObj.getPage().getBorder().getCoords().getPoints());
 
 			pageAnnoataion.addTarget(specific);
-			
-			storeAnnotationToJena(pageAnnoataion,"pageAnnotations");
+
+			storeAnnotationToJena(pageAnnoataion, "pageAnnotations");
 
 		} catch (RepositoryException e) {
 			e.printStackTrace();
@@ -287,55 +323,55 @@ public class PageXMLProcessing {
 	}
 
 	private void storeAnnotationToJena(Annotation pageAnnoataion, String id) {
-		
+		annoPage.addItem(pageAnnoataion);
 		String turtleFile = pageAnnoataion.getTriples(RDFFormat.TURTLE);
-		try( final InputStream in = new ByteArrayInputStream(turtleFile.getBytes("UTF-8")) ) {
-		    /* Naturally, you'd substitute the syntax of your actual
-		     * content here rather than use N-TRIPLE.
-		     */
-		    model.read(in, null, "TTL");
+		try (final InputStream in = new ByteArrayInputStream(turtleFile.getBytes("UTF-8"))) {
+			model.read(in, null, "TTL");
 		} catch (UnsupportedEncodingException e1) {
 			e1.printStackTrace();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		
-		File f = new File("C:\\Users\\Vaibhav\\Desktop\\AnnotationOutPut\\"+id+".xml");
-		if(!f.exists()){
+
+		File f = new File("C:\\Users\\Vaibhav\\Desktop\\AnnotationOutPut\\" + id + ".xml");
+		if (!f.exists()) {
 			try {
 				f.createNewFile();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 		Writer writer = null;
 
 		try {
-		    writer = new BufferedWriter(new OutputStreamWriter(
-		          new FileOutputStream(f), "utf-8"));
-		    writer.write(pageAnnoataion.getTriples(RDFFormat.RDFXML));
+			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f), "utf-8"));
+			writer.write(pageAnnoataion.getTriples(RDFFormat.RDFXML));
 		} catch (IOException ex) {
-		  ex.printStackTrace();
+			ex.printStackTrace();
 		} finally {
-		   try {writer.close();} catch (Exception ex) {/*ignore*/}
+			try {
+				writer.close();
+			} catch (Exception ex) {
+				/* ignore */}
 		}
-		
+
 	}
 
 	private SpecificResource getTarget(Annotation pageAnnoataion, String points) {
 		SpecificResource specific;
 		try {
 			specific = anno4j.createObject(SpecificResource.class);
-			/*ResourceObject source = anno4j.createObject(ResourceObject.class);
-			source.setResourceAsString("http://example.com/document1#points="
-					+ points);
-			specific.setSource(source);*/
+			/*
+			 * ResourceObject source =
+			 * anno4j.createObject(ResourceObject.class);
+			 * source.setResourceAsString("http://example.com/document1#points="
+			 * + points); specific.setSource(source);
+			 */
 			SvgSelector svg = anno4j.createObject(SvgSelector.class);
 			svg.setValue(points);
 			specific.setSelector(svg);
-			
-			
+
 			State state = anno4j.createObject(State.class);
 			HttpRequestState reqState = anno4j.createObject(HttpRequestState.class);
 			reqState.setValue("Accept: application/xml");
@@ -347,7 +383,7 @@ public class PageXMLProcessing {
 			e1.printStackTrace();
 		} catch (InstantiationException e1) {
 			e1.printStackTrace();
-		} 
+		}
 
 		return null;
 	}
