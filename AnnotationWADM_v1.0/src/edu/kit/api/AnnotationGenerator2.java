@@ -10,9 +10,8 @@ import java.io.OutputStreamWriter;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.xml.bind.JAXBContext;
@@ -31,13 +30,6 @@ import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFNode;
-import org.apache.jena.update.GraphStore;
-import org.apache.jena.update.GraphStoreFactory;
-import org.apache.jena.update.UpdateAction;
-import org.apache.jena.update.UpdateExecutionFactory;
-import org.apache.jena.update.UpdateFactory;
-import org.apache.jena.update.UpdateProcessor;
-import org.apache.jena.update.UpdateRequest;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.UpdateExecutionException;
 import org.openrdf.repository.RepositoryException;
@@ -79,7 +71,7 @@ import edu.kit.util.QureyUtil;
  *
  */
 
-public class AnnotationGenerator {
+public class AnnotationGenerator2 {
 
 	private Anno4j anno4j;
 	private QureyUtil qureyUtil;
@@ -87,10 +79,9 @@ public class AnnotationGenerator {
 	final String ServiceURI = "http://localhost:3030/kit/";
 	String annotationURL = "http://kit.edu/anno/";
 
-//	private List<Model> modelList = new ArrayList<Model>();
-	private Map<String, Model> modelMap = new HashMap<String, Model>();
+	private List<Model> modelList = new ArrayList<Model>();
 
-	public AnnotationGenerator() {
+	public AnnotationGenerator2() {
 		qureyUtil = new QureyUtil();
 
 	}
@@ -111,20 +102,10 @@ public class AnnotationGenerator {
 	private void postToJenaStore() {
 		System.out.println("insideJena Store");
 		DatasetAccessor accessor = DatasetAccessorFactory.createHTTP(ServiceURI);
-//		for (Model model : modelList) {
-//			accessor.add(storeURL, model);
-//		}
-		String pageXmlID = ""+UUID.randomUUID();
-		UpdateRequest request = UpdateFactory.create();
-		request.add("CREATE GRAPH <http://localhost:3030/kit/registry>");
-		
-		for (String resourceID : modelMap.keySet()) {
-			accessor.add(annotationURL+resourceID, modelMap.get(resourceID));
-			request.add(qureyUtil.getAnnotationRegistryQuery(pageXmlID, resourceID));
+		String storeURL = annotationURL + "12345";
+		for (Model model : modelList) {
+			accessor.add(storeURL, model);
 		}
-		 UpdateProcessor createRemote = UpdateExecutionFactory.createRemote(request, ServiceURI);
-	        createRemote.execute();
-		
 
 	}
 
@@ -144,23 +125,21 @@ public class AnnotationGenerator {
 			InstantiationException, MalformedQueryException, UpdateExecutionException {
 
 		String softAgentResourceID = checkAgentInRegistry(pcgtsTypeObj.getMetadata());
-		createPageAnnotation(pcgtsTypeObj, softAgentResourceID,digitalObjID);
-		createOtherAnnotations(pcgtsTypeObj, softAgentResourceID,digitalObjID);
-//		modelList.add(pageModel);
-//		modelList.addAll(regionModel);
+		Model pageModel = createPageAnnotation(pcgtsTypeObj, softAgentResourceID,digitalObjID);
+		List<Model> regionModel = createOtherAnnotations(pcgtsTypeObj, softAgentResourceID,digitalObjID);
+		modelList.add(pageModel);
+		modelList.addAll(regionModel);
 	}
 
 	private List<Model> createOtherAnnotations(PcGtsType pcgtsTypeObj, String softAgentResourceID,String digitalObjID) throws RepositoryException,
 			IllegalAccessException, InstantiationException, MalformedQueryException, UpdateExecutionException {
-//		List<Model> modelList = new ArrayList<Model>();
+		List<Model> modelList = new ArrayList<Model>();
 		for (RegionType regions : pcgtsTypeObj.getPage().getTextRegionOrImageRegionOrLineDrawingRegion()) {
 			Annotation annoations = createAnnoataionPart(pcgtsTypeObj.getMetadata(), softAgentResourceID);
 			Model otherModel = createOtherBodyTarget(annoations, regions,digitalObjID);
-//			modelList.add(otherModel);
-			modelMap.put(annoations.getResourceAsString(), otherModel);
+			modelList.add(otherModel);
 		}
-//		return modelList;
-		return null;
+		return modelList;
 
 	}
 
@@ -230,7 +209,6 @@ public class AnnotationGenerator {
 			IllegalAccessException, InstantiationException, MalformedQueryException, UpdateExecutionException {
 		Annotation annoations = createAnnoataionPart(pcgtsTypeObj.getMetadata(), softAgentResourceID);
 		Model model = createBodyTarget(annoations, pcgtsTypeObj.getPage(),digitalObjID);
-		modelMap.put(annoations.getResourceAsString(), model);
 		return model;
 	}
 
