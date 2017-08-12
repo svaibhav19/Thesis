@@ -71,7 +71,7 @@ import edu.kit.pagexml.TableRegionType;
 import edu.kit.pagexml.TextRegionType;
 import edu.kit.pagexml.UnknownRegionType;
 import edu.kit.pagexml.UserAttributeType;
-import edu.kit.util.QureyUtil;
+import edu.kit.util.QueryUtil;
 
 /**
  * 
@@ -82,7 +82,7 @@ import edu.kit.util.QureyUtil;
 public class AnnotationGenerator {
 
 	private Anno4j anno4j;
-	private QureyUtil qureyUtil;
+	private QueryUtil qureyUtil;
 
 	final String ServiceURI = "http://localhost:3030/kit/";
 	String annotationURL = "http://kit.edu/anno/";
@@ -91,7 +91,7 @@ public class AnnotationGenerator {
 	private Map<String, Model> modelMap = new HashMap<String, Model>();
 
 	public AnnotationGenerator() {
-		qureyUtil = new QureyUtil();
+		qureyUtil = new QueryUtil();
 
 	}
 
@@ -120,7 +120,7 @@ public class AnnotationGenerator {
 		
 		for (String resourceID : modelMap.keySet()) {
 			accessor.add(annotationURL+resourceID, modelMap.get(resourceID));
-			request.add(qureyUtil.getAnnotationRegistryQuery(pageXmlID, resourceID));
+			request.add(qureyUtil.getAnnotationRegistryQuery(pageXmlID, annotationURL + resourceID));
 		}
 		 UpdateProcessor createRemote = UpdateExecutionFactory.createRemote(request, ServiceURI);
 	        createRemote.execute();

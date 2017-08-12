@@ -126,14 +126,14 @@ public class Anno4JImpl {
 			annotation.addTarget(specific);
 			
 		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-			System.out.println("JSONLD FORMAT>>>>>>>>>>>>>\n"+annotation.getTriples(RDFFormat.TURTLE));
+			System.out.println("JSONLD FORMAT>>>>>>>>>>>>>\n"+annotation.getTriples(RDFFormat.JSONLD));
 			
 			System.out.println("+++++++++++++++++++++++++------------+++++++++++++++++++++++++++++++++++++++++");
 			ObjectParser objectParser = new ObjectParser();
-			List<Annotation> annotations = objectParser.parse(annotation.getTriples(RDFFormat.TURTLE), new URL("http://www.w3.org/"), RDFFormat.TURTLE);
+			List<Annotation> annotations = objectParser.parse(annotation.getTriples(RDFFormat.JSONLD), new URL("http://example.com/"), RDFFormat.JSONLD);
 //			List<Annotation> annotations = objectParser.parse(annotation.getTriples(RDFFormat.NTRIPLES).toString(), new URL("http://www.example.com/"), RDFFormat.NTRIPLES);
 			System.out.println("---------------------"+annotations.size());
-			System.out.println(annotations.get(0).getTriples(RDFFormat.TURTLE));
+			System.out.println(annotations.get(0).getTriples(RDFFormat.JSONLD));
 			
 //			DatasetAccessor da = DatasetAccessorFactory.createHTTP("http://localhost:3030/kit/abc");
 //			Model model = ModelFactory.createDefaultModel();

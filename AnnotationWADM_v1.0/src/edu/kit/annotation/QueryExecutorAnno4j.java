@@ -1,7 +1,11 @@
 package edu.kit.annotation;
 
-import java.util.UUID;
-
+import org.apache.jena.query.QueryExecution;
+import org.apache.jena.query.QueryExecutionFactory;
+import org.apache.jena.query.ResultSet;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.riot.Lang;
+import org.apache.jena.riot.RDFDataMgr;
 import org.apache.marmotta.ldpath.parser.ParseException;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.QueryEvaluationException;
@@ -25,7 +29,10 @@ public class QueryExecutorAnno4j {
 			        .addCriteria("ex:confidence", 0.5, Comparison.GT)
 			        .execute(TextAnnotationBody.class);*/
 		
-		String uui =UUID.randomUUID().toString();
-				System.out.println(uui);
+		String queryStr = "construct { ?s ?p ?o.} WHERE { GRAPH <http://kit.edu/anno/urn:anno4j:18f5533e-3a5f-4c35-830b-35c178612c26> { ?s ?p ?o } }";
+		
+		QueryExecution query = QueryExecutionFactory.sparqlService("http://localhost:3030/kit/",queryStr);
+		Model model = query.execConstruct();
+		RDFDataMgr.write(System.out, model, Lang.JSONLD);
 	}
 }

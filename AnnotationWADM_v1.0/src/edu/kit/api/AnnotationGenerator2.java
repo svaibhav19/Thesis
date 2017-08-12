@@ -63,7 +63,7 @@ import edu.kit.pagexml.TableRegionType;
 import edu.kit.pagexml.TextRegionType;
 import edu.kit.pagexml.UnknownRegionType;
 import edu.kit.pagexml.UserAttributeType;
-import edu.kit.util.QureyUtil;
+import edu.kit.util.QueryUtil;
 
 /**
  * 
@@ -74,7 +74,7 @@ import edu.kit.util.QureyUtil;
 public class AnnotationGenerator2 {
 
 	private Anno4j anno4j;
-	private QureyUtil qureyUtil;
+	private QueryUtil qureyUtil;
 
 	final String ServiceURI = "http://localhost:3030/kit/";
 	String annotationURL = "http://kit.edu/anno/";
@@ -82,7 +82,7 @@ public class AnnotationGenerator2 {
 	private List<Model> modelList = new ArrayList<Model>();
 
 	public AnnotationGenerator2() {
-		qureyUtil = new QureyUtil();
+		qureyUtil = new QueryUtil();
 
 	}
 
