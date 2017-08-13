@@ -5,7 +5,11 @@ import edu.kit.api.QueryByTarget;
 
 public class RestService {
 
-	// storing string can be anything JSON-LD/XML
+	/**
+	 * This method is used for converting and storing pageXML to annotations.
+	 * @param digitalObjId
+	 * @param xmlString
+	 */
 	public void storeAnnotation(String digitalObjId, String xmlString) {
 		
 		PageXMLProcessing xmlProcessing = new PageXMLProcessing(digitalObjId,xmlString);
@@ -35,6 +39,17 @@ public class RestService {
 		QueryByTarget queryByTarget = new QueryByTarget();
 		String queryOutPut = queryByTarget.getByTarget(targetString,format);
 		System.out.println("Query Output\n---------------\n"+queryOutPut);
+		
+	}
+	
+	/**
+	 * This Method is used for executing all the RAW query need for Executions.
+	 * @param queryString
+	 * @param format
+	 */
+	public void executeQuery(String queryString, String format){
+		QueryByTarget queryExec = new QueryByTarget();
+		queryExec.getQueryResults(queryString,format);
 		
 	}
 	

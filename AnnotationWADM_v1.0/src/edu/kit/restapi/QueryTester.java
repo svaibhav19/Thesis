@@ -1,8 +1,12 @@
 package edu.kit.restapi;
 
+import java.io.IOException;
+
+import edu.kit.util.PropertyHandler;
+
 public class QueryTester {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 //		final String ServiceURI = "http://localhost:3030/kit/";
 //		QueryUtil qureyUtil = new QueryUtil();
 		
@@ -20,7 +24,10 @@ public class QueryTester {
 			}
 		}*/
 		
-		RestService rest = new RestService();
-		rest.getAnnotationByTarget("http://example.org/source2", "RDF/XML");
+		/*RestService rest = new RestService();
+		rest.getAnnotationByTarget("http://example.org/source2", "JSON-LD");*/
+		
+//		System.out.println("Service Instance :"+PropertyHandler.instance().serviceURL);
+		System.out.println("base:"+PropertyHandler.serviceURL);
 	}
 }

@@ -15,6 +15,12 @@ import org.apache.jena.riot.RDFDataMgr;
 
 import edu.kit.util.QueryUtil;
 
+/**
+ * 
+ * @author Vaibhav
+ *
+ *  This class is used for executing all REST based queries JEAN to Frontend.
+ */
 public class QueryByTarget {
 
 	private String serviceURL = "http://localhost:3030/kit/";
@@ -65,6 +71,20 @@ public class QueryByTarget {
 		} else {
 			return Lang.RDFXML;
 		}
+	}
+
+	/**
+	 * This method is used for RAW CONSTRUCT Query output in specified format.
+	 * @param queryString
+	 * @param format
+	 * @return
+	 */
+	public String getQueryResults(String queryString, String format) {
+		StringWriter outputResults = new StringWriter();
+		QueryExecution eachGraphQuery = QueryExecutionFactory.sparqlService(serviceURL,queryString);
+		Model model = eachGraphQuery.execConstruct();
+		RDFDataMgr.write(outputResults, model, getFormat(format));
+		return outputResults.toString();
 	}
 
 }
