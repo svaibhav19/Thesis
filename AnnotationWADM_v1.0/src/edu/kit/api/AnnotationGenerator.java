@@ -71,6 +71,7 @@ import edu.kit.pagexml.TableRegionType;
 import edu.kit.pagexml.TextRegionType;
 import edu.kit.pagexml.UnknownRegionType;
 import edu.kit.pagexml.UserAttributeType;
+import edu.kit.util.PropertyHandler;
 import edu.kit.util.QueryUtil;
 
 /**
@@ -84,8 +85,8 @@ public class AnnotationGenerator {
 	private Anno4j anno4j;
 	private QueryUtil qureyUtil;
 
-	final String ServiceURI = "http://localhost:3030/kit/";
-	String annotationURL = "http://kit.edu/anno/";
+	final String ServiceURI = PropertyHandler.instance().serviceURL;
+	String annotationURL = PropertyHandler.instance().baseURL;
 
 //	private List<Model> modelList = new ArrayList<Model>();
 	private Map<String, Model> modelMap = new HashMap<String, Model>();
@@ -116,7 +117,7 @@ public class AnnotationGenerator {
 //		}
 		String pageXmlID = ""+UUID.randomUUID();
 		UpdateRequest request = UpdateFactory.create();
-		request.add("CREATE GRAPH <http://localhost:3030/kit/registry>");
+		request.add("CREATE GRAPH <"+ServiceURI+"/registry>");
 		
 		for (String resourceID : modelMap.keySet()) {
 			accessor.add(annotationURL+resourceID, modelMap.get(resourceID));

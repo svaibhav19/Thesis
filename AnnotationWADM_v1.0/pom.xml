@@ -39,11 +39,8 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.w3c/dom -->
-		<!-- <dependency>
-			<groupId>xml-apis</groupId>
-			<artifactId>xml-apis</artifactId>
-			<version>1.4.01</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>xml-apis</groupId> <artifactId>xml-apis</artifactId> 
+			<version>1.4.01</version> </dependency> -->
 
 		<dependency>
 			<groupId>org.apache.jena</groupId>
@@ -83,6 +80,11 @@
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
 			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.jsonld-java</groupId>
+			<artifactId>jsonld-java</artifactId>
+			<version>0.10.0</version>
 		</dependency>
 
 	</dependencies>

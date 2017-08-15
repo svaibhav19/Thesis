@@ -35,10 +35,11 @@ public class RestService {
 	 * @param targetString
 	 * @param format
 	 */
-	public void getAnnotationByTarget(String targetString,String format){
+	public String getAnnotationByTarget(String targetString,String format){
 		QueryByTarget queryByTarget = new QueryByTarget();
 		String queryOutPut = queryByTarget.getByTarget(targetString,format);
 		System.out.println("Query Output\n---------------\n"+queryOutPut);
+		return queryOutPut;
 		
 	}
 	

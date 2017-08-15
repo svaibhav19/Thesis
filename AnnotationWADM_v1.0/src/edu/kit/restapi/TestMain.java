@@ -32,8 +32,8 @@ public class TestMain {
 			e.printStackTrace();
 		}
 		
-//		RestService rest = new RestService();
-//		rest.storeAnnotation("digitalObjID",writer.toString());
+		RestService rest = new RestService();
+		rest.storeAnnotation("digitalObjID",writer.toString());
 		
 		AnnotationGenerator generator = new AnnotationGenerator();
 		try {

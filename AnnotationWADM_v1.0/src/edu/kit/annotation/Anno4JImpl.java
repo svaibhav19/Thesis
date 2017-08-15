@@ -1,9 +1,16 @@
 package edu.kit.annotation;
 
+import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.openrdf.repository.RepositoryException;
@@ -23,11 +30,14 @@ import com.github.anno4j.model.impl.ResourceObject;
 import com.github.anno4j.model.impl.agent.Person;
 import com.github.anno4j.model.impl.agent.Software;
 import com.github.anno4j.model.impl.body.TextualBody;
-import com.github.anno4j.model.impl.collection.AnnotationCollection;
-import com.github.anno4j.model.impl.collection.AnnotationPage;
 import com.github.anno4j.model.impl.multiplicity.Choice;
 import com.github.anno4j.model.impl.state.HttpRequestState;
 import com.github.anno4j.model.impl.targets.SpecificResource;
+import com.github.jsonldjava.core.DocumentLoader;
+import com.github.jsonldjava.core.JsonLdError;
+import com.github.jsonldjava.core.JsonLdOptions;
+import com.github.jsonldjava.core.JsonLdProcessor;
+import com.github.jsonldjava.utils.JsonUtils;
 
 /**
  * 
@@ -36,7 +46,7 @@ import com.github.anno4j.model.impl.targets.SpecificResource;
  */
 public class Anno4JImpl {
 
-	public static void main(String[] args) throws MalformedURLException {
+	public static void main(String[] args) throws IOException, JsonLdError {
 		
 		try {
 			Anno4j anno4j = new Anno4j();
@@ -130,10 +140,10 @@ public class Anno4JImpl {
 			
 			System.out.println("+++++++++++++++++++++++++------------+++++++++++++++++++++++++++++++++++++++++");
 			ObjectParser objectParser = new ObjectParser();
-			List<Annotation> annotations = objectParser.parse(annotation.getTriples(RDFFormat.JSONLD), new URL("http://example.com/"), RDFFormat.JSONLD);
+//			List<Annotation> annotations = objectParser.parse(annotation.getTriples(RDFFormat.JSONLD), new URL("http://example.com/"), RDFFormat.JSONLD);
 //			List<Annotation> annotations = objectParser.parse(annotation.getTriples(RDFFormat.NTRIPLES).toString(), new URL("http://www.example.com/"), RDFFormat.NTRIPLES);
-			System.out.println("---------------------"+annotations.size());
-			System.out.println(annotations.get(0).getTriples(RDFFormat.JSONLD));
+//			System.out.println("---------------------"+annotations.size());
+//			System.out.println(annotations.get(0).getTriples(RDFFormat.JSONLD));
 			
 //			DatasetAccessor da = DatasetAccessorFactory.createHTTP("http://localhost:3030/kit/abc");
 //			Model model = ModelFactory.createDefaultModel();
@@ -143,6 +153,48 @@ public class Anno4JImpl {
 //			 model.read(stream,null,"RDFXML");
 //			da.putModel("abcde", model);
 //			AnnotationCollection annoCollection = anno4j.createObject(AnnotationCollection.class);
+			
+			
+			
+			
+			
+			// Open a valid json(-ld) input file
+//			InputStream inputStream = new FileInputStream("input.json");
+			String jsonLdStr = annotation.getTriples(RDFFormat.JSONLD).substring(1);
+			jsonLdStr = jsonLdStr+"[{ \"Content-Location\": \"http://nonexisting.example.com/context\",\"X-Classpath\": \"custom/contexttest-0001.jsonld\","+
+					"\"Content-Type\": \"application/ld+json\" },";
+			InputStream stream = new ByteArrayInputStream(jsonLdStr.getBytes(StandardCharsets.UTF_8));
+			// Read the file into an Object (The type of this object will be a List, Map, String, Boolean,
+			// Number or null depending on the root object in the file).
+			Object jsonObject = JsonUtils.fromInputStream(stream);
+			// Create a context JSON map containing prefixes and definitions
+			Map context = new HashMap();
+			// Customise context...
+			// Create an instance of JsonLdOptions with the standard JSON-LD options
+			JsonLdOptions options = new JsonLdOptions();
+			// Customise options...
+			// Call whichever JSONLD function you want! (e.g. compact)
+			Object compact = JsonLdProcessor.compact(jsonObject, context, options);
+			// Print out the result (or don't, it's your call!)
+			System.out.println("final callsss");
+			System.out.println(JsonUtils.toPrettyString(compact));
+			
+			
+			
+			
+			// Inject a context document into the options as a literal string
+//			DocumentLoader dl = new DocumentLoader();
+//			JsonLdOptions options = new JsonLdOptions();
+//			// ... the contents of "contexts/example.jsonld"
+//			String jsonContext = "{ \"@contxt\": { ... } }";
+//			dl.addInjectedDoc("http://www.example.com/context",  jsonContext);
+//			options.setDocumentLoader(dl);
+//
+//			InputStream inputStream = new ByteArrayInputStream(annotation.getTriples(RDFFormat.JSONLD).getBytes(StandardCharsets.UTF_8));
+//			Object jsonObject = JsonUtils.fromInputStream(inputStream);
+//			Map context = new HashMap();
+//			Object compact = JsonLdProcessor.compact(jsonObject, context, options);
+//			System.out.println(JsonUtils.toPrettyString(compact));
 			
 			
 		} catch (RepositoryException e) {

@@ -56,6 +56,7 @@ import edu.kit.pagexml.TableRegionType;
 import edu.kit.pagexml.TextRegionType;
 import edu.kit.pagexml.UnknownRegionType;
 import edu.kit.pagexml.UserAttributeType;
+import edu.kit.util.PropertyHandler;
 
 /**
  * 
@@ -72,8 +73,8 @@ public class PageXMLProcessing {
 
 	private String digitalObjId;
 	private String xmlString;
-	final String ServiceURI = "http://localhost:3030/kit/";
-	String annoID = "http://kit.edu/anno/12345";
+	final String ServiceURI = PropertyHandler.instance().serviceURL;
+	String annoID = PropertyHandler.instance().baseURL;
 	Model model = ModelFactory.createDefaultModel();
 	private AnnotationPage annoPage;
 

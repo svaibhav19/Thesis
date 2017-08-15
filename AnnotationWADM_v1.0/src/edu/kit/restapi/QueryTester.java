@@ -1,12 +1,19 @@
 package edu.kit.restapi;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
-import edu.kit.util.PropertyHandler;
+import com.github.jsonldjava.core.JsonLdError;
+import com.github.jsonldjava.core.JsonLdOptions;
+import com.github.jsonldjava.core.JsonLdProcessor;
+import com.github.jsonldjava.utils.JsonUtils;
 
 public class QueryTester {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, JsonLdError {
 //		final String ServiceURI = "http://localhost:3030/kit/";
 //		QueryUtil qureyUtil = new QueryUtil();
 		
@@ -24,10 +31,8 @@ public class QueryTester {
 			}
 		}*/
 		
-		/*RestService rest = new RestService();
-		rest.getAnnotationByTarget("http://example.org/source2", "JSON-LD");*/
-		
-//		System.out.println("Service Instance :"+PropertyHandler.instance().serviceURL);
-		System.out.println("base:"+PropertyHandler.serviceURL);
+		RestService rest = new RestService();
+		rest.getAnnotationByTarget("http://example.org/source2", "RDF/XML");
+	
 	}
 }

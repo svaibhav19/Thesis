@@ -13,6 +13,7 @@ import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 
+import edu.kit.util.PropertyHandler;
 import edu.kit.util.QueryUtil;
 
 /**
@@ -23,7 +24,7 @@ import edu.kit.util.QueryUtil;
  */
 public class QueryByTarget {
 
-	private String serviceURL = "http://localhost:3030/kit/";
+	private String serviceURL = PropertyHandler.instance().serviceURL;
 	private QueryUtil queryUtil;
 	
 	public QueryByTarget(){

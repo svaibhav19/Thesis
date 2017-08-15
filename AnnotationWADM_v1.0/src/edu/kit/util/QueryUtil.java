@@ -11,7 +11,7 @@ public class QueryUtil {
 	public String checkAgentQuery(String creatorName){
 		String creatorQuery = "SELECT ?s ?p ?o "+
 							  "WHERE { "+
-							  "graph <http://kit.edu/anno/agents> "+ 
+							  "graph <"+PropertyHandler.instance().baseURL+"agents> "+ 
 							  "{?s ?p ?o. "+
 							  "{?s <http://xmlns.com/foaf/0.1/name> \""+creatorName+"\"}"+
 							  "} }";
@@ -19,7 +19,7 @@ public class QueryUtil {
 	}
 	public String getByAnnoIDQuery(String annoID){
 		String byIDQuery ="SELECT ?s ?p ?o "+
-						"WHERE { graph <http://kit.edu/anno/12345> "+ 
+						"WHERE { graph <"+PropertyHandler.instance().baseURL+"12345> "+ 
 						"{?s ?p ?o. {?s ?p <http://www.w3.org/ns/oa#Annotation>. "+
 						"FILTER(?s =<"+annoID+">) } } }";
 		return byIDQuery;
@@ -27,7 +27,7 @@ public class QueryUtil {
 	
 	public String getAnnotationRegistryQuery(String pageXmlID,String graphID){
 		String registryQuery ="insert data {"+
-							  " graph <http://kit.edu/anno/annotationRegistry> { <http://kit.edu/"+
+							  " graph <"+PropertyHandler.instance().baseURL+"annotationRegistry> { <"+PropertyHandler.instance().baseURL+
 							  pageXmlID+"> <http://www.w3.org/ns/oa#hasAnnotation> <"+graphID+">. } }";
 		
 		return registryQuery;
@@ -40,8 +40,7 @@ public class QueryUtil {
 	}
 	public String getBaseGraphConstructQuery(String graphID){
 		String graphQuery = "CONSTRUCT {?s ?p ?o} "+
-							"WHERE { GRAPH <http://kit.edu/anno/"+graphID+"> {?s ?p ?o} }";
-		System.out.println("baseQuery>>>>>\n"+graphQuery+"\n------------\n");
+							"WHERE { GRAPH <"+PropertyHandler.instance().baseURL+graphID+"> {?s ?p ?o} }";
 		return graphQuery;
 		
 	}
