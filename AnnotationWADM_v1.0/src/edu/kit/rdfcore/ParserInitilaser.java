@@ -1,5 +1,6 @@
 package edu.kit.rdfcore;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.nio.charset.Charset;
@@ -66,7 +67,7 @@ public class ParserInitilaser {
 	private JSONObject getSelector(HasSelector hasSelector) {
 		JSONObject selectorJson = new JSONObject();
 		selectorJson.put("type", "SvgSelector");
-		selectorJson.put("value", hasSelector.getSelector().getValue());
+		selectorJson.put("value", "<svg><polygon points=\""+hasSelector.getSelector().getValue()+"\"/></svg>");
 		return selectorJson;
 	}
 
