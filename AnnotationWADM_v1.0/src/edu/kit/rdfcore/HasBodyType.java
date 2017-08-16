@@ -7,6 +7,9 @@ import javax.xml.bind.annotation.XmlElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class HasBodyType {
 
+	@XmlElement(name="Choice", namespace=IRINS.j0)
+	private ChoiceType choice;
+	
 	@XmlElement(name="CreationProvenance", namespace=IRINS.j4)
 	private CreationProvenanceType creationProvenance;
 
@@ -16,6 +19,14 @@ public class HasBodyType {
 
 	public void setCreationProvenance(CreationProvenanceType creationProvenance) {
 		this.creationProvenance = creationProvenance;
+	}
+
+	public ChoiceType getChoice() {
+		return choice;
+	}
+
+	public void setChoice(ChoiceType choice) {
+		this.choice = choice;
 	}
 	
 }

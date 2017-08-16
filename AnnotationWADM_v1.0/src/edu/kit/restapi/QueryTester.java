@@ -32,7 +32,7 @@ public class QueryTester {
 		}*/
 		
 		RestService rest = new RestService();
-		rest.getAnnotationByTarget("http://example.org/source2", "RDF/XML");
+		rest.getAnnotationByTarget("http://example.org/source4", "ld+json");
 	
 	}
 }

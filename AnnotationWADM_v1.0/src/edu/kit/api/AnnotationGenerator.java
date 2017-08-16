@@ -110,7 +110,6 @@ public class AnnotationGenerator {
 	}
 
 	private void postToJenaStore() {
-		System.out.println("insideJena Store");
 		DatasetAccessor accessor = DatasetAccessorFactory.createHTTP(ServiceURI);
 //		for (Model model : modelList) {
 //			accessor.add(storeURL, model);

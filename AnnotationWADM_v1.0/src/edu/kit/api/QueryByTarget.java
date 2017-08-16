@@ -13,6 +13,7 @@ import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 
+import edu.kit.rdfcore.ParserInitilaser;
 import edu.kit.util.PropertyHandler;
 import edu.kit.util.QueryUtil;
 
@@ -20,35 +21,43 @@ import edu.kit.util.QueryUtil;
  * 
  * @author Vaibhav
  *
- *  This class is used for executing all REST based queries JEAN to Frontend.
+ *         This class is used for executing all REST based queries JEAN to
+ *         Frontend.
  */
 public class QueryByTarget {
 
 	private String serviceURL = PropertyHandler.instance().serviceURL;
 	private QueryUtil queryUtil;
-	
-	public QueryByTarget(){
+
+	public QueryByTarget() {
 		queryUtil = new QueryUtil();
 	}
-	
+
 	public String getByTarget(String targetString, String format) {
 		String queryStr = queryUtil.getQueryByTarget(targetString);
 		Lang langFormat = getFormat(format);
 		List<String> finalResults = new ArrayList<String>();
-		QueryExecution query = QueryExecutionFactory.sparqlService(serviceURL,queryStr);
+		QueryExecution query = QueryExecutionFactory.sparqlService(serviceURL, queryStr);
 		ResultSet results = query.execSelect();
-		
+
 		while (results.hasNext()) {
 			StringWriter ouptResults = new StringWriter();
 			QuerySolution soln = results.nextSolution();
 			RDFNode x = soln.get("s");
-			String graphBaseQuery = queryUtil.getBaseGraphConstructQuery(x.toString().replaceAll("<", "").replaceAll(">", ""));
-			QueryExecution eachGraphQuery = QueryExecutionFactory.sparqlService(serviceURL,graphBaseQuery);
+			String graphBaseQuery = queryUtil
+					.getBaseGraphConstructQuery(x.toString().replaceAll("<", "").replaceAll(">", ""));
+			QueryExecution eachGraphQuery = QueryExecutionFactory.sparqlService(serviceURL, graphBaseQuery);
 			Model model = eachGraphQuery.execConstruct();
 			RDFDataMgr.write(ouptResults, model, langFormat);
-			finalResults.add(ouptResults.toString());
+			if (format.equals("ld+json")) {
+				ParserInitilaser parser = new ParserInitilaser();
+				String jsonStr = parser.parse(ouptResults.toString());
+				finalResults.add(jsonStr);
+			} else {
+				finalResults.add(ouptResults.toString());
+			}
 		}
-		
+
 		return finalResults.toString();
 	}
 
@@ -59,9 +68,9 @@ public class QueryByTarget {
 			return Lang.TTL;
 		} else if (format.equals("N-TRIPLES")) {
 			return Lang.NTRIPLES;
-		}else if (format.equals("NT")) {
+		} else if (format.equals("NT")) {
 			return Lang.NT;
-		} else if (format.equals("RDF/XML")) {
+		} else if (format.equals("RDF/XML") || format.equals("ld+json")) {
 			return Lang.RDFXML;
 		} else if (format.equals("N3")) {
 			return Lang.N3;
@@ -76,13 +85,14 @@ public class QueryByTarget {
 
 	/**
 	 * This method is used for RAW CONSTRUCT Query output in specified format.
+	 * 
 	 * @param queryString
 	 * @param format
 	 * @return
 	 */
 	public String getQueryResults(String queryString, String format) {
 		StringWriter outputResults = new StringWriter();
-		QueryExecution eachGraphQuery = QueryExecutionFactory.sparqlService(serviceURL,queryString);
+		QueryExecution eachGraphQuery = QueryExecutionFactory.sparqlService(serviceURL, queryString);
 		Model model = eachGraphQuery.execConstruct();
 		RDFDataMgr.write(outputResults, model, getFormat(format));
 		return outputResults.toString();

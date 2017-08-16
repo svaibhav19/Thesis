@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class HasSourceType {
 
-	@XmlAttribute(name = "resource")
+	@XmlAttribute(name = "resource" , namespace = IRINS.rdf)
 	private String resource;
 
 	public String getResource() {

@@ -19,8 +19,8 @@ public class TestMain {
 	public static void main(String[] args) {
 		
 		StringWriter writer = new StringWriter();
-//		File xmlFile = new File("resources/PAGE2017UpdatedImageRegion XML.xml");
-		File xmlFile = new File("resources/PAGE2017UpdatedImageRegionSamllXML.xml");
+		File xmlFile = new File("resources/PAGE2017UpdatedImageRegion XML.xml");
+//		File xmlFile = new File("resources/PAGE2017UpdatedImageRegionSamllXML.xml");
 		try (BufferedReader br = new BufferedReader(new FileReader(xmlFile))) {
 		    String line;
 		    while ((line = br.readLine()) != null) {
@@ -37,7 +37,7 @@ public class TestMain {
 		
 		AnnotationGenerator generator = new AnnotationGenerator();
 		try {
-			generator.parseAnnotations("http://example.org/source2",writer.toString());
+			generator.parseAnnotations("http://example.org/source4",writer.toString());
 		} catch (RepositoryException e) {
 			e.printStackTrace();
 		} catch (RepositoryConfigException e) {
