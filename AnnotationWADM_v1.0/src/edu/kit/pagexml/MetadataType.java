@@ -210,4 +210,12 @@ public class MetadataType {
         this.externalRef = value;
     }
 
+	@Override
+	public String toString() {
+		return "MetadataType [creator=" + creator + ", created=" + created + ", lastChange=" + lastChange
+				+ ", comments=" + comments + ", userDefined=" + userDefined + ", externalRef=" + externalRef + "]";
+	}
+    
+    
+
 }

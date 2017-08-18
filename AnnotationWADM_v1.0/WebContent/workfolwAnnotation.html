@@ -1,23 +1,67 @@
 
-<div class="row">
-		<div class="col-xs-11 col-sm-11 col-md-11 col-lg-11 headerText" >
-			WorkFlow Annotations			
+<div onload="getPageXml()" class="row">
+	<div class="col-xs-11 col-sm-11 col-md-11 col-lg-11 headerText">
+		WorkFlow Annotations</div>
+	<div class="row">
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg">
+			<label >PageXML list:</label> <select  class="form-control"
+				id="pagexmlid">
+				
+			</select> 
 		</div>
-		<div class="row">
-			<div class="col-xs-4 col-sm-4 col-md-4 col-lg">
-				PageXML Registry
-				<select>
-					
-				</select>
-			</div>
-			
-			<div class="col-xs-4 col-sm-4 col-md-4 col-lg">
-				NO OF ANNOTATION
-			</div>
-			
-			<div class="col-xs-4 col-sm-4 col-md-4 col-lg">
-			DATA FROM ANNOTATION
-			</div>
-		
+
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg"><label > ANNOTATION :</label>
+		<select  class="form-control"
+				id="annoid">
+				
+			</select> 
 		</div>
+
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg">DATA FROM
+			ANNOTATION</div>
+
+	</div>
 </div>
+
+<script type="text/javascript">
+function getPageXml(){
+	  var xhttp = new XMLHttpRequest();
+	  xhttp.open("POST", "http://localhost:8080/AnnotationWADM_v1.0/rest/query", false);
+	  xhttp.setRequestHeader("Content-type", "application/json");
+	  xhttp.send("SELECT DISTINCT ?s WHERE { GRAPH <http://kit.edu/anno/annotationRegistry> { ?s ?p ?o } }");
+	  var response = JSON.parse(xhttp.responseText);
+	  var  select = document.getElementById('pagexmlid');
+	  for (var  items = 0; items < response.length;  items++) {
+		var opt = document.createElement('option');
+	    opt.value = response[items].s;
+	    opt.innerHTML = response[items].s;
+	    select.appendChild(opt);
+	}
+	   getAnnotations();
+	  
+}
+
+function getAnnotations(){
+	var selectedid = $("#pagexmlid").val();
+	
+	var xhttp = new XMLHttpRequest();
+	  xhttp.open("POST", "http://localhost:8080/AnnotationWADM_v1.0/rest/query", false);
+	  xhttp.setRequestHeader("Content-type", "application/json");
+	  xhttp.send("SELECT ?s ?p ?o  WHERE { GRAPH <http://kit.edu/anno/annotationRegistry> { ?s ?p ?o. FILTER (?s = <"+selectedid+">)} }");
+	  
+	  var response = JSON.parse(xhttp.responseText); 
+	   var  select = document.getElementById('annoid');
+	  for (var  items = 0; items < response.length;  items++) {
+		var opt = document.createElement('option');
+	    opt.value = response[items].s;
+	    opt.innerHTML = response[items].o;
+	    select.appendChild(opt);
+	} 
+	
+}
+$(function(){
+	$('div[onload]').trigger('onload');
+});
+
+
+</script>

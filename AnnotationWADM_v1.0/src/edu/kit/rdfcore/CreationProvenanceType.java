@@ -29,6 +29,18 @@ public class CreationProvenanceType {
 	
 	@XmlElement(name="identifier",namespace=IRINS.dc)
 	private String identifier;
+	
+	@XmlElement(name="imageWidth", namespace=IRINS.unit)
+	private String imageWidth;
+	
+	@XmlElement(name="imageHeight", namespace=IRINS.unit)
+	private String imageHeight;
+	
+	@XmlElement(name = "unit", namespace=IRINS.j6)
+	private String unit;
+	
+	@XmlElement(name="format", namespace=IRINS.dc)
+	private String format;
 
 	public HasSourceType getHasSource() {
 		return hasSource;
@@ -86,4 +98,45 @@ public class CreationProvenanceType {
 		this.identifier = identifier;
 	}
 
+	public String getImageWidth() {
+		return imageWidth;
+	}
+
+	public void setImageWidth(String imageWidth) {
+		this.imageWidth = imageWidth;
+	}
+
+	public String getImageHeight() {
+		return imageHeight;
+	}
+
+	public void setImageHeight(String imageHeight) {
+		this.imageHeight = imageHeight;
+	}
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+
+	public String getFormat() {
+		return format;
+	}
+
+	public void setFormat(String format) {
+		this.format = format;
+	}
+
+	@Override
+	public String toString() {
+		return "CreationProvenanceType [hasSource=" + hasSource + ", hasSelector=" + hasSelector + ", items=" + items
+				+ ", title=" + title + ", subject=" + subject + ", value=" + value + ", identifier=" + identifier
+				+ ", imageWidth=" + imageWidth + ", imageHeight=" + imageHeight + ", unit=" + unit + ", format="
+				+ format + "]";
+	}
+	
+	
 }

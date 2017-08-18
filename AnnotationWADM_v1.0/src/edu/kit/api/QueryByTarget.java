@@ -12,8 +12,9 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-import edu.kit.rdfcore.ParserInitilaser;
 import edu.kit.util.PropertyHandler;
 import edu.kit.util.QueryUtil;
 
@@ -50,7 +51,7 @@ public class QueryByTarget {
 			Model model = eachGraphQuery.execConstruct();
 			RDFDataMgr.write(ouptResults, model, langFormat);
 			if (format.equals("ld+json")) {
-				ParserInitilaser parser = new ParserInitilaser();
+				RDF2AnnoJsonConverter parser = new RDF2AnnoJsonConverter();
 				String jsonStr = parser.parse(ouptResults.toString());
 				finalResults.add(jsonStr);
 			} else {
@@ -93,7 +94,23 @@ public class QueryByTarget {
 	public String getQueryResults(String queryString, String format) {
 		StringWriter outputResults = new StringWriter();
 		QueryExecution eachGraphQuery = QueryExecutionFactory.sparqlService(serviceURL, queryString);
-		Model model = eachGraphQuery.execConstruct();
+		Model model = null;
+		if(queryString.contains("select")||queryString.contains("SELECT")){
+			ResultSet results = eachGraphQuery.execSelect();
+			JSONArray outputArr = new JSONArray();
+			while (results.hasNext()) {
+				QuerySolution soln = results.nextSolution();
+				soln.get("o");
+				JSONObject outJson = new JSONObject();
+				outJson.put("s", soln.get("s"));
+				outJson.put("p", soln.get("p"));
+				outJson.put("o", soln.get("o"));
+				outputArr.put(outJson);
+			}
+			return outputArr.toString();
+		}else
+			model = eachGraphQuery.execConstruct();
+		
 		RDFDataMgr.write(outputResults, model, getFormat(format));
 		return outputResults.toString();
 	}

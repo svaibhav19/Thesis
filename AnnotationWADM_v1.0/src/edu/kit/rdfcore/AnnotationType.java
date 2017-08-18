@@ -1,5 +1,7 @@
 package edu.kit.rdfcore;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -18,7 +20,7 @@ public class AnnotationType {
 	private HasTarget hasTarget;
 	
 	@XmlElement(name="hasBody",namespace=IRINS.j0)
-	private HasBodyType hasBody;
+	private List<HasBodyType> hasBody;
 	
 	@XmlElement(name="modified", namespace=IRINS.j1)
 	private String modified;
@@ -53,14 +55,6 @@ public class AnnotationType {
 		this.hasTarget = hasTarget;
 	}
 
-	public HasBodyType getHasBody() {
-		return hasBody;
-	}
-
-	public void setHasBody(HasBodyType hasBody) {
-		this.hasBody = hasBody;
-	}
-
 	public String getModified() {
 		return modified;
 	}
@@ -83,6 +77,14 @@ public class AnnotationType {
 
 	public void setCreator(CreatorType creator) {
 		this.creator = creator;
+	}
+
+	public List<HasBodyType> getHasBody() {
+		return hasBody;
+	}
+
+	public void setHasBody(List<HasBodyType> hasBody) {
+		this.hasBody = hasBody;
 	}
 	
 }

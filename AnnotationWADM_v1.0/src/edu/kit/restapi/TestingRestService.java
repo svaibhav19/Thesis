@@ -8,6 +8,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import edu.kit.api.QueryByTarget;
+
 @Path("/")
 public class TestingRestService {
 
@@ -25,6 +27,16 @@ public class TestingRestService {
 		System.out.println(jsonld);
 		System.out.println(digitalObjID);
 		return "found string";
+	}
+	
+	@POST
+	@Path("query")
+	@Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	public String executeQuery(String queryString){
+		System.out.println(queryString);
+		QueryByTarget queryExec = new QueryByTarget();
+		String results = queryExec.getQueryResults(queryString,"RDF/XML");
+		return results;
 	}
 	
 //	@POST

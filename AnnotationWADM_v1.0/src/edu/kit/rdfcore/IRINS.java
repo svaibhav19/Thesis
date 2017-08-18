@@ -10,5 +10,6 @@ public final class IRINS {
 	public static final String j3 = "http://www.w3.org/ns/activitystreams#";
 	public static final String j4 = "https://github.com/anno4j/ns#";
 	public static final String j5 = "http://xmlns.com/foaf/0.1/";
-	
+	public static final String j6="http://qudt.org/vocab/";
+	public static final String unit = "http://qudt.org/vocab/unit/";
 }

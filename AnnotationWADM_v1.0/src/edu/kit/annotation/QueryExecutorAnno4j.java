@@ -2,7 +2,6 @@ package edu.kit.annotation;
 
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
-import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
@@ -16,23 +15,10 @@ public class QueryExecutorAnno4j {
 
 	public static void main(String[] args) throws RepositoryException, RepositoryConfigException, MalformedQueryException, QueryEvaluationException, ParseException, IllegalAccessException, InstantiationException {
 		
-//		Anno4j anno4j = new Anno4j();
-//		SPARQLRepository sp = anno4j.createObject(SPARQLRepository.class);
-//		anno4j.setRepository(new SPARQLRepository("http://www.mydomain.com/sparql"));
-//		
-//		QueryService queryService = anno4j.createQueryService();
-//		queryService.addCriteria("oa:hasBody/ex:value", "Example Value", Comparison.EQ);
-		
-		 /*List<TextAnnotationBody> result = queryService
-			        .addPrefix("ex", "http://www.example.com/schema#")
-			        .addCriteria("^oa:hasBody/dcterms:modified","2017-07-30T10:20:56z", Comparison.EQ)
-			        .addCriteria("ex:confidence", 0.5, Comparison.GT)
-			        .execute(TextAnnotationBody.class);*/
-		
-		String queryStr = "construct { ?s ?p ?o.} WHERE { GRAPH <http://kit.edu/anno/urn:anno4j:18f5533e-3a5f-4c35-830b-35c178612c26> { ?s ?p ?o } }";
+		String queryStr = "construct { ?s ?p ?o.} WHERE { GRAPH <http://kit.edu/anno/urn:anno4j:028ddc58-3f49-4356-b974-02266a633238> { ?s ?p ?o. Filter (STRSTARTS(STR(?p), \"http://www.w3.org/ns/oa#hasBody\") || STRSTARTS(STR(?p), \"http://www.w3.org/ns/oa#motivatedBy\")  || STRSTARTS(STR(?p), \"http://www.w3.org/ns/oa#hasSource\") || STRSTARTS(STR(?p), \"http://www.w3.org/ns/oa#hasSelector\") || STRSTARTS(STR(?o), \"http://www.w3.org/ns#Selector\"))} }";
 		
 		QueryExecution query = QueryExecutionFactory.sparqlService("http://localhost:3030/kit/",queryStr);
 		Model model = query.execConstruct();
-		RDFDataMgr.write(System.out, model, Lang.JSONLD);
+		RDFDataMgr.write(System.out, model, Lang.RDFXML);
 	}
 }

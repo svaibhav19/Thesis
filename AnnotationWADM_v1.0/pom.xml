@@ -28,6 +28,7 @@
 	<repositories>
 		<repository>
 			<id>com.github.anno4j</id>
+			<!-- <id>ossrh</id> -->
 			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
 		</repository>
 	</repositories>
@@ -37,11 +38,6 @@
 			<artifactId>anno4j-core</artifactId>
 			<version>2.3.1-SNAPSHOT</version>
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.w3c/dom -->
-		<!-- <dependency> <groupId>xml-apis</groupId> <artifactId>xml-apis</artifactId> 
-			<version>1.4.01</version> </dependency> -->
-
 		<dependency>
 			<groupId>org.apache.jena</groupId>
 			<artifactId>jena-tdb</artifactId>
@@ -66,10 +62,6 @@
 			<artifactId>jersey-container-servlet-core</artifactId>
 			<version>2.26-b03</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
-		<!-- <dependency> <groupId>javax.ws.rs</groupId> <artifactId>javax.ws.rs-api</artifactId> 
-			<version>2.1-m09</version> </dependency> -->
-		<!-- https://mvnrepository.com/artifact/xerces/xercesImpl -->
 		<dependency>
 			<groupId>xerces</groupId>
 			<artifactId>xercesImpl</artifactId>
@@ -81,16 +73,11 @@
 			<artifactId>commons-logging</artifactId>
 			<version>1.2</version>
 		</dependency>
-		<!-- <dependency> <groupId>com.github.jsonld-java</groupId> <artifactId>jsonld-java</artifactId> 
-			<version>0.10.0</version> </dependency> -->
-
 		<!-- https://mvnrepository.com/artifact/org.json/json -->
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 			<version>20160810</version>
 		</dependency>
-
-
 	</dependencies>
 </project>

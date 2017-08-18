@@ -1,15 +1,11 @@
 package edu.kit.annotation;
 
 import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -33,7 +29,6 @@ import com.github.anno4j.model.impl.body.TextualBody;
 import com.github.anno4j.model.impl.multiplicity.Choice;
 import com.github.anno4j.model.impl.state.HttpRequestState;
 import com.github.anno4j.model.impl.targets.SpecificResource;
-import com.github.jsonldjava.core.DocumentLoader;
 import com.github.jsonldjava.core.JsonLdError;
 import com.github.jsonldjava.core.JsonLdOptions;
 import com.github.jsonldjava.core.JsonLdProcessor;
@@ -53,8 +48,6 @@ public class Anno4JImpl {
 			Annotation annotation = anno4j.createObject(Annotation.class);
 			
 			System.out.println("objets Created");
-
-			
 
 			// setting the motivations
 //			Motivation motivation = MotivationFactory.getCommenting(anno4j);
@@ -136,10 +129,10 @@ public class Anno4JImpl {
 			annotation.addTarget(specific);
 			
 		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-			System.out.println("JSONLD FORMAT>>>>>>>>>>>>>\n"+annotation.getTriples(RDFFormat.JSONLD));
+			System.out.println("JSONLD FORMAT>>>>>>>>>>>>>\n"+annotation.getTriples(RDFFormat.RDFXML));
 			
 			System.out.println("+++++++++++++++++++++++++------------+++++++++++++++++++++++++++++++++++++++++");
-			ObjectParser objectParser = new ObjectParser();
+//			ObjectParser objectParser = new ObjectParser();
 //			List<Annotation> annotations = objectParser.parse(annotation.getTriples(RDFFormat.JSONLD), new URL("http://example.com/"), RDFFormat.JSONLD);
 //			List<Annotation> annotations = objectParser.parse(annotation.getTriples(RDFFormat.NTRIPLES).toString(), new URL("http://www.example.com/"), RDFFormat.NTRIPLES);
 //			System.out.println("---------------------"+annotations.size());
@@ -160,24 +153,24 @@ public class Anno4JImpl {
 			
 			// Open a valid json(-ld) input file
 //			InputStream inputStream = new FileInputStream("input.json");
-			String jsonLdStr = annotation.getTriples(RDFFormat.JSONLD).substring(1);
-			jsonLdStr = jsonLdStr+"[{ \"Content-Location\": \"http://nonexisting.example.com/context\",\"X-Classpath\": \"custom/contexttest-0001.jsonld\","+
-					"\"Content-Type\": \"application/ld+json\" },";
-			InputStream stream = new ByteArrayInputStream(jsonLdStr.getBytes(StandardCharsets.UTF_8));
-			// Read the file into an Object (The type of this object will be a List, Map, String, Boolean,
-			// Number or null depending on the root object in the file).
-			Object jsonObject = JsonUtils.fromInputStream(stream);
-			// Create a context JSON map containing prefixes and definitions
-			Map context = new HashMap();
-			// Customise context...
-			// Create an instance of JsonLdOptions with the standard JSON-LD options
-			JsonLdOptions options = new JsonLdOptions();
-			// Customise options...
-			// Call whichever JSONLD function you want! (e.g. compact)
-			Object compact = JsonLdProcessor.compact(jsonObject, context, options);
-			// Print out the result (or don't, it's your call!)
-			System.out.println("final callsss");
-			System.out.println(JsonUtils.toPrettyString(compact));
+//			String jsonLdStr = annotation.getTriples(RDFFormat.JSONLD).substring(1);
+//			jsonLdStr = jsonLdStr+"[{ \"Content-Location\": \"http://nonexisting.example.com/context\",\"X-Classpath\": \"custom/contexttest-0001.jsonld\","+
+//					"\"Content-Type\": \"application/ld+json\" },";
+//			InputStream stream = new ByteArrayInputStream(jsonLdStr.getBytes(StandardCharsets.UTF_8));
+//			// Read the file into an Object (The type of this object will be a List, Map, String, Boolean,
+//			// Number or null depending on the root object in the file).
+//			Object jsonObject = JsonUtils.fromInputStream(stream);
+//			// Create a context JSON map containing prefixes and definitions
+//			Map context = new HashMap();
+//			// Customise context...
+//			// Create an instance of JsonLdOptions with the standard JSON-LD options
+//			JsonLdOptions options = new JsonLdOptions();
+//			// Customise options...
+//			// Call whichever JSONLD function you want! (e.g. compact)
+//			Object compact = JsonLdProcessor.compact(jsonObject, context, options);
+//			// Print out the result (or don't, it's your call!)
+//			System.out.println("final callsss");
+//			System.out.println(JsonUtils.toPrettyString(compact));
 			
 			
 			

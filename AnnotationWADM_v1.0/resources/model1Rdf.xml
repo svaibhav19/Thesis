@@ -1,0 +1,865 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:j.0="http://www.w3.org/ns/oa#"
+    xmlns:j.1="http://purl.org/dc/terms/"
+    xmlns:j.2="http://www.w3.org/ns/prov/"
+    xmlns:j.3="http://www.w3.org/ns/activitystreams#"
+    xmlns:j.4="https://github.com/anno4j/ns#"
+    xmlns:j.5="http://qudt.org/vocab/"
+    xmlns:j.6="http://xmlns.com/foaf/0.1/">
+  <j.0:Annotation rdf:about="urn:anno4j:6fea72b5-6fbe-4748-bea9-4077a006bb9e">
+    <j.0:motivatedBy>
+      <j.4:Resource rdf:about="http://www.w3.org/ns/oa#describing">
+        <rdf:type rdf:resource="http://www.w3.org/ns/oa#Motivation"/>
+      </j.4:Resource>
+    </j.0:motivatedBy>
+    <j.0:hasTarget>
+      <j.4:CreationProvenance rdf:about="urn:anno4j:2935a472-f627-4edb-8277-1ef0cb36df5f">
+        <j.0:hasSource rdf:resource="http://example.org/source1"/>
+        <j.0:hasSelector>
+          <j.4:Selector rdf:about="urn:anno4j:d53fcd67-e069-41c3-865c-e956e6fa9941">
+            <j.1:conformsTo>http://www.w3.org/TR/SVG/</j.1:conformsTo>
+            <rdf:value>2015,515 2015,1370 285,1370 285,515</rdf:value>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#SvgSelector"/>
+          </j.4:Selector>
+        </j.0:hasSelector>
+        <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+        <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+        <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+      </j.4:CreationProvenance>
+    </j.0:hasTarget>
+    <j.0:hasBody>
+      <j.4:Resource rdf:about="urn:anno4j:50836c4f-0a21-4553-995b-091fe21732c0">
+        <j.3:items>
+          <j.4:Resource rdf:about="urn:anno4j:5f95eee2-c8cf-41ad-bf72-3f1dde345f7f">
+            <dc:title>SaturationFGColorHue_SKEWNESS</dc:title>
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <rdf:value>12.216722132103827</rdf:value>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <dc:format>xsd:string</dc:format>
+            <j.5:unit>deg</j.5:unit>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <dc:identifier>r2</dc:identifier>
+          </j.4:Resource>
+        </j.3:items>
+        <j.3:items>
+          <j.4:ExternalWebResource rdf:about="urn:anno4j:f14fcb28-6fb8-439e-8a84-c1ec5d418a14">
+            <rdf:value>19.00151891560792</rdf:value>
+            <dc:format>xsd:string</dc:format>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <j.5:unit>deg</j.5:unit>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <dc:title>BrightnessBGColorHue_SKEWNESS</dc:title>
+            <dc:identifier>r2</dc:identifier>
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+          </j.4:ExternalWebResource>
+        </j.3:items>
+        <j.3:items>
+          <j.4:Resource rdf:about="urn:anno4j:87738e92-0472-4491-b7ed-09b3dc0f8def">
+            <dc:identifier>r2</dc:identifier>
+            <dc:format>xsd:string</dc:format>
+            <j.5:unit>deg</j.5:unit>
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <dc:title>SaturationBGColorHue_MEDIAN</dc:title>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <rdf:value>45.17647058823529</rdf:value>
+          </j.4:Resource>
+        </j.3:items>
+        <j.3:items>
+          <j.4:CreationProvenance rdf:about="urn:anno4j:0392228a-bacd-4bb0-939c-c0d91973576d">
+            <dc:title>BrightnessFGColorHue_MEAN</dc:title>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <dc:identifier>r2</dc:identifier>
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:value>32.94165003551737</rdf:value>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <j.5:unit>deg</j.5:unit>
+            <dc:format>xsd:string</dc:format>
+          </j.4:CreationProvenance>
+        </j.3:items>
+        <j.3:items>
+          <j.0:EmbeddedContent rdf:about="urn:anno4j:fe01e82f-c945-47c7-a26a-9b59da29adb5">
+            <dc:identifier>r2</dc:identifier>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <j.5:unit>pct</j.5:unit>
+            <dc:format>xsd:string</dc:format>
+            <dc:title>SaturationBGColorBrightness_SKEWNESS</dc:title>
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:value>-1.3711908377851822</rdf:value>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+          </j.0:EmbeddedContent>
+        </j.3:items>
+        <j.3:items>
+          <j.4:CreationProvenance rdf:about="urn:anno4j:5c06c821-038f-439c-8c95-ae8df5490a3c">
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:value>7.414896183509553</rdf:value>
+            <dc:title>BrightnessFGColorBrightness_STD_DEV</dc:title>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <dc:identifier>r2</dc:identifier>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <j.5:unit>pct</j.5:unit>
+            <dc:format>xsd:string</dc:format>
+          </j.4:CreationProvenance>
+        </j.3:items>
+        <j.3:items>
+          <j.4:Resource rdf:about="urn:anno4j:1e34a2b7-4d11-4842-adc9-26d557344353">
+            <dc:identifier>r2</dc:identifier>
+            <dc:title>BrightnessFGColorBrightness_MEDIAN</dc:title>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:value>60.0</rdf:value>
+            <dc:format>xsd:string</dc:format>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <j.5:unit>pct</j.5:unit>
+          </j.4:Resource>
+        </j.3:items>
+        <j.3:items>
+          <j.4:ExternalWebResource rdf:about="urn:anno4j:5b7d7394-ea59-4f3a-9ac8-5eb66ebf6350">
+            <j.5:unit>pct</j.5:unit>
+            <dc:identifier>r2</dc:identifier>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <dc:title>BrightnessBGColorSaturation_SKEWNESS</dc:title>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <dc:format>xsd:string</dc:format>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <rdf:value>2.2834622838789573</rdf:value>
+            <dc:subject>TextRegion</dc:subject>
+          </j.4:ExternalWebResource>
+        </j.3:items>
+        <j.3:items>
+          <j.4:CreationProvenance rdf:about="urn:anno4j:2ddda72e-2584-4d2e-8683-c8f260050394">
+            <rdf:value>2.630267975895987</rdf:value>
+            <dc:identifier>r2</dc:identifier>
+            <dc:format>xsd:string</dc:format>
+            <dc:title>SaturationBGColorSaturation_STD_DEV</dc:title>
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <j.5:unit>pct</j.5:unit>
+          </j.4:CreationProvenance>
+        </j.3:items>
+        <j.3:items>
+          <j.4:CreationProvenance rdf:about="urn:anno4j:9f357887-540d-47b1-b0e3-43c4e2b89f21">
+            <j.5:unit>pct</j.5:unit>
+            <dc:subject>TextRegion</dc:subject>
+            <dc:title>BrightnessFGColorSaturation_MEDIAN</dc:title>
+            <dc:format>xsd:string</dc:format>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <rdf:value>22.35294117647059</rdf:value>
+            <dc:identifier>r2</dc:identifier>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+          </j.4:CreationProvenance>
+        </j.3:items>
+        <j.3:items>
+          <j.4:CreationProvenance rdf:about="urn:anno4j:05895693-d158-4937-9a49-d9f8486a366a">
+            <dc:title>NumberVerticalLines</dc:title>
+            <dc:subject>TextRegion</dc:subject>
+            <dc:identifier>r2</dc:identifier>
+            <dc:format>xsd:string</dc:format>
+            <rdf:value>6</rdf:value>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+          </j.4:CreationProvenance>
+        </j.3:items>
+        <j.3:items>
+          <j.0:EmbeddedContent rdf:about="urn:anno4j:aee93acd-4194-4858-ba68-b1ce4bf98813">
+            <dc:title>SaturationBGColorSaturation_MEDIAN</dc:title>
+            <rdf:value>9.803921568627452</rdf:value>
+            <dc:identifier>r2</dc:identifier>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <j.5:unit>pct</j.5:unit>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <dc:format>xsd:string</dc:format>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <dc:subject>TextRegion</dc:subject>
+          </j.0:EmbeddedContent>
+        </j.3:items>
+        <j.3:items>
+          <j.4:ExternalWebResource rdf:about="urn:anno4j:917800fa-90c7-4d3c-ab75-e8bf7282b2c7">
+            <dc:title>SaturationBGColorHue_STD_DEV</dc:title>
+            <rdf:value>27.53581820349759</rdf:value>
+            <j.5:unit>deg</j.5:unit>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <dc:format>xsd:string</dc:format>
+            <dc:subject>TextRegion</dc:subject>
+            <dc:identifier>r2</dc:identifier>
+          </j.4:ExternalWebResource>
+        </j.3:items>
+        <j.3:items>
+          <j.4:ExternalWebResource rdf:about="urn:anno4j:8e70837b-1c95-47cb-947e-96d321048bbc">
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <dc:title>SaturationFGColorBrightness_STD_DEV</dc:title>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <dc:identifier>r2</dc:identifier>
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:value>7.935845612672312</rdf:value>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <dc:format>xsd:string</dc:format>
+            <j.5:unit>pct</j.5:unit>
+          </j.4:ExternalWebResource>
+        </j.3:items>
+        <j.3:items>
+          <j.4:ExternalWebResource rdf:about="urn:anno4j:eb7b1dc2-89b2-4e92-939f-5b93d69ec081">
+            <dc:title>BrightnessBGColorHue_MEAN</dc:title>
+            <j.5:unit>deg</j.5:unit>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <dc:identifier>r2</dc:identifier>
+            <rdf:value>45.53416922520986</rdf:value>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <dc:format>xsd:string</dc:format>
+          </j.4:ExternalWebResource>
+        </j.3:items>
+        <j.3:items>
+          <j.0:EmbeddedContent rdf:about="urn:anno4j:fd9d9b1f-2965-4b4c-bdb4-658f897e7025">
+            <dc:title>SaturationBGColorHue_SKEWNESS</dc:title>
+            <dc:format>xsd:string</dc:format>
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:value>12.3583355728851</rdf:value>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <j.5:unit>deg</j.5:unit>
+            <dc:identifier>r2</dc:identifier>
+          </j.0:EmbeddedContent>
+        </j.3:items>
+        <j.3:items>
+          <j.0:EmbeddedContent rdf:about="urn:anno4j:b0f8d780-8259-4912-9568-64a4cc33538e">
+            <dc:format>xsd:string</dc:format>
+            <dc:identifier>r2</dc:identifier>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <j.5:unit>pct</j.5:unit>
+            <dc:title>RelativeHeight</dc:title>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <rdf:value>22.40566</rdf:value>
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+          </j.0:EmbeddedContent>
+        </j.3:items>
+        <j.3:items>
+          <j.4:ExternalWebResource rdf:about="urn:anno4j:ffd2a9e8-450b-40b0-896a-adc4b7f97e2d">
+            <j.5:unit>pct</j.5:unit>
+            <rdf:value>59.02414617370814</rdf:value>
+            <dc:title>BrightnessFGColorBrightness_MEAN</dc:title>
+            <dc:identifier>r2</dc:identifier>
+            <dc:format>xsd:string</dc:format>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+          </j.4:ExternalWebResource>
+        </j.3:items>
+        <j.3:items>
+          <j.4:ExternalWebResource rdf:about="urn:anno4j:23bd0c56-ffbb-431d-a47a-253a2c2d6014">
+            <j.5:unit>cm</j.5:unit>
+            <dc:identifier>r2</dc:identifier>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:value>14.647334</rdf:value>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <dc:format>xsd:string</dc:format>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <dc:title>Width</dc:title>
+          </j.4:ExternalWebResource>
+        </j.3:items>
+        <j.3:items>
+          <j.4:CreationProvenance rdf:about="urn:anno4j:7bcb947a-50ad-4a0a-b4c8-3b9add1bc885">
+            <j.5:unit>pct</j.5:unit>
+            <dc:identifier>r2</dc:identifier>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <dc:format>xsd:string</dc:format>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <dc:title>BrightnessBGColorBrightness_STD_DEV</dc:title>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:value>3.3064830343383407</rdf:value>
+          </j.4:CreationProvenance>
+        </j.3:items>
+        <j.3:items>
+          <j.4:ExternalWebResource rdf:about="urn:anno4j:4acbc054-baff-4f62-9bf0-7eff183efc3f">
+            <dc:format>xsd:string</dc:format>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <rdf:value>60.78431372549019</rdf:value>
+            <j.5:unit>pct</j.5:unit>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <dc:subject>TextRegion</dc:subject>
+            <dc:identifier>r2</dc:identifier>
+            <dc:title>SaturationFGColorBrightness_MEDIAN</dc:title>
+          </j.4:ExternalWebResource>
+        </j.3:items>
+        <j.3:items>
+          <j.4:ExternalWebResource rdf:about="urn:anno4j:8c20230d-0757-45c1-ae29-91560fdd7496">
+            <j.5:unit>pct</j.5:unit>
+            <dc:title>RelativeHPOS</dc:title>
+            <dc:format>xsd:string</dc:format>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <rdf:value>9.710392</rdf:value>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <dc:identifier>r2</dc:identifier>
+            <dc:subject>TextRegion</dc:subject>
+          </j.4:ExternalWebResource>
+        </j.3:items>
+        <j.3:items>
+          <j.4:CreationProvenance rdf:about="urn:anno4j:9d87e415-0789-40ec-af14-50c5ab964ea6">
+            <dc:title>RedArea</dc:title>
+            <dc:subject>TextRegion</dc:subject>
+            <dc:identifier>r2</dc:identifier>
+            <dc:format>xsd:string</dc:format>
+            <rdf:value>true</rdf:value>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+          </j.4:CreationProvenance>
+        </j.3:items>
+        <j.3:items>
+          <j.4:CreationProvenance rdf:about="urn:anno4j:6f35283e-ec84-4cd3-a3a8-2921cd808d8d">
+            <dc:identifier>r2</dc:identifier>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <j.5:unit>pct</j.5:unit>
+            <rdf:value>0.20409674363707983</rdf:value>
+            <dc:title>SaturationBGColorSaturation_SKEWNESS</dc:title>
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <dc:format>xsd:string</dc:format>
+          </j.4:CreationProvenance>
+        </j.3:items>
+        <j.3:items>
+          <j.4:CreationProvenance rdf:about="urn:anno4j:ebefed3c-6de7-4b4d-8ad1-25b5d4bb6012">
+            <j.5:unit>deg</j.5:unit>
+            <dc:format>xsd:string</dc:format>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <dc:identifier>r2</dc:identifier>
+            <dc:subject>TextRegion</dc:subject>
+            <dc:title>BrightnessFGColorHue_STD_DEV</dc:title>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <rdf:value>57.246947492264766</rdf:value>
+          </j.4:CreationProvenance>
+        </j.3:items>
+        <j.3:items>
+          <j.0:EmbeddedContent rdf:about="urn:anno4j:89d415c3-73f2-4def-85af-68dacf72cf5a">
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <dc:format>xsd:string</dc:format>
+            <dc:identifier>r2</dc:identifier>
+            <dc:subject>TextRegion</dc:subject>
+            <dc:title>BrightnessBGColorSaturation_STD_DEV</dc:title>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <rdf:value>4.960576468486858</rdf:value>
+            <j.5:unit>pct</j.5:unit>
+          </j.0:EmbeddedContent>
+        </j.3:items>
+        <j.3:items>
+          <j.4:ExternalWebResource rdf:about="urn:anno4j:870328be-ef0a-41b2-a18c-3645ed74b100">
+            <dc:format>xsd:string</dc:format>
+            <j.5:unit>pct</j.5:unit>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <dc:identifier>r2</dc:identifier>
+            <rdf:value>78.43137254901961</rdf:value>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <dc:subject>TextRegion</dc:subject>
+            <dc:title>BrightnessBGColorBrightness_MEDIAN</dc:title>
+          </j.4:ExternalWebResource>
+        </j.3:items>
+        <rdf:type rdf:resource="http://www.w3.org/ns/oa#Choice"/>
+        <j.3:items>
+          <j.4:CreationProvenance rdf:about="urn:anno4j:9a00b586-93aa-44ea-a4b3-df7ce5fab353">
+            <dc:identifier>r2</dc:identifier>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <dc:title>SaturationFGColorBrightness_SKEWNESS</dc:title>
+            <dc:subject>TextRegion</dc:subject>
+            <dc:format>xsd:string</dc:format>
+            <j.5:unit>pct</j.5:unit>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <rdf:value>-0.021158836821796465</rdf:value>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+          </j.4:CreationProvenance>
+        </j.3:items>
+        <j.3:items>
+          <j.0:EmbeddedContent rdf:about="urn:anno4j:192abef1-f8a5-4314-8678-dc2ebeaea9c2">
+            <j.5:unit>pct</j.5:unit>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <dc:title>BrightnessFGColorSaturation_MEAN</dc:title>
+            <rdf:value>21.281359582360835</rdf:value>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <dc:identifier>r2</dc:identifier>
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <dc:format>xsd:string</dc:format>
+          </j.0:EmbeddedContent>
+        </j.3:items>
+        <j.3:items>
+          <j.0:EmbeddedContent rdf:about="urn:anno4j:f915498a-7da7-4c07-80a6-1a0f9873645c">
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <dc:title>SaturationFGColorHue_MEDIAN</dc:title>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <dc:format>xsd:string</dc:format>
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <rdf:value>21.176470588235293</rdf:value>
+            <j.5:unit>deg</j.5:unit>
+            <dc:identifier>r2</dc:identifier>
+          </j.0:EmbeddedContent>
+        </j.3:items>
+        <j.3:items>
+          <j.4:CreationProvenance rdf:about="urn:anno4j:fdd1c887-968c-4c2a-a299-b3aec07d7249">
+            <dc:subject>TextRegion</dc:subject>
+            <dc:identifier>r2</dc:identifier>
+            <dc:format>xsd:string</dc:format>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <rdf:value>9.803921568627452</rdf:value>
+            <j.5:unit>pct</j.5:unit>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <dc:title>BrightnessBGColorSaturation_MEDIAN</dc:title>
+          </j.4:CreationProvenance>
+        </j.3:items>
+        <j.3:items>
+          <j.4:CreationProvenance rdf:about="urn:anno4j:4b853e9b-994e-4f2d-8c0c-b0354585eb5e">
+            <dc:subject>TextRegion</dc:subject>
+            <dc:title>SaturationFGColorBrightness_MEAN</dc:title>
+            <dc:format>xsd:string</dc:format>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <j.5:unit>pct</j.5:unit>
+            <rdf:value>61.277791417737404</rdf:value>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <dc:identifier>r2</dc:identifier>
+          </j.4:CreationProvenance>
+        </j.3:items>
+        <j.3:items>
+          <j.4:Resource rdf:about="urn:anno4j:eb92ddcb-6413-4826-9846-ae4b092ceb32">
+            <dc:identifier>r2</dc:identifier>
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:value>6.918886825931852</rdf:value>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <dc:format>xsd:string</dc:format>
+            <dc:title>BrightnessFGColorHue_SKEWNESS</dc:title>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <j.5:unit>deg</j.5:unit>
+          </j.4:Resource>
+        </j.3:items>
+        <j.3:items>
+          <j.4:CreationProvenance rdf:about="urn:anno4j:fda4dfd8-fe2d-4887-9e12-f4680a5b8c7c">
+            <j.5:unit>cm</j.5:unit>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <dc:format>xsd:string</dc:format>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <dc:title>Height</dc:title>
+            <dc:identifier>r2</dc:identifier>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:value>7.239</rdf:value>
+          </j.4:CreationProvenance>
+        </j.3:items>
+        <j.3:items>
+          <j.0:EmbeddedContent rdf:about="urn:anno4j:7ec57c20-fab4-4632-8169-1e7cde12ff11">
+            <j.5:unit>pct</j.5:unit>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <dc:title>SaturationFGColorSaturation_SKEWNESS</dc:title>
+            <dc:subject>TextRegion</dc:subject>
+            <dc:format>xsd:string</dc:format>
+            <dc:identifier>r2</dc:identifier>
+            <rdf:value>1.2574948690226517</rdf:value>
+          </j.0:EmbeddedContent>
+        </j.3:items>
+        <j.3:items>
+          <j.4:ExternalWebResource rdf:about="urn:anno4j:fc816ab1-c670-4c8e-8e3a-0d411112da20">
+            <j.5:unit>pct</j.5:unit>
+            <rdf:value>77.65919078109876</rdf:value>
+            <dc:format>xsd:string</dc:format>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <dc:title>BrightnessBGColorBrightness_MEAN</dc:title>
+            <dc:identifier>r2</dc:identifier>
+            <dc:subject>TextRegion</dc:subject>
+          </j.4:ExternalWebResource>
+        </j.3:items>
+        <j.3:items>
+          <j.4:CreationProvenance rdf:about="urn:anno4j:fdf791e8-d6be-422e-8666-42c687eb7d12">
+            <dc:identifier>r2</dc:identifier>
+            <dc:format>xsd:string</dc:format>
+            <rdf:value>6.587736166879135</rdf:value>
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <j.5:unit>pct</j.5:unit>
+            <dc:title>BrightnessFGColorSaturation_STD_DEV</dc:title>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+          </j.4:CreationProvenance>
+        </j.3:items>
+        <j.3:items>
+          <j.0:EmbeddedContent rdf:about="urn:anno4j:f7cfac6b-b215-4576-a0fd-088d5c6ec2d4">
+            <dc:title>HPOS</dc:title>
+            <rdf:value>2.4129999</rdf:value>
+            <dc:format>xsd:string</dc:format>
+            <dc:subject>TextRegion</dc:subject>
+            <dc:identifier>r2</dc:identifier>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <j.5:unit>cm</j.5:unit>
+          </j.0:EmbeddedContent>
+        </j.3:items>
+        <j.3:items>
+          <j.4:ExternalWebResource rdf:about="urn:anno4j:a0316f55-7f7a-4ae7-b08c-84fa72b73138">
+            <dc:title>Area</dc:title>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <rdf:value>106.03205</rdf:value>
+            <dc:format>xsd:string</dc:format>
+            <j.5:unit>sq.cm</j.5:unit>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <dc:subject>TextRegion</dc:subject>
+            <dc:identifier>r2</dc:identifier>
+          </j.4:ExternalWebResource>
+        </j.3:items>
+        <j.3:items>
+          <j.4:CreationProvenance rdf:about="urn:anno4j:7fd00ee6-ebe7-4bf8-86b3-395e02b54034">
+            <dc:title>NumberHorizontalLines</dc:title>
+            <dc:subject>TextRegion</dc:subject>
+            <dc:identifier>r2</dc:identifier>
+            <dc:format>xsd:string</dc:format>
+            <rdf:value>12</rdf:value>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+          </j.4:CreationProvenance>
+        </j.3:items>
+        <j.3:items>
+          <j.0:EmbeddedContent rdf:about="urn:anno4j:ab84c218-8ed7-4300-aa37-bb890b63c4b8">
+            <dc:title>BrightnessBGColorSaturation_MEAN</dc:title>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <dc:identifier>r2</dc:identifier>
+            <j.5:unit>pct</j.5:unit>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <dc:format>xsd:string</dc:format>
+            <rdf:value>10.776471281490013</rdf:value>
+          </j.0:EmbeddedContent>
+        </j.3:items>
+        <j.3:items>
+          <j.4:Resource rdf:about="urn:anno4j:606fd04b-a463-474b-8f7e-c2500fc28293">
+            <dc:title>SaturationFGColorHue_MEAN</dc:title>
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <rdf:value>25.689865830938313</rdf:value>
+            <j.5:unit>deg</j.5:unit>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <dc:identifier>r2</dc:identifier>
+            <dc:format>xsd:string</dc:format>
+          </j.4:Resource>
+        </j.3:items>
+        <j.3:items>
+          <j.4:Resource rdf:about="urn:anno4j:e4f869a1-b46e-47d4-8ff5-1d8ff2cc91a8">
+            <dc:subject>TextRegion</dc:subject>
+            <dc:format>xsd:string</dc:format>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <j.5:unit>pct</j.5:unit>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <rdf:value>6.474491810336542</rdf:value>
+            <dc:title>SaturationBGColorBrightness_STD_DEV</dc:title>
+            <dc:identifier>r2</dc:identifier>
+          </j.4:Resource>
+        </j.3:items>
+        <j.3:items>
+          <j.4:Resource rdf:about="urn:anno4j:f4d9b7fe-7e92-4738-90c3-16dfaf8a16ba">
+            <dc:title>SaturationBGColorHue_MEAN</dc:title>
+            <dc:subject>TextRegion</dc:subject>
+            <j.5:unit>deg</j.5:unit>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <dc:format>xsd:string</dc:format>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <rdf:value>46.967496513590426</rdf:value>
+            <dc:identifier>r2</dc:identifier>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+          </j.4:Resource>
+        </j.3:items>
+        <j.3:items>
+          <j.4:Resource rdf:about="urn:anno4j:9bd5a84e-e916-40d2-8fcc-d266c18b60e8">
+            <dc:title>BrightnessFGColorSaturation_SKEWNESS</dc:title>
+            <dc:identifier>r2</dc:identifier>
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <j.5:unit>pct</j.5:unit>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <rdf:value>-0.14123104471407064</rdf:value>
+            <dc:format>xsd:string</dc:format>
+          </j.4:Resource>
+        </j.3:items>
+        <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+        <j.3:items>
+          <j.4:CreationProvenance rdf:about="urn:anno4j:d89a5543-bac2-4020-8dbe-ff5b36b66a89">
+            <dc:title>NumberFeatureStackArray</dc:title>
+            <dc:subject>TextRegion</dc:subject>
+            <dc:identifier>r2</dc:identifier>
+            <dc:format>xsd:string</dc:format>
+            <rdf:value>30</rdf:value>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+          </j.4:CreationProvenance>
+        </j.3:items>
+        <j.3:items>
+          <j.0:EmbeddedContent rdf:about="urn:anno4j:b074f879-30ef-444c-bf0d-4f862db8ab9e">
+            <j.5:unit>pct</j.5:unit>
+            <dc:subject>TextRegion</dc:subject>
+            <dc:format>xsd:string</dc:format>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <rdf:value>13.495808</rdf:value>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <dc:identifier>r2</dc:identifier>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <dc:title>RelativeVPOS</dc:title>
+          </j.0:EmbeddedContent>
+        </j.3:items>
+        <j.3:items>
+          <j.0:EmbeddedContent rdf:about="urn:anno4j:9f765485-881f-4adf-b05c-7c461cf6fa25">
+            <j.5:unit>pct</j.5:unit>
+            <dc:subject>TextRegion</dc:subject>
+            <dc:format>xsd:string</dc:format>
+            <rdf:value>-0.6851247954873855</rdf:value>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <dc:identifier>r2</dc:identifier>
+            <dc:title>BrightnessFGColorBrightness_SKEWNESS</dc:title>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+          </j.0:EmbeddedContent>
+        </j.3:items>
+        <j.3:items>
+          <j.0:EmbeddedContent rdf:about="urn:anno4j:9e77fd7c-1e63-481a-863c-b6e75b90e2d1">
+            <dc:format>xsd:string</dc:format>
+            <dc:title>SaturationFGColorSaturation_MEAN</dc:title>
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <j.5:unit>pct</j.5:unit>
+            <rdf:value>24.79064266675653</rdf:value>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <dc:identifier>r2</dc:identifier>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+          </j.0:EmbeddedContent>
+        </j.3:items>
+        <j.3:items>
+          <j.0:EmbeddedContent rdf:about="urn:anno4j:6806d3e3-a5f9-4ae8-a290-59968deede2b">
+            <rdf:value>21.176470588235293</rdf:value>
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <dc:identifier>r2</dc:identifier>
+            <dc:title>BrightnessFGColorHue_MEDIAN</dc:title>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <dc:format>xsd:string</dc:format>
+            <j.5:unit>deg</j.5:unit>
+          </j.0:EmbeddedContent>
+        </j.3:items>
+        <j.3:items>
+          <j.0:EmbeddedContent rdf:about="urn:anno4j:a2499b1c-e0b6-4ac2-9ccf-606741668b32">
+            <dc:format>xsd:string</dc:format>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <dc:identifier>r2</dc:identifier>
+            <rdf:value>58.943783</rdf:value>
+            <dc:subject>TextRegion</dc:subject>
+            <dc:title>RelativeWidth</dc:title>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <j.5:unit>pct</j.5:unit>
+          </j.0:EmbeddedContent>
+        </j.3:items>
+        <j.3:items>
+          <j.4:CreationProvenance rdf:about="urn:anno4j:98e99b80-f254-4bff-94bb-9e6b7730e704">
+            <rdf:value>23.92156862745098</rdf:value>
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <j.5:unit>pct</j.5:unit>
+            <dc:identifier>r2</dc:identifier>
+            <dc:title>SaturationFGColorSaturation_MEDIAN</dc:title>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <dc:format>xsd:string</dc:format>
+          </j.4:CreationProvenance>
+        </j.3:items>
+        <j.3:items>
+          <j.4:CreationProvenance rdf:about="urn:anno4j:56bd831f-2c4a-429f-bb0c-f24d54b28614">
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <dc:format>xsd:string</dc:format>
+            <dc:title>SaturationFGColorHue_STD_DEV</dc:title>
+            <rdf:value>35.93184909466317</rdf:value>
+            <j.5:unit>deg</j.5:unit>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <dc:identifier>r2</dc:identifier>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <dc:subject>TextRegion</dc:subject>
+          </j.4:CreationProvenance>
+        </j.3:items>
+        <j.3:items>
+          <j.4:ExternalWebResource rdf:about="urn:anno4j:262932d9-3056-492d-a0f5-4f77824ea56b">
+            <dc:format>xsd:string</dc:format>
+            <rdf:value>13.691483471408494</rdf:value>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <dc:identifier>r2</dc:identifier>
+            <j.5:unit>deg</j.5:unit>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <dc:title>BrightnessBGColorHue_STD_DEV</dc:title>
+          </j.4:ExternalWebResource>
+        </j.3:items>
+        <j.3:items>
+          <j.4:CreationProvenance rdf:about="urn:anno4j:a41ee5ef-52b2-4d08-a3d1-87a35c8e76e3">
+            <dc:title>SaturationFGColorSaturation_STD_DEV</dc:title>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <dc:subject>TextRegion</dc:subject>
+            <j.5:unit>pct</j.5:unit>
+            <rdf:value>6.489338267808205</rdf:value>
+            <dc:format>xsd:string</dc:format>
+            <dc:identifier>r2</dc:identifier>
+          </j.4:CreationProvenance>
+        </j.3:items>
+        <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+        <j.3:items>
+          <j.4:CreationProvenance rdf:about="urn:anno4j:93cf042a-58de-491f-bc76-47f14d6ea4b9">
+            <dc:title>VPOS</dc:title>
+            <j.5:unit>cm</j.5:unit>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <dc:identifier>r2</dc:identifier>
+            <dc:subject>TextRegion</dc:subject>
+            <dc:format>xsd:string</dc:format>
+            <rdf:value>4.3603334</rdf:value>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+          </j.4:CreationProvenance>
+        </j.3:items>
+        <j.3:items>
+          <j.4:ExternalWebResource rdf:about="urn:anno4j:fc8546e7-4754-4f98-ae7e-e3c42b6995ae">
+            <dc:title>MeanDistanceHorizontalLines</dc:title>
+            <rdf:value>1.2206112146377563</rdf:value>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <dc:format>xsd:string</dc:format>
+            <dc:subject>TextRegion</dc:subject>
+            <j.5:unit>cm</j.5:unit>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <dc:identifier>r2</dc:identifier>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+          </j.4:ExternalWebResource>
+        </j.3:items>
+        <j.3:items>
+          <j.4:Resource rdf:about="urn:anno4j:c54c5695-50be-4eb3-98c1-8e7e06247402">
+            <dc:format>xsd:string</dc:format>
+            <rdf:value>78.03921568627452</rdf:value>
+            <dc:title>SaturationBGColorBrightness_MEDIAN</dc:title>
+            <j.5:unit>pct</j.5:unit>
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <dc:identifier>r2</dc:identifier>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+          </j.4:Resource>
+        </j.3:items>
+        <j.3:items>
+          <j.4:Resource rdf:about="urn:anno4j:9d4174e5-d47c-460e-81cf-4102f363be26">
+            <rdf:value>-0.29671392359640214</rdf:value>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <dc:title>BrightnessBGColorBrightness_SKEWNESS</dc:title>
+            <j.5:unit>pct</j.5:unit>
+            <dc:format>xsd:string</dc:format>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <dc:identifier>r2</dc:identifier>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <dc:subject>TextRegion</dc:subject>
+          </j.4:Resource>
+        </j.3:items>
+        <j.3:items>
+          <j.4:CreationProvenance rdf:about="urn:anno4j:4c07ffd4-acb0-4001-a92c-5a496ab73908">
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+            <rdf:value>45.17647058823529</rdf:value>
+            <j.5:unit>deg</j.5:unit>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <dc:title>BrightnessBGColorHue_MEDIAN</dc:title>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <dc:identifier>r2</dc:identifier>
+            <dc:format>xsd:string</dc:format>
+            <dc:subject>TextRegion</dc:subject>
+          </j.4:CreationProvenance>
+        </j.3:items>
+        <j.3:items>
+          <j.0:EmbeddedContent rdf:about="urn:anno4j:1af4782e-b496-4232-b30f-34b2466858bc">
+            <dc:identifier>r2</dc:identifier>
+            <j.5:unit>cm</j.5:unit>
+            <rdf:value>2.4412224292755127</rdf:value>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+            <dc:title>MeanDistanceVerticalLines</dc:title>
+            <dc:format>xsd:string</dc:format>
+            <dc:subject>TextRegion</dc:subject>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+          </j.0:EmbeddedContent>
+        </j.3:items>
+        <j.3:items>
+          <j.4:CreationProvenance rdf:about="urn:anno4j:d3cbe538-be3c-4fa5-a1b2-3b97e9322073">
+            <dc:format>xsd:string</dc:format>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <rdf:value>10.241929050573091</rdf:value>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <j.5:unit>pct</j.5:unit>
+            <dc:identifier>r2</dc:identifier>
+            <dc:subject>TextRegion</dc:subject>
+            <dc:title>SaturationBGColorSaturation_MEAN</dc:title>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+          </j.4:CreationProvenance>
+        </j.3:items>
+        <j.3:items>
+          <j.4:CreationProvenance rdf:about="urn:anno4j:82f18abe-d6cb-41aa-bfeb-408a7973e98f">
+            <dc:title>SaturationBGColorBrightness_MEAN</dc:title>
+            <rdf:value>76.40061362479258</rdf:value>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+            <dc:identifier>r2</dc:identifier>
+            <j.5:unit>pct</j.5:unit>
+            <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+            <dc:subject>TextRegion</dc:subject>
+            <dc:format>xsd:string</dc:format>
+            <rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+          </j.4:CreationProvenance>
+        </j.3:items>
+      </j.4:Resource>
+    </j.0:hasBody>
+    <j.1:modified>2017-08-17T13:06:27z</j.1:modified>
+    <j.1:creator>
+      <j.2:SoftwareAgent rdf:about="urn:anno4j:f72dceaf-6105-48df-a114-d9ed83785e74">
+        <j.6:name>SWATI Workflow-Version 1.3</j.6:name>
+        <rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+        <rdf:type rdf:resource="https://github.com/anno4j/ns#Agent"/>
+      </j.2:SoftwareAgent>
+    </j.1:creator>
+    <j.1:created>2017-08-17T13:06:27z</j.1:created>
+  </j.0:Annotation>
+</rdf:RDF>

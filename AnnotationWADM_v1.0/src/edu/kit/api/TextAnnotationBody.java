@@ -51,4 +51,28 @@ public interface TextAnnotationBody extends Body {
     
     @Iri(DC.NS+"conformsTo")  
     void setConformsTo(String conformsTo);
+    
+    @Iri(DC.NS+"description ")  
+    String getDescription ();
+    
+    @Iri(DC.NS+"description ")  
+    void setDescription (String description );
+    
+    @Iri("http://qudt.org/vocab/unit")
+    String getUnit();
+    
+    @Iri("http://qudt.org/vocab/unit")
+    void setUnit(String unit);
+    
+    @Iri("http://qudt.org/vocab/unit/imageHeight")
+    String getImageHeight();
+    
+    @Iri("http://qudt.org/vocab/unit/imageHeight")
+    void setImageHeight(String imageHeight);
+    
+    @Iri("http://qudt.org/vocab/unit/imageWidth")
+    String getImageWidth();
+
+    @Iri("http://qudt.org/vocab/unit/imageWidth")
+    void setImageWidth(String imageWidth);
 }

@@ -12,24 +12,27 @@ public class PropertyHandler {
 	static public String serviceURL;
 	
 	private PropertyHandler(){
-		InputStream inStream = null;
-		try {
-			inStream = new FileInputStream("resources/jenaService.properties");
-			Properties prop = new Properties();
-			prop.load(inStream);
-			baseURL = prop.getProperty("baseURL");
-			serviceURL = prop.getProperty("serviceURL");
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			if (inStream != null) {
-				try {
-					inStream.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+//		InputStream inStream = null;
+//		try {
+//			inStream = new FileInputStream("jenaService.properties");
+//			Properties prop = new Properties();
+//			prop.load(inStream);
+//			baseURL = prop.getProperty("baseURL");
+//			serviceURL = prop.getProperty("serviceURL");
+//		} catch (IOException ex) {
+//			ex.printStackTrace();
+//		} finally {
+//			if (inStream != null) {
+//				try {
+//					inStream.close();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+		
+		baseURL = "http://kit.edu/anno/";
+		serviceURL = "http://localhost:3030/kit";
 	}
 	
 	static public PropertyHandler instance(){

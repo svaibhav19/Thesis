@@ -1,11 +1,19 @@
 package edu.kit.restapi;
 
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.openrdf.rio.RDFFormat;
+
+import com.github.anno4j.model.Annotation;
 import com.github.jsonldjava.core.JsonLdError;
 import com.github.jsonldjava.core.JsonLdOptions;
 import com.github.jsonldjava.core.JsonLdProcessor;
@@ -32,7 +40,35 @@ public class QueryTester {
 		}*/
 		
 		RestService rest = new RestService();
-		rest.getAnnotationByTarget("http://example.org/source4", "ld+json");
+//		String rite = rest.getAnnotationByTarget("http://example.org/source1", "RDF/XML");
+		String rite = rest.getAnnotationByTarget("http://example.org/source2", "ld+json");
+//			System.out.println(rite);
+		writeTofile(rite);
 	
+	}
+
+	private static void writeTofile(String rite) {
+		File f = new File("C:\\Users\\Vaibhav\\Desktop\\AnnotationOutPut\\completeJson.xml");
+		if (!f.exists()) {
+			try {
+				f.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		Writer writer = null;
+
+		try {
+			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f), "utf-8"));
+			writer.write(rite);
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				writer.close();
+			} catch (Exception ex) {
+				/* ignore */}
+		}
 	}
 }
