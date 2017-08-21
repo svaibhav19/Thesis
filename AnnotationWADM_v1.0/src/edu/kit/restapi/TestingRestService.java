@@ -39,6 +39,16 @@ public class TestingRestService {
 		return results;
 	}
 	
+	@POST
+	@Path("byID")
+	@Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	public String executeQueryByID(String annoid){
+		System.out.println("****************"+annoid);
+		QueryByTarget queryExec = new QueryByTarget();
+		String results = queryExec.getQueryResultsByID(annoid, "ld+json");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++\n"+results);
+		return results;
+	}
 //	@POST
 //	@Path("store")
 //	@Consumes(MediaType.APPLICATION_JSON)

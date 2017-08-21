@@ -115,4 +115,30 @@ public class QueryByTarget {
 		return outputResults.toString();
 	}
 
+	public String getQueryResultsByID(String idStr, String format) {
+		String idString = null;
+		if(idStr.contains(PropertyHandler.instance().baseURL))
+			idString = "<"+idStr+">";
+		else
+			idString = "<"+PropertyHandler.instance().baseURL+idStr+">";
+		
+		Lang langFormat = getFormat(format);
+		List<String> finalResults = new ArrayList<String>();
+		StringWriter ouptResults = new StringWriter();
+		String graphBaseQuery = queryUtil.getQueryByID(idString);
+		System.out.println("query:\n"+graphBaseQuery);
+		QueryExecution eachGraphQuery = QueryExecutionFactory.sparqlService(serviceURL, graphBaseQuery);
+		Model model = eachGraphQuery.execConstruct();
+		RDFDataMgr.write(ouptResults, model, langFormat);
+		if (format.equals("ld+json")) {
+			RDF2AnnoJsonConverter parser = new RDF2AnnoJsonConverter();
+			String jsonStr = parser.parse(ouptResults.toString());
+			finalResults.add(jsonStr);
+		} else {
+			finalResults.add(ouptResults.toString());
+		}
+		return finalResults.toString();
+		
+	}
+
 }

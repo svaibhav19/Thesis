@@ -43,7 +43,7 @@ public class TestMain {
 		
 		AnnotationGenerator generator = new AnnotationGenerator();
 		try {
-			generator.parseAnnotations("http://example.org/source2",writer.toString());
+			generator.parseAnnotations("http://example.org/source1",writer.toString());
 		} catch (RepositoryException e) {
 			e.printStackTrace();
 		} catch (RepositoryConfigException e) {

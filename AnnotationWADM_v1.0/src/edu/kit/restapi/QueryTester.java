@@ -19,6 +19,8 @@ import com.github.jsonldjava.core.JsonLdOptions;
 import com.github.jsonldjava.core.JsonLdProcessor;
 import com.github.jsonldjava.utils.JsonUtils;
 
+import edu.kit.util.PropertyHandler;
+
 public class QueryTester {
 
 	public static void main(String[] args) throws IOException, JsonLdError {
@@ -41,9 +43,12 @@ public class QueryTester {
 		
 		RestService rest = new RestService();
 //		String rite = rest.getAnnotationByTarget("http://example.org/source1", "RDF/XML");
-		String rite = rest.getAnnotationByTarget("http://example.org/source2", "ld+json");
+//		String rite = rest.getAnnotationByTarget("http://example.org/source2", "ld+json");
+		String rite = rest.getAnnotationByID("http://kit.edu/anno/urn:anno4j:d3b978e7-7766-4db8-b91c-2c73fdf8356b","ld+json");
 //			System.out.println(rite);
 		writeTofile(rite);
+		
+		
 	
 	}
 

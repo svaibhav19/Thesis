@@ -53,6 +53,11 @@ public class RestService {
 		queryExec.getQueryResults(queryString,format);
 		
 	}
+	public String getAnnotationByID(String idStr, String format) {
+		QueryByTarget queryExec = new QueryByTarget();
+		
+		return queryExec.getQueryResultsByID(idStr,format);
+	}
 	
 	
 

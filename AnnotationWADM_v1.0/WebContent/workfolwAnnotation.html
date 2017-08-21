@@ -1,67 +1,93 @@
 
 <div onload="getPageXml()" class="row">
-	<div class="col-xs-11 col-sm-11 col-md-11 col-lg-11 headerText">
-		WorkFlow Annotations</div>
 	<div class="row">
-		<div class="col-xs-4 col-sm-4 col-md-4 col-lg">
-			<label >PageXML list:</label> <select  class="form-control"
-				id="pagexmlid">
+		<div
+			class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-xs-4 col-sm-4 col-md-4 col-lg-4">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="well" id="infodiv">
+						Loading Content <i id="loaderSpin" class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				
-			</select> 
+					<label>PageXML list:</label> <select onchange="getAnnotations()" class="form-control"
+						id="pagexmlid">
+					</select>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<label> ANNOTATION :</label> <select onchange="loadAnnotation()" class="form-control"
+						id="annoid">
+					</select>
+				</div>
+			</div>
 		</div>
-
-		<div class="col-xs-4 col-sm-4 col-md-4 col-lg"><label > ANNOTATION :</label>
-		<select  class="form-control"
-				id="annoid">
-				
-			</select> 
+		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+			<label>Annotation Data</label>
+			<div id="jjson" class="jjson"></div>
 		</div>
-
-		<div class="col-xs-4 col-sm-4 col-md-4 col-lg">DATA FROM
-			ANNOTATION</div>
 
 	</div>
 </div>
 
 <script type="text/javascript">
-function getPageXml(){
-	  var xhttp = new XMLHttpRequest();
-	  xhttp.open("POST", "http://localhost:8080/AnnotationWADM_v1.0/rest/query", false);
-	  xhttp.setRequestHeader("Content-type", "application/json");
-	  xhttp.send("SELECT DISTINCT ?s WHERE { GRAPH <http://kit.edu/anno/annotationRegistry> { ?s ?p ?o } }");
-	  var response = JSON.parse(xhttp.responseText);
-	  var  select = document.getElementById('pagexmlid');
-	  for (var  items = 0; items < response.length;  items++) {
-		var opt = document.createElement('option');
-	    opt.value = response[items].s;
-	    opt.innerHTML = response[items].s;
-	    select.appendChild(opt);
+	function getPageXml() {
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("POST",
+				"http://localhost:8080/AnnotationWADM_v1.0/rest/query", false);
+		xhttp.setRequestHeader("Content-type", "application/json");
+		xhttp.send("SELECT DISTINCT ?s WHERE { GRAPH <http://kit.edu/anno/annotationRegistry> { ?s ?p ?o } }");
+		var response = JSON.parse(xhttp.responseText);
+		var select = document.getElementById('pagexmlid');
+		for (var items = 0; items < response.length; items++) {
+			var opt = document.createElement('option');
+			opt.value = response[items].s;
+			opt.innerHTML = response[items].s;
+			select.appendChild(opt);
+		}
+		getAnnotations();
+
 	}
-	   getAnnotations();
-	  
-}
 
-function getAnnotations(){
-	var selectedid = $("#pagexmlid").val();
+	function getAnnotations() {
+		var selectedid = $("#pagexmlid").val();
+		 $('#annoid').empty();
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("POST",
+				"http://localhost:8080/AnnotationWADM_v1.0/rest/query", false);
+		xhttp.setRequestHeader("Content-type", "application/json");
+		xhttp
+				.send("SELECT ?s ?p ?o  WHERE { GRAPH <http://kit.edu/anno/annotationRegistry> { ?s ?p ?o. FILTER (?s = <"+selectedid+">)} }");
+
+		var response = JSON.parse(xhttp.responseText);
+		var select = document.getElementById('annoid');
+		for (var items = 0; items < response.length; items++) {
+			var opt = document.createElement('option');
+			opt.value = response[items].o;
+			opt.innerHTML = response[items].o;
+			select.appendChild(opt);	
+		}
+		$("#infodiv").html("No of PageXML    : "+$('#pagexmlid > option').length+"<br>	No of Annotation :"+$('#annoid > option').length);
+		
+		loadAnnotation();
+		
+	}
 	
-	var xhttp = new XMLHttpRequest();
-	  xhttp.open("POST", "http://localhost:8080/AnnotationWADM_v1.0/rest/query", false);
-	  xhttp.setRequestHeader("Content-type", "application/json");
-	  xhttp.send("SELECT ?s ?p ?o  WHERE { GRAPH <http://kit.edu/anno/annotationRegistry> { ?s ?p ?o. FILTER (?s = <"+selectedid+">)} }");
-	  
-	  var response = JSON.parse(xhttp.responseText); 
-	   var  select = document.getElementById('annoid');
-	  for (var  items = 0; items < response.length;  items++) {
-		var opt = document.createElement('option');
-	    opt.value = response[items].s;
-	    opt.innerHTML = response[items].o;
-	    select.appendChild(opt);
-	} 
+	function loadAnnotation(){
+		var selectAnnoid = $("#annoid").val();
+		
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("POST",
+				"http://localhost:8080/AnnotationWADM_v1.0/rest/byID", false);
+		xhttp.setRequestHeader("Content-type", "application/json");
+		xhttp.send(selectAnnoid);
+		
+	var response = JSON.parse(xhttp.responseText); 
+	$("#jjson").jJsonViewer(response,{expanded: true}); 
+	}
 	
-}
-$(function(){
-	$('div[onload]').trigger('onload');
-});
-
-
+	
+	$(function() {
+		$('div[onload]').trigger('onload');
+	});
 </script>

@@ -111,6 +111,7 @@ public class AnnotationGenerator {
 		processXML(pcgtsTypeObj,digitalObjID,softAgentResourceID);
 		// store to apache Jena
 		postToJenaStore();
+		
 	}
 
 	private void postToJenaStore() {
