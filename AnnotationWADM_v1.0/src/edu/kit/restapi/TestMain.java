@@ -6,17 +6,14 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
 
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.UpdateExecutionException;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.config.RepositoryConfigException;
 
-import com.github.anno4j.Anno4j;
-
 import edu.kit.api.AnnotationGenerator;
+import edu.kit.api.AnnotationGeneratorImpl;
 
 public class TestMain {
 
@@ -38,10 +35,8 @@ public class TestMain {
 			e.printStackTrace();
 		}
 		
-		/*RestService rest = new RestService();
-		rest.storeAnnotation("digitalObjID",writer.toString());*/
 		
-		AnnotationGenerator generator = new AnnotationGenerator();
+		AnnotationGenerator generator = new AnnotationGeneratorImpl();
 		try {
 			generator.parseAnnotations("http://example.org/source1",writer.toString());
 		} catch (RepositoryException e) {

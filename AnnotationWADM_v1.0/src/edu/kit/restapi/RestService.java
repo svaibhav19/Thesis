@@ -1,7 +1,7 @@
 package edu.kit.restapi;
 
-import edu.kit.api.PageXMLProcessing;
 import edu.kit.api.QueryByTarget;
+import edu.kit.api.QueryByTargetImpl;
 
 public class RestService {
 
@@ -12,8 +12,8 @@ public class RestService {
 	 */
 	public void storeAnnotation(String digitalObjId, String xmlString) {
 		
-		PageXMLProcessing xmlProcessing = new PageXMLProcessing(digitalObjId,xmlString);
-		xmlProcessing.parseAndStoreXML();
+		/*PageXMLProcessing xmlProcessing = new PageXMLProcessing(digitalObjId,xmlString);
+		xmlProcessing.parseAndStoreXML();*/
 		
 	}
 	/**
@@ -36,7 +36,7 @@ public class RestService {
 	 * @param format
 	 */
 	public String getAnnotationByTarget(String targetString,String format){
-		QueryByTarget queryByTarget = new QueryByTarget();
+		QueryByTarget queryByTarget = new QueryByTargetImpl();
 		String queryOutPut = queryByTarget.getByTarget(targetString,format);
 //		System.out.println("Query Output\n---------------\n"+queryOutPut);
 		return queryOutPut;
@@ -49,12 +49,12 @@ public class RestService {
 	 * @param format
 	 */
 	public void executeQuery(String queryString, String format){
-		QueryByTarget queryExec = new QueryByTarget();
+		QueryByTarget queryExec = new QueryByTargetImpl();
 		queryExec.getQueryResults(queryString,format);
 		
 	}
 	public String getAnnotationByID(String idStr, String format) {
-		QueryByTarget queryExec = new QueryByTarget();
+		QueryByTarget queryExec = new QueryByTargetImpl();
 		
 		return queryExec.getQueryResultsByID(idStr,format);
 	}

@@ -49,8 +49,6 @@ public class AnnotationJson {
     private List<Body> body = null;
     @JsonProperty("target")
     private Target target;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     @JsonProperty("@context")
     public String getContext() {
@@ -161,15 +159,5 @@ public class AnnotationJson {
     public void setTarget(Target target) {
         this.target = target;
     }
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
-
+    
 }

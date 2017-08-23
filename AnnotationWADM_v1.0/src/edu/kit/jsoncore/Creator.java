@@ -27,8 +27,6 @@ public class Creator {
     private String name;
     @JsonProperty("nickname")
     private String nickname;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     @JsonProperty("id")
     public String getId() {
@@ -68,16 +66,6 @@ public class Creator {
     @JsonProperty("nickname")
     public void setNickname(String nickname) {
         this.nickname = nickname;
-    }
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
     }
 
 }

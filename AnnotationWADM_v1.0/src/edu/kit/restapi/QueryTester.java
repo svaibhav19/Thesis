@@ -19,6 +19,8 @@ import com.github.jsonldjava.core.JsonLdOptions;
 import com.github.jsonldjava.core.JsonLdProcessor;
 import com.github.jsonldjava.utils.JsonUtils;
 
+import edu.kit.api.QueryByTarget;
+import edu.kit.api.QueryByTargetImpl;
 import edu.kit.util.PropertyHandler;
 
 public class QueryTester {
@@ -42,18 +44,23 @@ public class QueryTester {
 		}*/
 		
 		RestService rest = new RestService();
-//		String rite = rest.getAnnotationByTarget("http://example.org/source1", "RDF/XML");
+//		String rite = rest.getAnnotationByTarget("http://example.org/source1", "TTL");
 //		String rite = rest.getAnnotationByTarget("http://example.org/source2", "ld+json");
-		String rite = rest.getAnnotationByID("http://kit.edu/anno/urn:anno4j:d3b978e7-7766-4db8-b91c-2c73fdf8356b","ld+json");
-//			System.out.println(rite);
-		writeTofile(rite);
+//		String rite = rest.getAnnotationByID("urn:anno4j:c09e2a2a-35b6-4b6e-9a3e-a15e6a9c4f9c","ld+json");
+		
+		QueryByTarget queryExec = new QueryByTargetImpl();
+		String rite = queryExec.getQueryResults("SELECT ?ss ?pp ?oo WHERE { GRAPH <http://kit.edu/anno/urn:anno4j:c09e2a2a-35b6-4b6e-9a3e-a15e6a9c4f9c> { ?ss ?pp ?oo } }","RDF/XML");
+		
+			System.out.println(rite);
+//		writeTofile(rite);
 		
 		
 	
 	}
 
 	private static void writeTofile(String rite) {
-		File f = new File("C:\\Users\\Vaibhav\\Desktop\\AnnotationOutPut\\completeJson.xml");
+		System.out.println("writing to file");
+		File f = new File("C:\\Users\\Vaibhav\\Desktop\\AnnotationOutPut\\allformat\\completeAnno.json");
 		if (!f.exists()) {
 			try {
 				f.createNewFile();

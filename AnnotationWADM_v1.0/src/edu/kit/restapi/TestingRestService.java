@@ -9,6 +9,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import edu.kit.api.QueryByTarget;
+import edu.kit.api.QueryByTargetImpl;
 
 @Path("/")
 public class TestingRestService {
@@ -33,8 +34,8 @@ public class TestingRestService {
 	@Path("query")
 	@Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 	public String executeQuery(String queryString){
-		System.out.println(queryString);
-		QueryByTarget queryExec = new QueryByTarget();
+		
+		QueryByTarget queryExec = new QueryByTargetImpl();
 		String results = queryExec.getQueryResults(queryString,"RDF/XML");
 		return results;
 	}
@@ -44,34 +45,10 @@ public class TestingRestService {
 	@Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 	public String executeQueryByID(String annoid){
 		System.out.println("****************"+annoid);
-		QueryByTarget queryExec = new QueryByTarget();
+		QueryByTargetImpl queryExec = new QueryByTargetImpl();
 		String results = queryExec.getQueryResultsByID(annoid, "ld+json");
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++++\n"+results);
 		return results;
 	}
-//	@POST
-//	@Path("store")
-//	@Consumes(MediaType.APPLICATION_JSON)
-//	public String storeXML(String json){
-//		System.out.println(json);
-//		return "";
-//	}
-//	
-	/*@GET
-	@Path("getjsonld")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String getJsonLD(@FormParam("store") String temp){
-		System.out.println(temp);
-		return "";
-	}
-	
-	@GET
-	@Path("getxml")
-	@Produces(MediaType.APPLICATION_XML)
-	public String getXML(){
-		
-		return "";
-	}
-*/	
 	
 }
