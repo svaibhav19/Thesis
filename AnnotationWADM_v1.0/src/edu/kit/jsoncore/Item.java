@@ -1,122 +1,106 @@
 
 package edu.kit.jsoncore;
 
-import java.util.HashMap;
-import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "type",
-    "purpose",
-    "value",
-    "format",
-    "language",
-    "creator",
-    "source"
-})
 public class Item {
 
-    @JsonProperty("type")
-    private String type;
-    @JsonProperty("purpose")
-    private String purpose;
-    @JsonProperty("value")
-    private String value;
-    @JsonProperty("format")
-    private String format;
-    @JsonProperty("language")
-    private String language;
-    @JsonProperty("creator")
-    private String creator;
-    @JsonProperty("source")
-    private Source source;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+	private String type;
+	private String purpose;
+	private String value;
+	private String format;
+	private String language;
+	private String creator;
+	private Source source;
+	private String identifier;
+	private String title;
+	private String subject;
+	private String unit;
 
-    @JsonProperty("type")
-    public String getType() {
-        return type;
-    }
+	public String getIdentifier() {
+		return identifier;
+	}
 
-    @JsonProperty("type")
-    public void setType(String type) {
-        this.type = type;
-    }
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
+	}
 
-    @JsonProperty("purpose")
-    public String getPurpose() {
-        return purpose;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    @JsonProperty("purpose")
-    public void setPurpose(String purpose) {
-        this.purpose = purpose;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    @JsonProperty("value")
-    public String getValue() {
-        return value;
-    }
+	public String getSubject() {
+		return subject;
+	}
 
-    @JsonProperty("value")
-    public void setValue(String value) {
-        this.value = value;
-    }
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
 
-    @JsonProperty("format")
-    public String getFormat() {
-        return format;
-    }
+	public String getType() {
+		return type;
+	}
 
-    @JsonProperty("format")
-    public void setFormat(String format) {
-        this.format = format;
-    }
+	public void setType(String type) {
+		this.type = type;
+	}
 
-    @JsonProperty("language")
-    public String getLanguage() {
-        return language;
-    }
+	public String getPurpose() {
+		return purpose;
+	}
 
-    @JsonProperty("language")
-    public void setLanguage(String language) {
-        this.language = language;
-    }
+	public void setPurpose(String purpose) {
+		this.purpose = purpose;
+	}
 
-    @JsonProperty("creator")
-    public String getCreator() {
-        return creator;
-    }
+	public String getValue() {
+		return value;
+	}
 
-    @JsonProperty("creator")
-    public void setCreator(String creator) {
-        this.creator = creator;
-    }
+	public void setValue(String value) {
+		this.value = value;
+	}
 
-    @JsonProperty("source")
-    public Source getSource() {
-        return source;
-    }
+	public String getFormat() {
+		return format;
+	}
 
-    @JsonProperty("source")
-    public void setSource(Source source) {
-        this.source = source;
-    }
+	public void setFormat(String format) {
+		this.format = format;
+	}
 
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
+	public String getLanguage() {
+		return language;
+	}
 
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
+	public String getCreator() {
+		return creator;
+	}
+
+	public void setCreator(String creator) {
+		this.creator = creator;
+	}
+
+	public Source getSource() {
+		return source;
+	}
+
+	public void setSource(Source source) {
+		this.source = source;
+	}
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
 
 }

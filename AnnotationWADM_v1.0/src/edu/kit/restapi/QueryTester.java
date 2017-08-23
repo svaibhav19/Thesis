@@ -45,11 +45,11 @@ public class QueryTester {
 		
 		RestService rest = new RestService();
 //		String rite = rest.getAnnotationByTarget("http://example.org/source1", "TTL");
-//		String rite = rest.getAnnotationByTarget("http://example.org/source2", "ld+json");
+		String rite = rest.getAnnotationByTarget("http://example.org/source1", "ld+json");
 //		String rite = rest.getAnnotationByID("urn:anno4j:c09e2a2a-35b6-4b6e-9a3e-a15e6a9c4f9c","ld+json");
 		
-		QueryByTarget queryExec = new QueryByTargetImpl();
-		String rite = queryExec.getQueryResults("SELECT ?ss ?pp ?oo WHERE { GRAPH <http://kit.edu/anno/urn:anno4j:c09e2a2a-35b6-4b6e-9a3e-a15e6a9c4f9c> { ?ss ?pp ?oo } }","RDF/XML");
+//		QueryByTarget queryExec = new QueryByTargetImpl();
+//		String rite = queryExec.getQueryResults(" CONSTRUCT {?s ?p ?o} WHERE { GRAPH <http://kit.edu/anno/urn:anno4j:c09e2a2a-35b6-4b6e-9a3e-a15e6a9c4f9c> {?s ?p ?o} } ","RDF/XML");
 		
 			System.out.println(rite);
 //		writeTofile(rite);

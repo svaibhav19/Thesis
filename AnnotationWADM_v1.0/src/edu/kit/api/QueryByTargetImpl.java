@@ -120,22 +120,6 @@ public class QueryByTargetImpl implements QueryByTarget{
 		}else
 			model = eachGraphQuery.execConstruct();
 		
-		/*if(queryString.contains("select")||queryString.contains("SELECT")){
-			ResultSet results = eachGraphQuery.execSelect();
-			JSONArray outputArr = new JSONArray();
-			while (results.hasNext()) {
-				QuerySolution soln = results.nextSolution();
-				soln.get("o");
-				JSONObject outJson = new JSONObject();
-				outJson.put("s", soln.get("s"));
-				outJson.put("p", soln.get("p"));
-				outJson.put("o", soln.get("o"));
-				outputArr.put(outJson);
-			}
-			return outputArr.toString();
-		}else
-			model = eachGraphQuery.execConstruct();*/
-		
 		RDFDataMgr.write(outputResults, model, getFormat(format));
 		return outputResults.toString();
 	}
