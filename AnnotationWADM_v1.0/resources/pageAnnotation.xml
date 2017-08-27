@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+<rdf:Description rdf:about="urn:anno4j:e1d566f7-3908-4aba-91eb-1e28a208d120">
+	<rdf:type rdf:resource="http://www.w3.org/ns/oa#Annotation"/>
+	<creator xmlns="http://purl.org/dc/terms/" rdf:resource="urn:anno4j:93df0386-0f60-47ac-af27-4d3ea9369e5d"/>
+	<created xmlns="http://purl.org/dc/terms/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2017-08-17T11:35:02z</created>
+	<modified xmlns="http://purl.org/dc/terms/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2017-08-17T11:35:02z</modified>
+	<motivatedBy xmlns="http://www.w3.org/ns/oa#" rdf:resource="http://www.w3.org/ns/oa#describing"/>
+	<hasBody xmlns="http://www.w3.org/ns/oa#" rdf:resource="urn:anno4j:56c5bf9e-fdc1-4b74-bea9-d9edca251058"/>
+	<hasBody xmlns="http://www.w3.org/ns/oa#" rdf:resource="urn:anno4j:8c5cd19b-062f-4be0-8880-7922f44687d9"/>
+	<hasTarget xmlns="http://www.w3.org/ns/oa#" rdf:resource="urn:anno4j:1d0ef31e-b4d9-4243-9094-b133f954eefb"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:anno4j:56c5bf9e-fdc1-4b74-bea9-d9edca251058">
+	<rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+	<unit xmlns="http://qudt.org/vocab/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pixel</unit>
+	<title xmlns="http://purl.org/dc/elements/1.1/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">imageFileName</title>
+	<rdf:value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">0001_T Hs 1108 55 4Ã‚Â°_00037_T_0.tif</rdf:value>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:anno4j:8c5cd19b-062f-4be0-8880-7922f44687d9">
+	<rdf:type rdf:resource="http://www.w3.org/ns/oa#Choice"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:21bbb142-4753-4424-bc64-b0f6870109e2"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:c6ef579c-3195-44c0-a8b1-4997a9966964"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:f3cc2b3d-0591-4145-8b64-355e0261eca4"/>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:anno4j:21bbb142-4753-4424-bc64-b0f6870109e2">
+	<rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+	<rdf:value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24.849666595458984</rdf:value>
+	<title xmlns="http://purl.org/dc/elements/1.1/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">pageModelWidth</title>
+	<format xmlns="http://purl.org/dc/elements/1.1/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">xsd:float</format>
+	<unit xmlns="http://qudt.org/vocab/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">cm</unit>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:anno4j:c6ef579c-3195-44c0-a8b1-4997a9966964">
+	<rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+	<rdf:value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">32.308799743652344</rdf:value>
+	<title xmlns="http://purl.org/dc/elements/1.1/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">pageModelHeight</title>
+	<format xmlns="http://purl.org/dc/elements/1.1/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">xsd:float</format>
+	<unit xmlns="http://qudt.org/vocab/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">cm</unit>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:anno4j:f3cc2b3d-0591-4145-8b64-355e0261eca4">
+	<rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+	<rdf:value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">3</rdf:value>
+	<title xmlns="http://purl.org/dc/elements/1.1/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NumberTextRegion</title>
+	<format xmlns="http://purl.org/dc/elements/1.1/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">xsd:string</format>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:anno4j:1d0ef31e-b4d9-4243-9094-b133f954eefb">
+	<rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+	<hasSource xmlns="http://www.w3.org/ns/oa#" rdf:resource="http://example.org/source2"/>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:anno4j:93df0386-0f60-47ac-af27-4d3ea9369e5d">
+	<rdf:type rdf:resource="http://www.w3.org/ns/prov/SoftwareAgent"/>
+	<name xmlns="http://xmlns.com/foaf/0.1/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SWATI Workflow-Version 1.3</name>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#Agent"/>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/ns/oa#describing">
+	<rdf:type rdf:resource="http://www.w3.org/ns/oa#Motivation"/>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+</rdf:Description>
+
+</rdf:RDF>

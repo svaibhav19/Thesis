@@ -1,0 +1,81 @@
+[ {
+  "@id" : "http://www.w3.org/ns/oa#tagging",
+  "@type" : [ "http://www.w3.org/ns/oa#Motivation", "https://github.com/anno4j/ns#Resource" ]
+}, {
+  "@id" : "urn:anno4j:13b4729c-e803-4425-935c-bd1e2efb4d96",
+  "@type" : [ "http://www.w3.org/ns/oa#Choice", "https://github.com/anno4j/ns#CreationProvenance", "https://github.com/anno4j/ns#ExternalWebResource", "https://github.com/anno4j/ns#Resource" ],
+  "http://www.w3.org/ns/activitystreams#items" : [ {
+    "@id" : "urn:anno4j:b9fbb6e1-2f2f-4dcb-8cf5-b83ac686eb82"
+  } ]
+}, {
+  "@id" : "urn:anno4j:4a251074-2e3e-4c51-aa85-e2ccf4ea8e95",
+  "@type" : [ "http://www.w3.org/ns/oa#SpecificResource", "https://github.com/anno4j/ns#CreationProvenance", "https://github.com/anno4j/ns#ExternalWebResource", "https://github.com/anno4j/ns#Resource" ],
+  "http://www.w3.org/ns/oa#hasSource" : [ {
+    "@id" : "urn:anno4j:77232bc5-ec2b-4b5c-9060-bcb8e448e98f"
+  } ],
+  "http://www.w3.org/ns/oa#hasState" : [ {
+    "@id" : "urn:anno4j:f7eb97fd-4788-4355-a3a9-bbdab9663cf9"
+  } ],
+  "http://www.w3.org/ns/oa#styleClass" : [ {
+    "@value" : "mystyle"
+  } ]
+}, {
+  "@id" : "urn:anno4j:83d37e71-6abc-444a-908d-5e9757da2df1",
+  "@type" : [ "http://www.w3.org/ns/oa#TextualBody", "https://github.com/anno4j/ns#CreationProvenance", "https://github.com/anno4j/ns#ExternalWebResource", "https://github.com/anno4j/ns#Resource" ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#value" : [ {
+    "@value" : "love"
+  } ],
+  "http://www.w3.org/ns/oa#hasPurpose" : [ {
+    "@id" : "http://www.w3.org/ns/oa#tagging"
+  } ]
+}, {
+  "@id" : "urn:anno4j:99871fd8-1a3f-4855-a910-3b4f21bcdd61",
+  "@type" : [ "http://xmlns.com/foaf/0.1/Person", "https://github.com/anno4j/ns#Agent", "https://github.com/anno4j/ns#Resource" ],
+  "http://xmlns.com/foaf/0.1/name" : [ {
+    "@value" : "A. Person"
+  } ],
+  "http://xmlns.com/foaf/0.1/nick" : [ {
+    "@value" : "user1"
+  } ],
+  "http://xmlns.com/foaf/0.1/openid" : [ {
+    "@value" : "http://example.org/user1"
+  } ]
+}, {
+  "@id" : "urn:anno4j:a787d915-7cae-4b5b-a5fa-b8bb6d23924a",
+  "@type" : [ "http://www.w3.org/ns/oa#Annotation" ],
+  "http://purl.org/dc/terms/created" : [ {
+    "@value" : "2015-10-13T13:00:00Z"
+  } ],
+  "http://purl.org/dc/terms/creator" : [ {
+    "@id" : "urn:anno4j:99871fd8-1a3f-4855-a910-3b4f21bcdd61"
+  } ],
+  "http://purl.org/dc/terms/issued" : [ {
+    "@value" : "2015-10-14T15:13:28Z"
+  } ],
+  "http://www.w3.org/ns/activitystreams#generator" : [ {
+    "@id" : "urn:anno4j:cfd39b23-26a8-4fe8-a32b-cf58000af407"
+  } ],
+  "http://www.w3.org/ns/oa#hasBody" : [ {
+    "@id" : "urn:anno4j:13b4729c-e803-4425-935c-bd1e2efb4d96"
+  }, {
+    "@id" : "urn:anno4j:83d37e71-6abc-444a-908d-5e9757da2df1"
+  } ],
+  "http://www.w3.org/ns/oa#hasTarget" : [ {
+    "@id" : "urn:anno4j:4a251074-2e3e-4c51-aa85-e2ccf4ea8e95"
+  } ],
+  "http://www.w3.org/ns/oa#motivatedBy" : [ {
+    "@id" : "http://www.w3.org/ns/oa#tagging"
+  } ],
+  "http://www.w3.org/ns/oa#styledBy" : [ {
+    "@id" : "urn:anno4j:a481f7ff-14c5-41ec-80e3-96f06f3c498f"
+  } ]
+}, {
+  "@id" : "urn:anno4j:cfd39b23-26a8-4fe8-a32b-cf58000af407",
+  "@type" : [ "http://www.w3.org/ns/prov/SoftwareAgent", "https://github.com/anno4j/ns#Agent", "https://github.com/anno4j/ns#Resource" ],
+  "http://xmlns.com/foaf/0.1/homepage" : [ {
+    "@value" : "http://example.org/homepage1"
+  } ],
+  "http://xmlns.com/foaf/0.1/name" : [ {
+    "@value" : "Code v2.1"
+  } ]
+} ]

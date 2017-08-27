@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+<rdf:Description rdf:about="urn:anno4j:d007837d-639e-43d3-b0aa-fec3c122c58e">
+	<rdf:type rdf:resource="http://www.w3.org/ns/oa#Annotation"/>
+	<creator xmlns="http://purl.org/dc/terms/" rdf:resource="urn:anno4j:42a6edce-551d-4a2d-95f6-49e787d27aaf"/>
+	<created xmlns="http://purl.org/dc/terms/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2017-08-17T13:06:27z</created>
+	<modified xmlns="http://purl.org/dc/terms/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2017-08-17T13:06:27z</modified>
+	<motivatedBy xmlns="http://www.w3.org/ns/oa#" rdf:resource="http://www.w3.org/ns/oa#describing"/>
+	<hasBody xmlns="http://www.w3.org/ns/oa#" rdf:resource="urn:anno4j:671fdcec-108d-4e7c-8b00-d8239c1b23d1"/>
+	<hasBody xmlns="http://www.w3.org/ns/oa#" rdf:resource="urn:anno4j:c3fe3951-81ed-4554-ab1b-f88d175efcb8"/>
+	<hasTarget xmlns="http://www.w3.org/ns/oa#" rdf:resource="urn:anno4j:e1527210-5a21-4db6-87d9-012f70f6bc4c"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:anno4j:671fdcec-108d-4e7c-8b00-d8239c1b23d1">
+	<rdf:type rdf:resource="http://www.w3.org/ns/oa#EmbeddedContent"/>
+	<unit xmlns="http://qudt.org/vocab/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pixel</unit>
+	<title xmlns="http://purl.org/dc/elements/1.1/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">imageFileName</title>
+	<rdf:value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">T Hs 1108 55 4Ã‚Â°_00037_T_0.tif</rdf:value>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:anno4j:c3fe3951-81ed-4554-ab1b-f88d175efcb8">
+	<rdf:type rdf:resource="http://www.w3.org/ns/oa#Choice"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:e35b7f1b-257a-44cf-927f-c9a7bd6b970a"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:18c1caea-9976-4f8c-822a-1d7633b5cbea"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:0087eff0-3878-47ed-91e4-bbd427e0b6bb"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:b38757fb-6d88-43dd-a4f3-57af26c3af5f"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:1371148e-b75e-4d89-a68e-b2f85e36052c"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:69c7ea83-2355-4b7a-bd48-c0880127f36b"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:6a40b3da-6913-4a26-b795-ad14c3e0539d"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:158e3ce4-20fe-4be1-bc2d-b4450ef046b6"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:34d0d62f-a7ef-47c0-9c88-7fee763eb659"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:1d1eb56d-c590-46d2-8caa-3688275d4d1f"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:ec19beda-e1d4-465e-ac72-7cb918834a43"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:1380d72e-a354-4c2c-b6a3-b86d881cb9a1"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:f3633331-eac9-4819-ba46-1b57ec2b07c4"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:91b246fa-78f5-4a03-befb-f22a7ee20f3f"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:910aa607-751e-422a-a900-a4f1257daf33"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:93a89bee-d571-429c-8a45-6ac3ce4c4437"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:cad9c5ab-4aa2-49f3-a487-805ed591ca17"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:00b2471b-e7b2-4a54-acb9-0c3e13d54321"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:5241faf7-29be-4897-9a80-580081dfa828"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:26be2c84-4473-4c26-bfa0-2aae8dcbbb0d"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:3e64f788-f9c4-43d4-8fb2-1a729331ad3a"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:319c4157-9213-4433-980b-b400154fefd6"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:a73627c5-c870-4c65-a68a-ecf8500120c4"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:f4731da4-89be-4900-a733-5767de66825c"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:d9fa89c2-327e-4597-a174-5abcda7ab79b"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:71825497-5869-4876-a05a-1544ebf6af26"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:1c1789b8-ee33-4755-9ae2-745ea27e1709"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:c6550d35-bc51-4334-b23d-56719017c8e1"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:25029a7c-82c0-4f7f-952e-b9b4e0a2fef0"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:6937f0e5-235f-4cf9-b1b9-7b60c5b8da92"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:c53c4dfc-55de-4779-acc5-e40a6ab97595"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:28bb75f9-05d7-4778-aa49-6c9327a6ba3d"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:0583adbe-2c61-42e5-b233-032aa6b0f58e"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:cbd96a88-ea77-41ad-850e-e4a460337372"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:97e715be-ed23-4707-bab2-47d521a83501"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:9d91f95f-3f38-45a2-af68-5400572b1237"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:2fadca29-9758-4eca-9970-cdf42d42ec68"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:aa7098a3-ecfe-4f1d-b013-1ef65a688a14"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:3a7eeff4-1928-443b-bf34-ae30516ba444"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:7e1f6d76-5895-491e-832e-45d5a2eeab9b"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:1c582233-dd57-4adf-bdf3-f3b2668d0b54"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:9e07743b-0630-4c12-a40e-5dce6703e916"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:5b501192-12d3-4248-a8c8-ea6fcbbdf5f2"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:1a87b918-aa6f-4e82-a040-a150d005f41d"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:b6b6a024-7d58-4e87-80ec-0504dc141d7f"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:dd21dde4-1f1a-46c3-a483-07d3e1e3028f"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:3537cdc5-8dda-4f02-9142-e0fe021f956c"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:e0c99cc8-f4bf-4efc-8cec-61f7d89acdfe"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:15e86a8a-adb5-43b1-a37f-d7fb341d9d17"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:b8b02059-18a7-4dfe-b783-1f9d4a18cd62"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:11559d25-c3dd-4ab5-924f-0cc49e999342"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:df7c8ad8-8f6c-48ca-af5a-151e2e37d785"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:7bf7f419-1223-4858-a05c-bdb67f299cb4"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:4733eef3-f54e-4c89-b2c8-031f24679076"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:c0e4ebd2-6c4c-4ac5-a227-e7b5dace8358"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:fd3e0119-25a3-4ade-8301-e1ca32db766a"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:9012b676-8584-424d-9bb6-4e2918199eed"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:37b6bb55-3924-4357-8561-27d7c793e259"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:d641f04d-0dad-4800-8078-24bf44789abc"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:aa0727ff-a964-4216-a19d-5d255f37bcd5"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:4146696b-2527-4bd6-9019-ab46febe470c"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:137d45a6-023e-48b9-802f-2b5e047090f6"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:b726d99b-2e5f-4177-9158-9471e7bb0e90"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:438f3613-9e91-43ac-8546-a5f9feccf08c"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:7def2aa1-cbd0-4f6e-9dbd-3e43f2d67d7f"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:26a28646-874d-4892-b4e1-e63ebf61cc48"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:2160608d-790b-452e-bd91-37900d8db310"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:95023ad8-3051-4841-a6ad-101c20f352e2"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:d3ba2fa6-6787-4889-99ea-d6871db71258"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:7e54509a-e08a-47b1-978a-b9d06d014800"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:5db21cd3-300e-4d09-9423-50f264633c8f"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:d9245c39-f1c7-48f0-ae4c-e7b818d69ffb"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:e44668d3-dafc-487b-a359-9ec16638523e"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:0af9bea9-39b8-413f-a142-994477300ea5"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:20d7cf51-0167-4181-b837-3c3a241a325d"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:c5c2de73-e788-4ddc-8dd5-bf6345dd4aaf"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:b71ba868-2d58-48aa-ab8d-ea629c359927"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:68d42eea-81ab-402e-8c24-8c00c6df9003"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:40ad123d-64f4-445f-a184-4421b5cef1b5"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:cdc0de5c-0788-46a1-b972-eeecd3fe0245"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:65b1ff31-d4f2-41e9-8088-9c98678af157"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:53bf1c6d-fb31-4070-8e2b-c63159f08c4f"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:ebe816ca-e8af-4c2f-9e05-e904750bce28"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:ae2afe6d-5d48-4c61-8282-2e65e532a118"/>
+	<items xmlns="http://www.w3.org/ns/activitystreams#" rdf:resource="urn:anno4j:cbe666be-5f14-4abf-b0ed-2638ca075b78"/>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:anno4j:e1527210-5a21-4db6-87d9-012f70f6bc4c">
+	<rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+	<hasSelector xmlns="http://www.w3.org/ns/oa#" rdf:resource="urn:anno4j:4734a700-d86e-45a2-94a4-1ff198715e29"/>
+	<hasSource xmlns="http://www.w3.org/ns/oa#" rdf:resource="http://example.org/source2"/>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#CreationProvenance"/>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#ExternalWebResource"/>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:anno4j:4734a700-d86e-45a2-94a4-1ff198715e29">
+	<rdf:type rdf:resource="http://www.w3.org/ns/oa#SvgSelector"/>
+	<rdf:value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2560,320 2560,3670 0,3670 0,320</rdf:value>
+	<conformsTo xmlns="http://purl.org/dc/terms/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.w3.org/TR/SVG/</conformsTo>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#Selector"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:anno4j:42a6edce-551d-4a2d-95f6-49e787d27aaf">
+	<rdf:type rdf:resource="http://www.w3.org/ns/prov/SoftwareAgent"/>
+	<name xmlns="http://xmlns.com/foaf/0.1/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SWATI Workflow-Version 1.3</name>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#Agent"/>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/ns/oa#describing">
+	<rdf:type rdf:resource="http://www.w3.org/ns/oa#Motivation"/>
+	<rdf:type rdf:resource="https://github.com/anno4j/ns#Resource"/>
+</rdf:Description>
+
+</rdf:RDF>
