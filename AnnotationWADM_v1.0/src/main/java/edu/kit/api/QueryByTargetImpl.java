@@ -38,6 +38,7 @@ public class QueryByTargetImpl implements QueryByTarget{
 		String queryStr = queryUtil.getQueryByTarget(targetString);
 		Lang langFormat = getFormat(format);
 		List<String> finalResults = new ArrayList<String>();
+		
 		QueryExecution query = QueryExecutionFactory.sparqlService(serviceURL, queryStr);
 		ResultSet results = query.execSelect();
 
@@ -50,7 +51,7 @@ public class QueryByTargetImpl implements QueryByTarget{
 			QueryExecution eachGraphQuery = QueryExecutionFactory.sparqlService(serviceURL, graphBaseQuery);
 			Model model = eachGraphQuery.execConstruct();
 			RDFDataMgr.write(ouptResults, model, langFormat);
-			if (format.equals("ld+json")) {
+			if (format.equals("ld+json") || format.equals("ld json")) {
 				RDF2AnnoJsonConverterImpl parser = new RDF2AnnoJsonConverterImpl();
 				String jsonStr = parser.parse(ouptResults.toString());
 				finalResults.add(jsonStr);
@@ -136,11 +137,11 @@ public class QueryByTargetImpl implements QueryByTarget{
 		List<String> finalResults = new ArrayList<String>();
 		StringWriter ouptResults = new StringWriter();
 		String graphBaseQuery = queryUtil.getQueryByID(idString);
-		System.out.println("query:\n"+graphBaseQuery);
 		QueryExecution eachGraphQuery = QueryExecutionFactory.sparqlService(serviceURL, graphBaseQuery);
 		Model model = eachGraphQuery.execConstruct();
 		RDFDataMgr.write(ouptResults, model, langFormat);
-		if (format.equals("ld+json")) {
+		System.out.println(format.equals("ld+json")+"--------"+format.equals("ld json")+"<<<<<<<<<<<<<<");
+		if (format.equals("ld+json") || format.equals("ld json")) {
 			RDF2AnnoJsonConverterImpl parser = new RDF2AnnoJsonConverterImpl();
 			String jsonStr = parser.parse(ouptResults.toString());
 			finalResults.add(jsonStr);

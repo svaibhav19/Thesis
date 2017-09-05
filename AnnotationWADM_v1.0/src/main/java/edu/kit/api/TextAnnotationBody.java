@@ -46,11 +46,11 @@ public interface TextAnnotationBody extends Body {
     @Iri(DC.NS+"identifier")  
     void setIdentifier(String identifier);
     
-    @Iri(DC.NS+"conformsTo")  
-    String getConformsTo();
+    @Iri(DC.NS+"contributor")  
+    String getContributor();
     
-    @Iri(DC.NS+"conformsTo")  
-    void setConformsTo(String conformsTo);
+    @Iri(DC.NS+"contributor")  
+    void setContributor(String contributor);
     
     @Iri(DC.NS+"description ")  
     String getDescription ();
@@ -64,15 +64,4 @@ public interface TextAnnotationBody extends Body {
     @Iri("http://qudt.org/vocab/unit")
     void setUnit(String unit);
     
-    @Iri("http://qudt.org/vocab/unit/imageHeight")
-    String getImageHeight();
-    
-    @Iri("http://qudt.org/vocab/unit/imageHeight")
-    void setImageHeight(String imageHeight);
-    
-    @Iri("http://qudt.org/vocab/unit/imageWidth")
-    String getImageWidth();
-
-    @Iri("http://qudt.org/vocab/unit/imageWidth")
-    void setImageWidth(String imageWidth);
 }

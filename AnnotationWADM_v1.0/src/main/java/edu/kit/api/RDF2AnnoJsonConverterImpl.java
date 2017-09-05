@@ -55,9 +55,11 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 
 	@Override
 	public String convertAnnoJson(RDFtype rdf) {
+		
+		if(null != rdf.getAnnotation()){
 		JSONObject annoJson = new JSONObject();
-
 		annoJson.put("@context", "http://www.w3.org/ns/anno.jsonld");
+		
 		annoJson.put("id", rdf.getAnnotation().getAbout());
 		annoJson.put("type", "Annotation");
 		annoJson.put("creator", getCreator(rdf.getAnnotation().getCreator()));
@@ -67,6 +69,8 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 		annoJson.put("target", getTarget(rdf.getAnnotation().getHasTarget()));
 
 		return annoJson.toString();
+		}else
+			return null;
 	}
 
 	@Override
@@ -202,6 +206,9 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 
 		if (null != externalWebResource.getIdentifier())
 			bodyitem.put("identifier", externalWebResource.getIdentifier());
+		
+		if(null != externalWebResource.getContributor())
+			bodyitem.put("contributor", externalWebResource.getContributor());
 
 		return bodyitem;
 	}
@@ -224,6 +231,9 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 
 		if (null != resource.getIdentifier())
 			bodyitem.put("identifier", resource.getIdentifier());
+		
+		if(null != resource.getContributor())
+			bodyitem.put("contributor", resource.getContributor());
 
 		return bodyitem;
 	}
@@ -246,6 +256,9 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 
 		if (null != embeddedContent.getIdentifier())
 			bodyitem.put("identifier", embeddedContent.getIdentifier());
+		
+		if(null != embeddedContent.getContributor())
+			bodyitem.put("contributor", embeddedContent.getContributor());
 
 		return bodyitem;
 	}
@@ -269,10 +282,15 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 		if (null != creationProvenanceType.getFormat())
 			bodyitem.put("format", creationProvenanceType.getFormat());
 
-		if (null != creationProvenanceType.getImageHeight()) {
-			bodyitem.put("imageWidth", creationProvenanceType.getImageWidth());
+		if (null != creationProvenanceType.getImageHeight()) 
 			bodyitem.put("imageHeight", creationProvenanceType.getImageHeight());
-		}
+		
+		if (null != creationProvenanceType.getImageWidth()) 
+			bodyitem.put("imageWidth", creationProvenanceType.getImageWidth());
+		
+		if(null != creationProvenanceType.getContributor())
+			bodyitem.put("contributor", creationProvenanceType.getContributor());
+		
 		return bodyitem;
 	}
 

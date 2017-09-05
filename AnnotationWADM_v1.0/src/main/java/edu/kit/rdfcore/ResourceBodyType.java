@@ -7,27 +7,30 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ExternalWebResourceType {
-
-	@XmlElement(name = "title", namespace = IRINS.dc)
+public class ResourceBodyType {
+	
+	@XmlElement(name="title",namespace=IRINS.dc)
 	private String title;
-
-	@XmlElement(name = "subject", namespace = IRINS.dc)
+	
+	@XmlElement(name="subject", namespace=IRINS.dc)
 	private String subject;
-
-	@XmlElement(name = "value", namespace = IRINS.rdf)
+	
+	@XmlElement(name="value", namespace=IRINS.rdf)
 	private String value;
-
-	@XmlElement(name = "identifier", namespace = IRINS.dc)
+	
+	@XmlElement(name="identifier",namespace=IRINS.dc)
 	private String identifier;
-
-	@XmlElement(name = "unit", namespace = IRINS.j6)
+	
+	@XmlElement(name = "unit", namespace=IRINS.j6)
 	private String unit;
-
-	@XmlElement(name = "format", namespace = IRINS.dc)
+	
+	@XmlElement(name="format", namespace=IRINS.dc)
 	private String format;
-
-	@XmlElement(name = "items", namespace = IRINS.j3)
+	
+	@XmlElement(name="contributor", namespace=IRINS.dc)
+	private String contributor;
+	
+	@XmlElement(name="items", namespace = IRINS.j3)
 	private List<ItemsType> items;
 
 	public String getTitle() {
@@ -78,6 +81,14 @@ public class ExternalWebResourceType {
 		this.format = format;
 	}
 
+	public String getContributor() {
+		return contributor;
+	}
+
+	public void setContributor(String contributor) {
+		this.contributor = contributor;
+	}
+
 	public List<ItemsType> getItems() {
 		return items;
 	}
@@ -85,5 +96,4 @@ public class ExternalWebResourceType {
 	public void setItems(List<ItemsType> items) {
 		this.items = items;
 	}
-
 }

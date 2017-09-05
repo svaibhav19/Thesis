@@ -1,13 +1,11 @@
 package edu.kit.rdfcore;
 
-import java.util.List;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ResourceBodyType {
+public class EmbeddedContentType {
 	
 	@XmlElement(name="title",namespace=IRINS.dc)
 	private String title;
@@ -27,8 +25,8 @@ public class ResourceBodyType {
 	@XmlElement(name="format", namespace=IRINS.dc)
 	private String format;
 	
-	@XmlElement(name="items", namespace = IRINS.j3)
-	private List<ItemsType> items;
+	@XmlElement(name="contributor", namespace=IRINS.dc)
+	private String contributor;
 
 	public String getTitle() {
 		return title;
@@ -78,11 +76,12 @@ public class ResourceBodyType {
 		this.format = format;
 	}
 
-	public List<ItemsType> getItems() {
-		return items;
+	public String getContributor() {
+		return contributor;
 	}
 
-	public void setItems(List<ItemsType> items) {
-		this.items = items;
+	public void setContributor(String contributor) {
+		this.contributor = contributor;
 	}
+
 }

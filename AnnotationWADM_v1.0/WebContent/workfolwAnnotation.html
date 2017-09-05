@@ -34,7 +34,7 @@
 	function getPageXml() {
 		var xhttp = new XMLHttpRequest();
 		xhttp.open("POST",
-				"http://localhost:8080/AnnotationWADM_v1.0/rest/query", false);
+				window.location.href+"rest/query", false);
 		xhttp.setRequestHeader("Content-type", "application/json");
 		xhttp.send("SELECT DISTINCT ?s WHERE { GRAPH <http://kit.edu/anno/annotationRegistry> { ?s ?p ?o } }");
 		var response = JSON.parse(xhttp.responseText);
@@ -54,17 +54,20 @@
 		 $('#annoid').empty();
 		var xhttp = new XMLHttpRequest();
 		xhttp.open("POST",
-				"http://localhost:8080/AnnotationWADM_v1.0/rest/query", false);
+				window.location.href+"rest/query", false);
 		xhttp.setRequestHeader("Content-type", "application/json");
-		xhttp
-				.send("SELECT ?s ?p ?o  WHERE { GRAPH <http://kit.edu/anno/annotationRegistry> { ?s ?p ?o. FILTER (?s = <"+selectedid+">)} }");
+		xhttp.send("SELECT ?s ?p ?o  WHERE { GRAPH <http://kit.edu/anno/annotationRegistry> { ?s ?p ?o. FILTER (?s = <"+selectedid+">)} }");
 
 		var response = JSON.parse(xhttp.responseText);
 		var select = document.getElementById('annoid');
 		for (var items = 0; items < response.length; items++) {
 			var opt = document.createElement('option');
-			opt.value = response[items].o;
-			opt.innerHTML = response[items].o;
+			
+			var editVal = response[items].o.split("/");
+			var count = editVal.length-1;
+			
+			opt.value = editVal[count];
+			opt.innerHTML = editVal[count];
 			select.appendChild(opt);	
 		}
 		$("#infodiv").html("No of PageXML    : "+$('#pagexmlid > option').length+"<br>	No of Annotation :"+$('#annoid > option').length);
@@ -78,7 +81,7 @@
 		
 		var xhttp = new XMLHttpRequest();
 		xhttp.open("POST",
-				"http://localhost:8080/AnnotationWADM_v1.0/rest/byID", false);
+				window.location.href+"rest/byid?ID="+selectAnnoid+"&format=ld json", false);
 		xhttp.setRequestHeader("Content-type", "application/json");
 		xhttp.send(selectAnnoid);
 		

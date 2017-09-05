@@ -44,15 +44,15 @@ public class QueryTester {
 		}*/
 		
 		RestService rest = new RestService();
-//		String rite = rest.getAnnotationByTarget("http://example.org/source1", "TTL");
-		String rite = rest.getAnnotationByTarget("http://example.org/source1", "ld+json");
-//		String rite = rest.getAnnotationByID("urn:anno4j:c09e2a2a-35b6-4b6e-9a3e-a15e6a9c4f9c","ld+json");
+//		String rite = rest.getAnnotationByTarget("http://example.org/source1", "RDF/XML");
+//		String rite = rest.getAnnotationByTarget("http://example.org/source1", "ld+json");
+		String rite = rest.getAnnotationByID("urn:anno4j:230c1164-b1af-46ff-baf4-52e406a88b06","ld json");
 		
 //		QueryByTarget queryExec = new QueryByTargetImpl();
 //		String rite = queryExec.getQueryResults(" CONSTRUCT {?s ?p ?o} WHERE { GRAPH <http://kit.edu/anno/urn:anno4j:c09e2a2a-35b6-4b6e-9a3e-a15e6a9c4f9c> {?s ?p ?o} } ","RDF/XML");
 		
-			System.out.println(rite);
-//		writeTofile(rite);
+//			System.out.println(rite);
+		writeTofile(rite);
 		
 		
 	
@@ -60,7 +60,7 @@ public class QueryTester {
 
 	private static void writeTofile(String rite) {
 		System.out.println("writing to file");
-		File f = new File("C:\\Users\\Vaibhav\\Desktop\\AnnotationOutPut\\allformat\\completeAnno.json");
+		File f = new File("C:\\Users\\Vaibhav\\Desktop\\AnnotationOutPut\\completeAnno.json");
 		if (!f.exists()) {
 			try {
 				f.createNewFile();

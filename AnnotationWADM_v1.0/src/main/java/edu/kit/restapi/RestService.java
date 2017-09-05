@@ -38,7 +38,6 @@ public class RestService {
 	public String getAnnotationByTarget(String targetString,String format){
 		QueryByTarget queryByTarget = new QueryByTargetImpl();
 		String queryOutPut = queryByTarget.getByTarget(targetString,format);
-//		System.out.println("Query Output\n---------------\n"+queryOutPut);
 		return queryOutPut;
 		
 	}
@@ -55,7 +54,6 @@ public class RestService {
 	}
 	public String getAnnotationByID(String idStr, String format) {
 		QueryByTarget queryExec = new QueryByTargetImpl();
-		
 		return queryExec.getQueryResultsByID(idStr,format);
 	}
 	

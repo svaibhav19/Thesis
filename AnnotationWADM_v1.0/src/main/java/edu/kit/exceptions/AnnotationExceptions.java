@@ -69,7 +69,11 @@ public class AnnotationExceptions extends Exception {
 	    super(message, cause);
 	   httpStatus = status;
 	  }
-	  /**
+	  
+	public AnnotationExceptions(String message, StatusCode badRequest) {
+		// TODO Auto-generated constructor stub
+	}
+	/**
 	   * Get http status code.
 	   * @return http status code.
 	   */

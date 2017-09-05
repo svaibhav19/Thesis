@@ -42,6 +42,9 @@ public class CreationProvenanceType {
 	@XmlElement(name="format", namespace=IRINS.dc)
 	private String format;
 
+	@XmlElement(name="contributor", namespace=IRINS.dc)
+	private String contributor;
+	
 	public HasSourceType getHasSource() {
 		return hasSource;
 	}
@@ -130,13 +133,12 @@ public class CreationProvenanceType {
 		this.format = format;
 	}
 
-	@Override
-	public String toString() {
-		return "CreationProvenanceType [hasSource=" + hasSource + ", hasSelector=" + hasSelector + ", items=" + items
-				+ ", title=" + title + ", subject=" + subject + ", value=" + value + ", identifier=" + identifier
-				+ ", imageWidth=" + imageWidth + ", imageHeight=" + imageHeight + ", unit=" + unit + ", format="
-				+ format + "]";
+	public String getContributor() {
+		return contributor;
 	}
-	
-	
+
+	public void setContributor(String contributor) {
+		this.contributor = contributor;
+	}
+
 }
