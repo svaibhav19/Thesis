@@ -9,8 +9,8 @@ import java.nio.file.Paths;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.config.RepositoryConfigException;
 
-import edu.kit.api.JsonMapper;
-import edu.kit.api.JsonMapperImp;
+import edu.kit.api.json.JsonMapper;
+import edu.kit.api.json.JsonMapperImp;
 import edu.kit.exceptions.AnnotationExceptions;
 
 public class TestJSON {

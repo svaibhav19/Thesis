@@ -1,4 +1,4 @@
-package edu.kit.api;
+package edu.kit.api.json;
 
 import java.util.List;
 

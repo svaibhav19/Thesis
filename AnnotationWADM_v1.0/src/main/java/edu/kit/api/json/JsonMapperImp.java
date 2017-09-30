@@ -1,4 +1,4 @@
-package edu.kit.api;
+package edu.kit.api.json;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -40,6 +40,7 @@ import com.github.anno4j.model.impl.selector.XPathSelector;
 import com.github.anno4j.model.impl.targets.SpecificResource;
 import com.google.gson.Gson;
 
+import edu.kit.api.TextAnnotationBody;
 import edu.kit.exceptions.AnnotationExceptions;
 import edu.kit.jsoncore.AnnotationJson;
 import edu.kit.jsoncore.Body;
@@ -113,9 +114,10 @@ public class JsonMapperImp implements JsonMapper {
 					for (Item item : bodies.getItems()) {
 						if (item.getType().equalsIgnoreCase("TextualBody")) {
 							TextAnnotationBody textBody = anno4j.createObject(TextAnnotationBody.class);
-
-							if (null != item.getPurpose())
-								textBody.setPurpose(item.getPurpose());
+							
+							if (null != item.getPurpose())	
+								textBody.addPurpose(getMotivationType(item.getPurpose()));
+							
 							if (null != item.getValue())
 								textBody.setValue(item.getValue());
 							if (null != item.getFormat())
@@ -166,8 +168,8 @@ public class JsonMapperImp implements JsonMapper {
 						textBody.setUnit(bodies.getUnit());
 					if (null != bodies.getTitle())
 						textBody.setName(bodies.getTitle());
-					// if(null != bodies.getPurpose())
-					// textBody.set
+					if (null != bodies.getPurpose())	
+						textBody.addPurpose(getMotivationType(bodies.getPurpose()));
 					if (null != bodies.getCreator())
 						textBody.setCreator(getAgentType(bodies.getCreator()));
 

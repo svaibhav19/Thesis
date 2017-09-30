@@ -1,4 +1,4 @@
-package edu.kit.api;
+package edu.kit.api.page;
 
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
@@ -49,6 +49,7 @@ import com.github.anno4j.model.impl.multiplicity.Choice;
 import com.github.anno4j.model.impl.selector.SvgSelector;
 import com.github.anno4j.model.impl.targets.SpecificResource;
 
+import edu.kit.api.TextAnnotationBody;
 import edu.kit.exceptions.AnnotationExceptions;
 import edu.kit.exceptions.StatusCode;
 import edu.kit.pagexml.AdvertRegionType;

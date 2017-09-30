@@ -1,4 +1,4 @@
-package edu.kit.api;
+package edu.kit.api.json;
 
 import java.io.StringReader;
 import java.util.Collection;
@@ -308,9 +308,11 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 		if (null != creationProvenanceType.getContributor())
 			bodyitem.put("contributor", creationProvenanceType.getContributor());
 
-		if (null != creationProvenanceType.getCreator()) {
+		if (null != creationProvenanceType.getCreator()) 
 			bodyitem.put("creator", getCreator(creationProvenanceType.getCreator()));
-		}
+		
+		if(null != creationProvenanceType.getHasPurpose())
+			bodyitem.put("purpose", creationProvenanceType.getHasPurpose().getResource().toString().split("#")[1]);
 
 		return bodyitem;
 	}

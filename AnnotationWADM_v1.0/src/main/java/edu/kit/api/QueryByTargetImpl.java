@@ -15,6 +15,7 @@ import org.apache.jena.riot.RDFDataMgr;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import edu.kit.api.json.RDF2AnnoJsonConverterImpl;
 import edu.kit.util.QueryUtil;
 
 /**

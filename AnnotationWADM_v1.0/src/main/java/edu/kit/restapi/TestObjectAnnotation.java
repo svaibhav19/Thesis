@@ -22,9 +22,9 @@ import org.openrdf.rio.RDFFormat;
 import com.github.anno4j.io.ObjectParser;
 import com.github.anno4j.model.Annotation;
 
-import edu.kit.api.AnnotationGenerator;
-import edu.kit.api.AnnotationGeneratorImpl;
-import edu.kit.api.RDF2AnnoJsonConverterImpl;
+import edu.kit.api.json.AnnotationGenerator;
+import edu.kit.api.json.AnnotationGeneratorImpl;
+import edu.kit.api.json.RDF2AnnoJsonConverterImpl;
 
 public class TestObjectAnnotation {
 

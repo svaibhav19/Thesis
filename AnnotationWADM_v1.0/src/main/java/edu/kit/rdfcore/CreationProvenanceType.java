@@ -48,6 +48,19 @@ public class CreationProvenanceType {
 	@XmlElement(name="contributor", namespace=IRINS.dc)
 	private String contributor;
 	
+	@XmlElement(name="hasPurpose", namespace=IRINS.j0)
+	private HasPurpose hasPurpose;
+	
+	
+	
+	public HasPurpose getHasPurpose() {
+		return hasPurpose;
+	}
+
+	public void setHasPurpose(HasPurpose hasPurpose) {
+		this.hasPurpose = hasPurpose;
+	}
+
 	public HasSourceType getHasSource() {
 		return hasSource;
 	}

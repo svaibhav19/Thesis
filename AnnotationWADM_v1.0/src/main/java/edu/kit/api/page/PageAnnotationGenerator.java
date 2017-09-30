@@ -1,4 +1,4 @@
-package edu.kit.api;
+package edu.kit.api.page;
 
 import java.util.List;
 

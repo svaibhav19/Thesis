@@ -1,4 +1,4 @@
-package edu.kit.api;
+package edu.kit.api.json;
 
 public interface AnnotationGenerator {
 

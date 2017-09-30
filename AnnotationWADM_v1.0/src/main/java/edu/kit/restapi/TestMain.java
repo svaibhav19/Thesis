@@ -10,8 +10,8 @@ import java.io.StringWriter;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.config.RepositoryConfigException;
 
-import edu.kit.api.PageAnnotationGenerator;
-import edu.kit.api.PageAnnotationGeneratorImpl;
+import edu.kit.api.page.PageAnnotationGenerator;
+import edu.kit.api.page.PageAnnotationGeneratorImpl;
 import edu.kit.exceptions.AnnotationExceptions;
 
 public class TestMain {
