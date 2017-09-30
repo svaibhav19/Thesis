@@ -86,5 +86,15 @@ public class AnnotationType {
 	public void setHasBody(List<HasBodyType> hasBody) {
 		this.hasBody = hasBody;
 	}
+
+	@Override
+	public String toString() {
+		return "AnnotationType [about=" + about + ", motivatedBy=" + motivatedBy + ", hasTarget=" + hasTarget
+				+ ", hasBody=" + hasBody + ", modified=" + modified + ", created=" + created + ", creator=" + creator
+				+ ", getAbout()=" + getAbout() + ", getMotivatedBy()=" + getMotivatedBy() + ", getHasTarget()="
+				+ getHasTarget() + ", getModified()=" + getModified() + ", getCreated()=" + getCreated()
+				+ ", getCreator()=" + getCreator() + ", getHasBody()=" + getHasBody() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+	}
 	
 }

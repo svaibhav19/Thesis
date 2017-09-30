@@ -11,8 +11,8 @@ import javax.ws.rs.core.MediaType;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.config.RepositoryConfigException;
 
-import edu.kit.api.AnnotationGenerator;
-import edu.kit.api.AnnotationGeneratorImpl;
+import edu.kit.api.PageAnnotationGenerator;
+import edu.kit.api.PageAnnotationGeneratorImpl;
 import edu.kit.api.QueryByTarget;
 import edu.kit.api.QueryByTargetImpl;
 import edu.kit.exceptions.AnnotationExceptions;
@@ -48,7 +48,7 @@ public class AnnotationServices {
 			throws AnnotationExceptions {
 
 		try {
-			AnnotationGenerator generator = new AnnotationGeneratorImpl();
+			PageAnnotationGenerator generator = new PageAnnotationGeneratorImpl();
 			return generator.parseAnnotations(digitalObjID, dataToStore);
 		} catch (RepositoryException e) {
 			e.printStackTrace();

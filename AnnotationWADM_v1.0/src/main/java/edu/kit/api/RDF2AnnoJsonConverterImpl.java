@@ -1,11 +1,6 @@
 package edu.kit.api;
 
-import java.io.IOException;
 import java.io.StringReader;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.List;
 
@@ -16,11 +11,23 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 
+import org.apache.jena.query.Query;
+import org.apache.jena.query.QueryExecution;
+import org.apache.jena.query.QueryExecutionFactory;
+import org.apache.jena.query.QueryFactory;
+import org.apache.jena.query.QuerySolution;
+import org.apache.jena.query.ResultSet;
+import org.apache.jena.query.ResultSetFormatter;
+import org.apache.jena.rdf.model.Literal;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.rdf.model.Resource;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import edu.kit.rdfcore.ChoiceType;
 import edu.kit.rdfcore.CreationProvenanceType;
+import edu.kit.rdfcore.Creator;
 import edu.kit.rdfcore.CreatorType;
 import edu.kit.rdfcore.EmbeddedContentType;
 import edu.kit.rdfcore.ExternalWebResourceType;
@@ -32,20 +39,25 @@ import edu.kit.rdfcore.RDFtype;
 import edu.kit.rdfcore.ResourceBodyType;
 
 public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
+	private Model model;
+	private String idString;
+	private String serviceurl;
 
-//	public static void main(String[] args) throws IOException {
-//
-//		String content = readFile("resources/model1Rdf.xml", StandardCharsets.UTF_8);
-//		RDF2AnnoJsonConverter parser = new RDF2AnnoJsonConverter();
-//		System.out.println(parser.parse(content));
-//
-//	}
-//
-//	static String readFile(String path, Charset encoding) throws IOException {
-//		byte[] encoded = Files.readAllBytes(Paths.get(path));
-//		return new String(encoded, encoding);
-//	}
-//
+	// public static void main(String[] args) throws IOException {
+	//
+	// String content = readFile("resources/model1Rdf.xml",
+	// StandardCharsets.UTF_8);
+	// RDF2AnnoJsonConverter parser = new RDF2AnnoJsonConverter();
+	// System.out.println(parser.parse(content));
+	//
+	// }
+	//
+	// static String readFile(String path, Charset encoding) throws IOException
+	// {
+	// byte[] encoded = Files.readAllBytes(Paths.get(path));
+	// return new String(encoded, encoding);
+	// }
+	//
 	@Override
 	public String parse(String xmlStr) {
 		RDFtype rdf = getParser(xmlStr);
@@ -55,21 +67,21 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 
 	@Override
 	public String convertAnnoJson(RDFtype rdf) {
-		
-		if(null != rdf.getAnnotation()){
-		JSONObject annoJson = new JSONObject();
-		annoJson.put("@context", "http://www.w3.org/ns/anno.jsonld");
-		
-		annoJson.put("id", rdf.getAnnotation().getAbout());
-		annoJson.put("type", "Annotation");
-		annoJson.put("creator", getCreator(rdf.getAnnotation().getCreator()));
-		annoJson.put("created", rdf.getAnnotation().getCreated());
-		annoJson.put("modified", rdf.getAnnotation().getModified());
-		annoJson.put("body", getBody(rdf.getAnnotation().getHasBody()));
-		annoJson.put("target", getTarget(rdf.getAnnotation().getHasTarget()));
 
-		return annoJson.toString();
-		}else
+		if (null != rdf.getAnnotation()) {
+			JSONObject annoJson = new JSONObject();
+			annoJson.put("@context", "http://www.w3.org/ns/anno.jsonld");
+
+			annoJson.put("id", rdf.getAnnotation().getAbout());
+			annoJson.put("type", "Annotation");
+			annoJson.put("creator", getCreator(rdf.getAnnotation().getCreator()));
+			annoJson.put("created", rdf.getAnnotation().getCreated());
+			annoJson.put("modified", rdf.getAnnotation().getModified());
+			annoJson.put("body", getBody(rdf.getAnnotation().getHasBody()));
+			annoJson.put("target", getTarget(rdf.getAnnotation().getHasTarget()));
+
+			return annoJson.toString();
+		} else
 			return null;
 	}
 
@@ -98,7 +110,7 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 		JSONObject choiceObj = new JSONObject();
 
 		for (HasBodyType hasBody : bodyList) {
-			
+
 			if (null != hasBody.getExternalWebResource()) {
 				choiceArray = createExternalWebResource(hasBody.getExternalWebResource());
 			} else if (null != hasBody.getCreationProvenance() && null != hasBody.getCreationProvenance().getItems()) {
@@ -107,15 +119,16 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 				bodyArray.put(creationProvenance(hasBody.getCreationProvenance()));
 			} else if (null != hasBody.getChoice()) {
 				choiceArray = createChoice(hasBody.getChoice());
-			}else if(null != hasBody.getResource()){
+			} else if (null != hasBody.getResource()) {
 				choiceArray = createResource(hasBody.getResource());
 			}
 
 		}
-		choiceObj.put("type", "Choice");
-		choiceObj.put("items", choiceArray);
-
-		bodyArray.put(choiceObj);
+		if (0 != choiceArray.length()) {
+			choiceObj.put("type", "Choice");
+			choiceObj.put("items", choiceArray);
+			bodyArray.put(choiceObj);
+		}
 		return bodyArray;
 	}
 
@@ -206,8 +219,8 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 
 		if (null != externalWebResource.getIdentifier())
 			bodyitem.put("identifier", externalWebResource.getIdentifier());
-		
-		if(null != externalWebResource.getContributor())
+
+		if (null != externalWebResource.getContributor())
 			bodyitem.put("contributor", externalWebResource.getContributor());
 
 		return bodyitem;
@@ -231,8 +244,8 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 
 		if (null != resource.getIdentifier())
 			bodyitem.put("identifier", resource.getIdentifier());
-		
-		if(null != resource.getContributor())
+
+		if (null != resource.getContributor())
 			bodyitem.put("contributor", resource.getContributor());
 
 		return bodyitem;
@@ -256,8 +269,8 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 
 		if (null != embeddedContent.getIdentifier())
 			bodyitem.put("identifier", embeddedContent.getIdentifier());
-		
-		if(null != embeddedContent.getContributor())
+
+		if (null != embeddedContent.getContributor())
 			bodyitem.put("contributor", embeddedContent.getContributor());
 
 		return bodyitem;
@@ -267,8 +280,12 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 	public JSONObject creationProvenance(CreationProvenanceType creationProvenanceType) {
 		JSONObject bodyitem = new JSONObject();
 		bodyitem.put("type", "TextualBody");
-		bodyitem.put("title", creationProvenanceType.getTitle());
-		bodyitem.put("value", creationProvenanceType.getValue());
+
+		if (null != creationProvenanceType.getTitle())
+			bodyitem.put("title", creationProvenanceType.getTitle());
+
+		if (null != creationProvenanceType.getValue())
+			bodyitem.put("value", creationProvenanceType.getValue());
 
 		if (null != creationProvenanceType.getUnit())
 			bodyitem.put("unit", creationProvenanceType.getUnit());
@@ -282,26 +299,78 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 		if (null != creationProvenanceType.getFormat())
 			bodyitem.put("format", creationProvenanceType.getFormat());
 
-		if (null != creationProvenanceType.getImageHeight()) 
+		if (null != creationProvenanceType.getImageHeight())
 			bodyitem.put("imageHeight", creationProvenanceType.getImageHeight());
-		
-		if (null != creationProvenanceType.getImageWidth()) 
+
+		if (null != creationProvenanceType.getImageWidth())
 			bodyitem.put("imageWidth", creationProvenanceType.getImageWidth());
-		
-		if(null != creationProvenanceType.getContributor())
+
+		if (null != creationProvenanceType.getContributor())
 			bodyitem.put("contributor", creationProvenanceType.getContributor());
-		
+
+		if (null != creationProvenanceType.getCreator()) {
+			bodyitem.put("creator", getCreator(creationProvenanceType.getCreator()));
+		}
+
 		return bodyitem;
+	}
+
+	private JSONObject getCreator(Creator creator) {
+		JSONObject creatorJson = new JSONObject();
+		if (null != creator.getSoftwareAgent()) {
+			if (null != creator.getSoftwareAgent().getAbout())
+				creatorJson.put("id", creator.getSoftwareAgent().getAbout());
+
+			creatorJson.put("type", "Software");
+
+			if (null != creator.getSoftwareAgent().getName())
+				creatorJson.put("name", creator.getSoftwareAgent().getName());
+
+		} else {
+			String queryString = " SELECT ?s ?p ?o " + "WHERE { GRAPH " + idString + " " + "{ ?s ?p ?o. "
+					+ " FILTER (?s = <" + creator.getResource() + ">) } } ";
+
+			QueryExecution eachGraphQuery = QueryExecutionFactory.sparqlService(serviceurl, queryString);
+			ResultSet results = eachGraphQuery.execSelect();
+			for (; results.hasNext();) {
+				QuerySolution soln = results.nextSolution();
+				if (soln.get("p").toString().equals("http://xmlns.com/foaf/0.1/name"))
+					creatorJson.put("name", soln.get("o"));
+				if (soln.get("o").toString().equals("http://www.w3.org/ns/prov/SoftwareAgent"))
+					creatorJson.put("type", "Software");
+				if (soln.get("o").toString().equals("http://www.w3.org/ns/prov/PersonAgent"))
+					creatorJson.put("type", "Person");
+			}
+		}
+		return creatorJson;
 	}
 
 	@Override
 	public JSONObject getCreator(CreatorType creator) {
 
 		JSONObject creatorJson = new JSONObject();
-		creatorJson.put("id", creator.getSoftwareAgent().getAbout());
-		creatorJson.put("type", "Software");
-		creatorJson.put("name", creator.getSoftwareAgent().getName());
 
+		if (null != creator.getResource()) {
+			String queryString = " SELECT ?s ?p ?o " + "WHERE { GRAPH " + idString + " " + "{ ?s ?p ?o. "
+					+ " FILTER (?s = <" + creator.getResource() + ">) } } ";
+
+			QueryExecution eachGraphQuery = QueryExecutionFactory.sparqlService(serviceurl, queryString);
+			ResultSet results = eachGraphQuery.execSelect();
+			for (; results.hasNext();) {
+				QuerySolution soln = results.nextSolution();
+				if (soln.get("p").toString().equals("http://xmlns.com/foaf/0.1/name"))
+					creatorJson.put("name", soln.get("o"));
+				if (soln.get("o").toString().equals("http://www.w3.org/ns/prov/SoftwareAgent"))
+					creatorJson.put("type", "Software");
+				if (soln.get("o").toString().equals("http://www.w3.org/ns/prov/PersonAgent"))
+					creatorJson.put("type", "Person");
+			}
+
+		} else {
+			creatorJson.put("id", creator.getSoftwareAgent().getAbout());
+			creatorJson.put("type", "Software");
+			creatorJson.put("name", creator.getSoftwareAgent().getName());
+		}
 		return creatorJson;
 	}
 
@@ -339,5 +408,11 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public void setModel(Model model, String idString, String serviceurl) {
+		this.model = model;
+		this.idString = idString;
+		this.serviceurl = serviceurl;
 	}
 }

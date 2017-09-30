@@ -3,8 +3,11 @@ package edu.kit.api;
 
 import org.openrdf.annotations.Iri;
 
+import com.github.anno4j.model.Agent;
 import com.github.anno4j.model.Body;
 import com.github.anno4j.model.namespaces.DC;
+import com.github.anno4j.model.namespaces.DCTERMS;
+import com.github.anno4j.model.namespaces.OADM;
 import com.github.anno4j.model.namespaces.RDF;
 
 @Iri("http://www.w3.org/ns/oa#EmbeddedContent")
@@ -63,5 +66,17 @@ public interface TextAnnotationBody extends Body {
     
     @Iri("http://qudt.org/vocab/unit")
     void setUnit(String unit);
+    
+    @Iri(DC.NS+"purpose")
+    String purpose();
+    
+    @Iri(DC.NS+"purpose")
+    void setPurpose(String purpose);
+    
+    @Iri(DCTERMS.CREATOR)
+    Agent getCreator();
+
+    @Iri(DCTERMS.CREATOR)
+    void setCreator(Agent agent);
     
 }

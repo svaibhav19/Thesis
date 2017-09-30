@@ -6,21 +6,16 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-public class CreatorType {
-
+public class Creator {
+	
 	@XmlAttribute(name = "resource", namespace = IRINS.rdf)
 	private String resource;
+	
+	@XmlElement(name ="about", namespace=IRINS.rdf)
+	private String about;
 
 	@XmlElement(name = "SoftwareAgent", namespace = IRINS.j2)
 	private SoftwareAgentType softwareAgent;
-
-	public String getResource() {
-		return resource;
-	}
-
-	public void setResource(String resource) {
-		this.resource = resource;
-	}
 
 	public SoftwareAgentType getSoftwareAgent() {
 		return softwareAgent;
@@ -30,9 +25,20 @@ public class CreatorType {
 		this.softwareAgent = softwareAgent;
 	}
 
-	@Override
-	public String toString() {
-		return "CreatorType [resource=" + resource + ", softwareAgent=" + softwareAgent + "]";
+	public String getAbout() {
+		return about;
 	}
 
+	public void setAbout(String about) {
+		this.about = about;
+	}
+
+	public String getResource() {
+		return resource;
+	}
+
+	public void setResource(String resource) {
+		this.resource = resource;
+	}
+	
 }

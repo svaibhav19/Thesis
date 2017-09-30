@@ -1,7 +1,16 @@
 package edu.kit.api;
 
-import java.util.List;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.apache.jena.query.DatasetAccessor;
+import org.apache.jena.query.DatasetAccessorFactory;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.UpdateExecutionException;
 import org.openrdf.repository.RepositoryException;
@@ -14,97 +23,90 @@ import com.github.anno4j.model.Agent;
 import com.github.anno4j.model.Annotation;
 import com.github.anno4j.model.Motivation;
 import com.github.anno4j.model.MotivationFactory;
+import com.github.anno4j.model.Selector;
 import com.github.anno4j.model.Style;
 import com.github.anno4j.model.impl.ResourceObject;
 import com.github.anno4j.model.impl.agent.Person;
 import com.github.anno4j.model.impl.agent.Software;
 import com.github.anno4j.model.impl.multiplicity.Choice;
+import com.github.anno4j.model.impl.selector.CSSSelector;
+import com.github.anno4j.model.impl.selector.DataPositionSelector;
+import com.github.anno4j.model.impl.selector.FragmentSelector;
+import com.github.anno4j.model.impl.selector.RangeSelector;
+import com.github.anno4j.model.impl.selector.SvgSelector;
+import com.github.anno4j.model.impl.selector.TextPositionSelector;
+import com.github.anno4j.model.impl.selector.TextQuoteSelector;
+import com.github.anno4j.model.impl.selector.XPathSelector;
 import com.github.anno4j.model.impl.targets.SpecificResource;
 import com.google.gson.Gson;
 
+import edu.kit.exceptions.AnnotationExceptions;
 import edu.kit.jsoncore.AnnotationJson;
 import edu.kit.jsoncore.Body;
 import edu.kit.jsoncore.Creator;
+import edu.kit.jsoncore.Creator_;
+import edu.kit.jsoncore.EndSelector;
 import edu.kit.jsoncore.Generator;
 import edu.kit.jsoncore.Item;
 import edu.kit.jsoncore.Source;
+import edu.kit.jsoncore.StartSelector;
 import edu.kit.jsoncore.Stylesheet;
 import edu.kit.jsoncore.Target;
 
 public class JsonMapperImp implements JsonMapper {
 
 	private Anno4j anno4j;
+	DatasetAccessor accessor;
+	private Map<String, Software> softwareAgentList = new HashMap<String, Software>();
+	private Map<String, Person> personAgentList = new HashMap<String, Person>();
 
 	public JsonMapperImp() throws RepositoryException, RepositoryConfigException {
 		anno4j = new Anno4j();
+		accessor = DatasetAccessorFactory.createHTTP(ServiceURI);
 	}
 
 	@Override
 	public String parseJson(String jsonString)
-			throws RepositoryException, IllegalAccessException, InstantiationException {
+			throws RepositoryException, IllegalAccessException, InstantiationException, AnnotationExceptions {
+
 		Gson gson = new Gson();
-		AnnotationJson jsonObj = gson.fromJson(jsonString, AnnotationJson.class);
+		AnnotationJson jsonObj;
+		jsonObj = gson.fromJson(jsonString, AnnotationJson.class);
 		Annotation annotation = convertJsonToAnnotation(jsonObj);
 
-		System.out.println(annotation.getTriples(RDFFormat.RDFXML));
-		return null;
+		return postToAnnotationStore(annotation);
+	}
+
+	private String postToAnnotationStore(Annotation annotation) {
+
+		Model model = ModelFactory.createDefaultModel();
+		try (final InputStream in = new ByteArrayInputStream(
+				annotation.getTriples(RDFFormat.TURTLE).getBytes("UTF-8"))) {
+			model.read(in, null, "TTL");
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
+		accessor.add(annotationURL + annotation.getResourceAsString(), model);
+		return "Annotation Stored Succesfully";
 	}
 
 	@Override
 	public Annotation convertJsonToAnnotation(AnnotationJson jsonObj)
-			throws RepositoryException, IllegalAccessException, InstantiationException {
+			throws RepositoryException, IllegalAccessException, InstantiationException, AnnotationExceptions {
 
 		Annotation annotation = createAnnotations(jsonObj);
-		createAndAddBody(annotation, jsonObj.getBody());
+		createAndAddBody(annotation, jsonObj);
 		createAndAddTarget(annotation, jsonObj.getTarget());
+
 		return annotation;
 	}
 
-	private void createAndAddTarget(Annotation annotation, Target target) {
-		try {
-			SpecificResource specific = anno4j.createObject(SpecificResource.class);
+	private void createAndAddBody(Annotation annotation, AnnotationJson jsonObj) {
 
-			if (null != target.getStyleClass())
-				specific.addStyleClass(target.getStyleClass());
-			if (null != target.getSource()) {
-				ResourceObject source = anno4j.createObject(ResourceObject.class);
-				source.setResourceAsString(target.getSource());
-				specific.setSource(source);
-			}
-			// if (null != target.getState()) {
-			// no methods avail in anno4j
-			// for (State state : target.getState()) {
-			// com.github.anno4j.model.State stateObj =
-			// anno4j.createObject(com.github.anno4j.model.State.class);
-			// if(null != state.)
-			// stateObj.setResourceAsString(state.get);
-			// }
-			// }
-
-			// no full methods found for implementations
-			// if(null != target.getSelector()){
-			// Selector select = anno4j.createObject(Selector.class);
-			// select.set
-			// }
-			annotation.addTarget(specific);
-
-		} catch (RepositoryException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (MalformedQueryException e) {
-			e.printStackTrace();
-		} catch (UpdateExecutionException e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	private void createAndAddBody(Annotation annotation, List<Body> body) {
-
-		for (Body bodies : body) {
+		for (Body bodies : jsonObj.getBody()) {
 			if (bodies.getType().equalsIgnoreCase("choice")) {
 				try {
 					Choice choice = anno4j.createObject(Choice.class);
@@ -112,16 +114,16 @@ public class JsonMapperImp implements JsonMapper {
 						if (item.getType().equalsIgnoreCase("TextualBody")) {
 							TextAnnotationBody textBody = anno4j.createObject(TextAnnotationBody.class);
 
-							// if(null != item.getPurpose())
-							// anno4j-no purpose
+							if (null != item.getPurpose())
+								textBody.setPurpose(item.getPurpose());
 							if (null != item.getValue())
 								textBody.setValue(item.getValue());
 							if (null != item.getFormat())
 								textBody.setFormat(item.getFormat());
 							if (null != item.getLanguage())
 								textBody.setLanguage(item.getLanguage());
-							// if(null != item.getCreator())
-							// textBody.setCreator(agent);
+							if (null != item.getCreator())
+								textBody.setCreator(getAgentType(item.getCreator()));
 							if (null != item.getIdentifier())
 								textBody.setIdentifier(item.getIdentifier());
 							if (null != item.getSubject())
@@ -160,6 +162,14 @@ public class JsonMapperImp implements JsonMapper {
 
 					if (null != bodies.getValue())
 						textBody.setValue(bodies.getValue());
+					if (null != bodies.getUnit())
+						textBody.setUnit(bodies.getUnit());
+					if (null != bodies.getTitle())
+						textBody.setName(bodies.getTitle());
+					// if(null != bodies.getPurpose())
+					// textBody.set
+					if (null != bodies.getCreator())
+						textBody.setCreator(getAgentType(bodies.getCreator()));
 
 					annotation.addBody(textBody);
 				} catch (RepositoryException e) {
@@ -171,19 +181,139 @@ public class JsonMapperImp implements JsonMapper {
 				}
 			}
 		}
-
 	}
 
 	private RDFObject getSourceType(Source source) {
 		try {
-
-			ResourceObject sourceObj = anno4j.createObject(ResourceObject.class);
+			edu.kit.api.Source sourceObj = anno4j.createObject(edu.kit.api.Source.class);
+			if (null != source.getCreator())
+				sourceObj.setCreator(getAgentType(source.getCreator()));
+			if (null != source.getFormat())
+				sourceObj.setFormat(source.getFormat());
 			if (null != source.getId())
-				sourceObj.setResourceAsString(source.getId());
-
-			// other implementation is not available
+				sourceObj.setId(source.getId());
+			if (null != source.getLanguage())
+				sourceObj.setLanguage(source.getLanguage());
+			if (null != source.getType())
+				sourceObj.setType(source.getType());
 
 			return sourceObj;
+		} catch (RepositoryException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	private Agent getAgentType(Creator_ creator) {
+
+		if (creator.getType().equalsIgnoreCase("person")) {
+
+			Person personAgent;
+			try {
+				personAgent = anno4j.createObject(Person.class);
+				if (null != creator.getId())
+					personAgent.setOpenID(creator.getId());
+
+				return personAgent;
+
+			} catch (RepositoryException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			} catch (InstantiationException e) {
+				e.printStackTrace();
+			}
+
+		} else if (creator.getType().equalsIgnoreCase("software")) {
+			try {
+
+				Software softAgent = anno4j.createObject(Software.class);
+
+				if (null != creator.getId())
+					softAgent.setResourceAsString(creator.getId());
+
+				return softAgent;
+
+			} catch (RepositoryException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			} catch (InstantiationException e) {
+				e.printStackTrace();
+			} catch (MalformedQueryException e) {
+				e.printStackTrace();
+			} catch (UpdateExecutionException e) {
+				e.printStackTrace();
+			}
+
+		}
+		return null;
+	}
+
+	@Override
+	public Annotation createAnnotations(AnnotationJson jsonObj)
+			throws RepositoryException, IllegalAccessException, InstantiationException {
+		Annotation anno = anno4j.createObject(Annotation.class);
+
+		// if (null != jsonObj.getId())
+		// anno.setResourceAsString(jsonObj.getId());
+
+		if (null != jsonObj.getMotivation())
+			anno.addMotivation(getMotivationType(jsonObj.getMotivation()));
+
+		if (null != jsonObj.getCreator())
+			anno.setCreator(getAgentType(jsonObj.getCreator()));
+
+		if (null != jsonObj.getCreated())
+			anno.setCreated(jsonObj.getCreated());
+
+		if (null != jsonObj.getGenerator())
+			anno.setGenerator(getAgentType(jsonObj.getGenerator()));
+
+		if (null != jsonObj.getGenerated())
+			anno.setGenerated(jsonObj.getGenerated());
+
+		if (null != jsonObj.getStylesheet())
+			anno.setStyledBy(getStyleType(jsonObj.getStylesheet()));
+
+		if (null != jsonObj.getModified())
+			anno.setModified(jsonObj.getModified());
+
+		return anno;
+	}
+
+	private void createAndAddTarget(Annotation annotation, Target target) throws AnnotationExceptions {
+		try {
+			SpecificResource specific = anno4j.createObject(SpecificResource.class);
+
+			if (null != target.getStyleClass())
+				specific.addStyleClass(target.getStyleClass());
+
+			if (null != target.getSource()) {
+				ResourceObject source = anno4j.createObject(ResourceObject.class);
+				source.setResourceAsString(target.getSource());
+				specific.setSource(source);
+			}
+
+			if (null != target.getSelector()) {
+				if (null != target.getSelector().getType()) {
+					Selector selector = getSelector(target.getSelector());
+					specific.setSelector(selector);
+
+				} else {
+					// Selector selector = anno4j.createObject(Selector.class);
+					// selector.setva
+					// specific.setSelector(selector);
+				}
+			}
+
+			annotation.addTarget(specific);
+
 		} catch (RepositoryException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
@@ -196,44 +326,91 @@ public class JsonMapperImp implements JsonMapper {
 			e.printStackTrace();
 		}
 
-		return null;
 	}
 
-	@Override
-	public Annotation createAnnotations(AnnotationJson jsonObj)
-			throws RepositoryException, IllegalAccessException, InstantiationException {
+	private Selector getSelector(edu.kit.jsoncore.Selector selector)
+			throws RepositoryException, IllegalAccessException, InstantiationException, AnnotationExceptions {
+		if (selector.getType().equalsIgnoreCase("FragmentSelector")) {
+			FragmentSelector fragmentSelector = anno4j.createObject(FragmentSelector.class);
+			if (null != selector.getConformsTo())
+				fragmentSelector.setConformsTo(selector.getConformsTo());
+			if (null != selector.getValue())
+				fragmentSelector.setValue(selector.getValue());
 
-		Annotation anno = anno4j.createObject(Annotation.class);
+			// if (null != selector.getRefinedBy()) {
+			// throw new AnnotationExceptions("RefinedBy Not Implemented",
+			// StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
+			// }
+			return fragmentSelector;
+		}
+		if (selector.getType().equalsIgnoreCase("CssSelector")) {
+			CSSSelector cssSelector = anno4j.createObject(CSSSelector.class);
+			if (null != selector.getValue())
+				cssSelector.setValue(selector.getValue());
 
-		try {
-			if (null != jsonObj.getId())
-				anno.setResourceAsString(jsonObj.getId());
+			return cssSelector;
+		}
+		if (selector.getType().equalsIgnoreCase("XPathSelector")) {
+			XPathSelector xpathSelector = anno4j.createObject(XPathSelector.class);
+			if (null != selector.getValue())
+				xpathSelector.setValue(selector.getValue());
 
-			if (null != jsonObj.getMotivation())
-				anno.addMotivation(getMotivationType(jsonObj.getMotivation()));
+			return xpathSelector;
+		}
+		if (selector.getType().equalsIgnoreCase("TextQuoteSelector")) {
+			TextQuoteSelector textQuoteSelector = anno4j.createObject(TextQuoteSelector.class);
+			if (null != selector.getExact())
+				textQuoteSelector.setExact(selector.getExact());
+			if (null != selector.getPrefix())
+				textQuoteSelector.setPrefix(selector.getPrefix());
+			if (null != selector.getSuffix())
+				textQuoteSelector.setSuffix(selector.getSuffix());
 
-			if (null != jsonObj.getCreator())
-				anno.setCreator(getAgentType(jsonObj.getCreator()));
+			return textQuoteSelector;
+		}
+		if (selector.getType().equalsIgnoreCase("TextPositionSelector")) {
+			TextPositionSelector textPositionSelector = anno4j.createObject(TextPositionSelector.class);
+			if (null != selector.getStart())
+				textPositionSelector.setStart(selector.getStart());
+			if (null != selector.getEnd())
+				textPositionSelector.setEnd(selector.getEnd());
 
-			if (null != jsonObj.getCreated())
-				anno.setCreated(jsonObj.getCreated());
+			return textPositionSelector;
+		}
+		if (selector.getType().equalsIgnoreCase("DataPositionSelector")) {
+			DataPositionSelector dataPositionSelector = anno4j.createObject(DataPositionSelector.class);
+			if (null != selector.getStart())
+				dataPositionSelector.setStart(selector.getStart());
+			if (null != selector.getEnd())
+				dataPositionSelector.setEnd(selector.getEnd());
 
-			if (null != jsonObj.getGenerator())
-				anno.setGenerator(getAgentType(jsonObj.getGenerator()));
+			return dataPositionSelector;
+		}
+		if (selector.getType().equalsIgnoreCase("SvgSelector")) {
+			SvgSelector svg = anno4j.createObject(SvgSelector.class);
+			if (null != selector.getValue())
+				svg.setValue(selector.getValue());
 
-			if (null != jsonObj.getGenerated())
-				anno.setGenerated(jsonObj.getGenerated());
-
-			if (null != jsonObj.getStylesheet())
-				anno.setStyledBy(getStyleType(jsonObj.getStylesheet()));
-
-		} catch (MalformedQueryException e) {
-			e.printStackTrace();
-		} catch (UpdateExecutionException e) {
-			e.printStackTrace();
+			return svg;
+		}
+		if (selector.getType().equalsIgnoreCase("RangeSelector")) {
+			RangeSelector rangeSelector = anno4j.createObject(RangeSelector.class);
+			if (null != selector.getEndSelector()) {
+				EndSelector endSelector = anno4j.createObject(EndSelector.class);
+				endSelector.setType(selector.getStartSelector().getType());
+				endSelector.setValue(selector.getStartSelector().getValue());
+				rangeSelector.setEndSelector((Selector) endSelector);
+			}
+			if (null != selector.getStartSelector()) {
+				StartSelector startSelector = anno4j.createObject(StartSelector.class);
+				startSelector.setType(selector.getStartSelector().getType());
+				startSelector.setValue(selector.getValue());
+				rangeSelector.setStartSelector((Selector) startSelector);
+			}
+			return rangeSelector;
 		}
 
-		return anno;
+		return null;
 	}
 
 	private Style getStyleType(Stylesheet stylesheet) {
@@ -261,16 +438,23 @@ public class JsonMapperImp implements JsonMapper {
 
 	private Agent getAgentType(Generator generator) {
 		if (generator.getType().equalsIgnoreCase("person")) {
+
 			Person personAgent;
 			try {
 				personAgent = anno4j.createObject(Person.class);
 				if (null != generator.getId())
 					personAgent.setOpenID(generator.getId());
-				if (null != generator.getName())
-					personAgent.setName(generator.getName());
+
 				if (null != generator.getHomepage())
 					personAgent.setHomepage(generator.getHomepage());
 
+				if (null != generator.getName()) {
+					if (personAgentList.containsKey(generator.getName()))
+						return personAgentList.get(generator.getName());
+
+					personAgent.setName(generator.getName());
+					personAgentList.put(generator.getName(), personAgent);
+				}
 				return personAgent;
 
 			} catch (RepositoryException e) {
@@ -288,11 +472,17 @@ public class JsonMapperImp implements JsonMapper {
 
 				if (null != generator.getId())
 					softAgent.setResourceAsString(generator.getId());
-				if (null != generator.getName())
-					softAgent.setName(generator.getName());
+
 				if (null != generator.getHomepage())
 					softAgent.setHomepage(generator.getHomepage());
 
+				if (null != generator.getName()) {
+					if (softwareAgentList.containsKey(generator.getName()))
+						return softwareAgentList.get(generator.getName());
+
+					softAgent.setName(generator.getName());
+					softwareAgentList.put(generator.getName(), softAgent);
+				}
 				return softAgent;
 
 			} catch (RepositoryException e) {
@@ -318,11 +508,17 @@ public class JsonMapperImp implements JsonMapper {
 				personAgent = anno4j.createObject(Person.class);
 				if (null != creator.getId())
 					personAgent.setOpenID(creator.getId());
-				if (null != creator.getName())
-					personAgent.setName(creator.getName());
+
 				if (null != creator.getNickname())
 					personAgent.setNickname(creator.getNickname());
 
+				if (null != creator.getName()) {
+					if (personAgentList.containsKey(creator.getName()))
+						return personAgentList.get(creator.getName());
+
+					personAgent.setName(creator.getName());
+					personAgentList.put(creator.getName(), personAgent);
+				}
 				return personAgent;
 
 			} catch (RepositoryException e) {
@@ -340,11 +536,17 @@ public class JsonMapperImp implements JsonMapper {
 
 				if (null != creator.getId())
 					softAgent.setResourceAsString(creator.getId());
-				if (null != creator.getName())
-					softAgent.setName(creator.getName());
+
 				if (null != creator.getNickname())
 					softAgent.setNickname(creator.getNickname());
 
+				if (null != creator.getName()) {
+					if (softwareAgentList.containsKey(creator.getName()))
+						return softwareAgentList.get(creator.getName());
+
+					softAgent.setName(creator.getName());
+					softwareAgentList.put(creator.getName(), softAgent);
+				}
 				return softAgent;
 
 			} catch (RepositoryException e) {
@@ -401,5 +603,4 @@ public class JsonMapperImp implements JsonMapper {
 		return null;
 
 	}
-
 }

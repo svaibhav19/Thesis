@@ -8,7 +8,7 @@ public class Item {
 	private String value;
 	private String format;
 	private String language;
-	private String creator;
+	private Creator creator;
 	private Source source;
 	private String identifier;
 	private String title;
@@ -79,11 +79,11 @@ public class Item {
 		this.language = language;
 	}
 
-	public String getCreator() {
+	public Creator getCreator() {
 		return creator;
 	}
 
-	public void setCreator(String creator) {
+	public void setCreator(Creator creator) {
 		this.creator = creator;
 	}
 

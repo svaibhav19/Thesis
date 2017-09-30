@@ -13,6 +13,7 @@ public class AnnotationJson {
     private String created;
     private Generator generator;
     private String generated;
+    private String modified;
     private Stylesheet stylesheet;
     private List<Body> body = null;
     private Target target;
@@ -89,14 +90,6 @@ public class AnnotationJson {
         this.stylesheet = stylesheet;
     }
 
-    public List<Body> getBody() {
-        return body;
-    }
-
-    public void setBody(List<Body> body) {
-        this.body = body;
-    }
-
     public Target getTarget() {
         return target;
     }
@@ -104,5 +97,21 @@ public class AnnotationJson {
     public void setTarget(Target target) {
         this.target = target;
     }
+
+	public String getModified() {
+		return modified;
+	}
+
+	public void setModified(String modified) {
+		this.modified = modified;
+	}
+
+	public List<Body> getBody() {
+		return body;
+	}
+
+	public void setBody(List<Body> body) {
+		this.body = body;
+	}
     
 }

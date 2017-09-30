@@ -1,0 +1,41 @@
+{
+      "creator":{
+         "name":"CodiLab",
+         "type":"Software"
+      },
+      "created":"2017-09-29T06:19:21z",
+      "modified":"2017-09-29T06:21:11z",
+      "motivation": "describing",
+      "id":"4",
+      "type":"Annotation",
+      "body":[
+        {
+          "creator":{
+            "name":"CodiLab",
+            "type":"Software"
+          },
+          "format": "text/plain",
+          "purpose": "describing",
+          "type": "TextualBody",
+          "value": "Very important polygon!"
+        },
+        {
+          "creator":{
+            "name":"CodiLab",
+            "type":"Software"
+          },
+          "purpose": "tagging",
+          "type": "SpecificResource",
+          "source": "http://www.ecodicology.org/0010"
+        }
+      ],
+      "@context":"http://www.w3.org/ns/anno.jsonld",
+      "target":{
+         "selector":{
+            "type":"SvgSelector",
+            "value":"<svg><polygon points=\"1246.7755023183927,314.3833075734158 1447.330370942813,585.403400309119 1669.5668469860898,452.6035548686244 1515.0853941267387,281.8608964451314\"/><\/svg>"
+         },
+         "source":"http://episteme.ipe.kit.edu:8080/KITDM/rest/dataorganization/organization/download/327/200?viewName=master",
+         "type":"SpecificResource"
+      }
+   }

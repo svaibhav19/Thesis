@@ -11,6 +11,9 @@ public class CreationProvenanceType {
 
 	@XmlElement(name = "hasSource", namespace = IRINS.j0)
 	private HasSourceType hasSource;
+	
+	@XmlElement(name= "creator", namespace = IRINS.j1)
+	private Creator creator;
 
 	@XmlElement(name = "hasSelector", namespace = IRINS.j0)
 	private HasSelector hasSelector;
@@ -139,6 +142,14 @@ public class CreationProvenanceType {
 
 	public void setContributor(String contributor) {
 		this.contributor = contributor;
+	}
+
+	public Creator getCreator() {
+		return creator;
+	}
+
+	public void setCreator(Creator creator) {
+		this.creator = creator;
 	}
 
 }

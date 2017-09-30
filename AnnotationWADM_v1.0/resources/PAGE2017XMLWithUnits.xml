@@ -133,7 +133,7 @@
                 <Unicode/>
             </TextEquiv>
         </TextRegion>
-        <!-- <ImageRegion id="r4">
+        <ImageRegion id="r4">
             <Coords points="312,1303 2018,1303 2018,2114 312,2114"/>
             <UserDefined>
                 <UserAttribute description="MeasurementUnit:deg" name="BrightnessFGColorHue_SKEWNESS" type="xsd:string" value="6.020760323640211"/>
@@ -149,6 +149,6 @@
                 <UserAttribute description="MeasurementUnit:deg" name="SaturationBGColorHue_MEDIAN" type="xsd:string" value="35.294117647058826"/>
                 <UserAttribute description="MeasurementUnit:deg" name="BrightnessFGColorHue_STD_DEV" type="xsd:string" value="76.9524116076415"/>
             </UserDefined>
-        </ImageRegion> -->
+        </ImageRegion>
     </Page>
 </PcGts>

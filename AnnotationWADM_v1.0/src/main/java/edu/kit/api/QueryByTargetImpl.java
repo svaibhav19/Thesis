@@ -139,10 +139,12 @@ public class QueryByTargetImpl implements QueryByTarget{
 		String graphBaseQuery = queryUtil.getQueryByID(idString);
 		QueryExecution eachGraphQuery = QueryExecutionFactory.sparqlService(serviceURL, graphBaseQuery);
 		Model model = eachGraphQuery.execConstruct();
+		model.write(System.out);
 		RDFDataMgr.write(ouptResults, model, langFormat);
-		System.out.println(format.equals("ld+json")+"--------"+format.equals("ld json")+"<<<<<<<<<<<<<<");
+		
 		if (format.equals("ld+json") || format.equals("ld json")) {
 			RDF2AnnoJsonConverterImpl parser = new RDF2AnnoJsonConverterImpl();
+			parser.setModel(model,idString,serviceURL);
 			String jsonStr = parser.parse(ouptResults.toString());
 			finalResults.add(jsonStr);
 		} else {
