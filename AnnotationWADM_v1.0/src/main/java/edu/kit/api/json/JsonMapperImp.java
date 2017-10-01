@@ -518,6 +518,14 @@ public class JsonMapperImp implements JsonMapper {
 		}
 	}
 
+	/**
+	 * This method returns the type of Agent (Software/Person). 
+	 * Also map the required informations present in the JSON.
+	 * 
+	 * @param generator is a class from json object
+	 * @return Agent	(Software/person)
+	 * @throws AnnotationExceptions
+	 */
 	private Agent getAgentType(Generator generator) throws AnnotationExceptions {
 		if (generator.getType().equalsIgnoreCase("person")) {
 
@@ -583,6 +591,14 @@ public class JsonMapperImp implements JsonMapper {
 		return null;
 	}
 
+	/**
+	 * This method returns the type of Agent (Software/Person). 
+	 * Also map the required informations present in the JSON.
+	 * 
+	 * @param generator is a class from json object
+	 * @return Agent	(Software/person)
+	 * @throws AnnotationExceptions
+	 */
 	private Agent getAgentType(Creator creator) throws AnnotationExceptions {
 		if (creator.getType().equalsIgnoreCase("person")) {
 			Person personAgent;
@@ -647,6 +663,13 @@ public class JsonMapperImp implements JsonMapper {
 		return null;
 	}
 
+	/**
+	 * This Method is used to get the type of motivation. This motivation is also used to add to the the purpose of the Annotation.
+	 * 
+	 * @param motivation
+	 * @return
+	 * @throws AnnotationExceptions
+	 */
 	public Motivation getMotivationType(String motivation) throws AnnotationExceptions {
 
 		try {

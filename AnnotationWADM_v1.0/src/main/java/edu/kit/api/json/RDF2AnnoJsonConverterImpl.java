@@ -1,7 +1,6 @@
 package edu.kit.api.json;
 
 import java.io.StringReader;
-import java.util.Collection;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -11,17 +10,11 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
-import org.apache.jena.query.QueryFactory;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
-import org.apache.jena.query.ResultSetFormatter;
-import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.RDFNode;
-import org.apache.jena.rdf.model.Resource;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -38,26 +31,28 @@ import edu.kit.rdfcore.ItemsType;
 import edu.kit.rdfcore.RDFtype;
 import edu.kit.rdfcore.ResourceBodyType;
 
+/**
+ * 
+ * @author Vaibhav
+ * 
+ * This class is used to map the RDF/XML to JSON to Convert to Anno Json profile.
+ * the Core classes used for mapping is present in edu.kit.rdfcore. Internally it uses JAXB to unmarshal the XML.
+ *
+ */
 public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
+	
 	private Model model;
 	private String idString;
 	private String serviceurl;
 
-	// public static void main(String[] args) throws IOException {
-	//
-	// String content = readFile("resources/model1Rdf.xml",
-	// StandardCharsets.UTF_8);
-	// RDF2AnnoJsonConverter parser = new RDF2AnnoJsonConverter();
-	// System.out.println(parser.parse(content));
-	//
-	// }
-	//
-	// static String readFile(String path, Charset encoding) throws IOException
-	// {
-	// byte[] encoded = Files.readAllBytes(Paths.get(path));
-	// return new String(encoded, encoding);
-	// }
-	//
+	/**
+	 * This method unmarshal the RDF/XML to its respectvie object.
+	 * This object is further passed to get the Respective Array of Annotation JSON.
+	 * 
+	 * @param xmlStr RDF/XML format input.
+	 * @return String array of Annoatation JSON.
+	 * 
+	 */
 	@Override
 	public String parse(String xmlStr) {
 		RDFtype rdf = getParser(xmlStr);
@@ -65,6 +60,12 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 		return convertAnnoJson(rdf);
 	}
 
+	/**
+	 * This method is used to convert the RDF/XML to Array of Annotation JSON.
+	 * 
+	 * @param RDF Object.
+	 * @return String Array of JSON
+	 */
 	@Override
 	public String convertAnnoJson(RDFtype rdf) {
 
@@ -85,6 +86,11 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 			return null;
 	}
 
+	/**
+	 * This method is used to map the RDF/XML target information to the respective JSON object.
+	 * @param HasTarget from RDF/XML
+	 * @return JSONObject having Target in JSON format
+	 */
 	@Override
 	public JSONObject getTarget(HasTarget hasTarget) {
 		JSONObject targetJson = new JSONObject();
@@ -95,6 +101,12 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 		return targetJson;
 	}
 
+	/**
+	 * This Method is used to get the JSONObject of type of selector it has and its informations.
+	 * 
+	 * @param HasSelector RDF/XML has selector informations
+	 * @return JSONObject JSON of selected target
+	 */
 	@Override
 	public JSONObject getSelector(HasSelector hasSelector) {
 		JSONObject selectorJson = new JSONObject();
@@ -103,6 +115,12 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 		return selectorJson;
 	}
 
+	/**
+	 * This method is used to map the Array of body element of Array of JSON representations.
+	 *  
+	 * @return	JSONArray can have multiple bodies
+	 * @param	List<HasBodyType> has multiple bodies in RDF/XML
+	 */
 	@Override
 	public JSONArray getBody(List<HasBodyType> bodyList) {
 		JSONArray bodyArray = new JSONArray();
@@ -132,6 +150,12 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 		return bodyArray;
 	}
 
+	/**
+	 * This method is used to create body of resource type
+	 * 
+	 * @return	JSONArray
+	 * @param	ResourceBodyType
+	 */
 	@Override
 	public JSONArray createResource(ResourceBodyType resource) {
 		JSONArray jsonArray = new JSONArray();
@@ -145,6 +169,13 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 		return jsonArray;
 	}
 
+	/**
+	 * This method is used to create the JSONArray of type choice.
+	 * Its mapping has been defined from each element of RDF/XML to JSONObject/Array
+	 * 
+	 * @return	JSONArray
+	 * @param	ChoiceType
+	 */
 	@Override
 	public JSONArray createChoice(ChoiceType choice) {
 		JSONArray jsonArray = new JSONArray();
@@ -158,6 +189,13 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 		return jsonArray;
 	}
 
+	/**
+	 * This method is used to create the body of type provenance.
+	 * 
+	 * @param CreationProvenanceType from RDF/XML
+	 * @return JSONArray JSONArrya of body element
+	 * 
+	 */
 	@Override
 	public JSONArray createCreationProvenance(CreationProvenanceType creationProvenance) {
 		JSONArray jsonArray = new JSONArray();
