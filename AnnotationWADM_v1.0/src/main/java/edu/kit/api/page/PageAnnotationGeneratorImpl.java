@@ -113,10 +113,7 @@ public class PageAnnotationGeneratorImpl implements PageAnnotationGenerator {
 	}
 
 	private void createDataSet() {
-		
 		accessor = DatasetAccessorFactory.createHTTP(ServiceURI);
-		
-		
 	}
 
 	/**
@@ -231,7 +228,6 @@ public class PageAnnotationGeneratorImpl implements PageAnnotationGenerator {
 		Model model;
 		annoations = createAnnoataionPart(pcgtsTypeObj.getMetadata(), softAgentResourceID);
 		model = createBodyTarget(annoations, pcgtsTypeObj.getPage(), digitalObjID);
-		// modelMap.put(annoations.getResourceAsString(), model);
 		accessor.add(annotationURL + annoations.getResourceAsString(), model);
 		resourceIDList.add(annoations.getResourceAsString());
 		return model;

@@ -42,6 +42,7 @@ import com.google.gson.Gson;
 
 import edu.kit.api.TextAnnotationBody;
 import edu.kit.exceptions.AnnotationExceptions;
+import edu.kit.exceptions.StatusCode;
 import edu.kit.jsoncore.AnnotationJson;
 import edu.kit.jsoncore.Body;
 import edu.kit.jsoncore.Creator;
@@ -54,6 +55,13 @@ import edu.kit.jsoncore.StartSelector;
 import edu.kit.jsoncore.Stylesheet;
 import edu.kit.jsoncore.Target;
 
+/**
+ * 
+ * @author Vaibhav 
+ * 
+ * This class is used to map JSON to JSON Pojo classes. Further
+ *         this POJO classes are used to map to Anno4j classes.
+ */
 public class JsonMapperImp implements JsonMapper {
 
 	private Anno4j anno4j;
@@ -66,46 +74,73 @@ public class JsonMapperImp implements JsonMapper {
 		accessor = DatasetAccessorFactory.createHTTP(ServiceURI);
 	}
 
+	/**
+	 * this method perform 3 stage operation 1. parse AnnoJSON and map to
+	 * respective classes using google gson lib. 2. transform JSON to Annotation
+	 * using Anno4j lib. 3. Store the annotation into annotation Store.
+	 * 
+	 * return String "execution message success if annotation has been stored or
+	 * thows exectition if any."
+	 */
 	@Override
 	public String parseJson(String jsonString)
 			throws RepositoryException, IllegalAccessException, InstantiationException, AnnotationExceptions {
 
 		Gson gson = new Gson();
-		AnnotationJson jsonObj;
-		jsonObj = gson.fromJson(jsonString, AnnotationJson.class);
+		AnnotationJson jsonObj = gson.fromJson(jsonString, AnnotationJson.class);
 		Annotation annotation = convertJsonToAnnotation(jsonObj);
 
 		return postToAnnotationStore(annotation);
 	}
 
-	private String postToAnnotationStore(Annotation annotation) {
-
+	/**
+	 * This method is used to store all the created annotation into Apache Jena.
+	 * The service and base URL are defined in properties file and accessed in implemented interface.
+	 *   
+	 * @param annotation
+	 * @return "Success message"
+	 */
+	private String postToAnnotationStore(Annotation annotation) throws AnnotationExceptions {
 		Model model = ModelFactory.createDefaultModel();
 		try (final InputStream in = new ByteArrayInputStream(
 				annotation.getTriples(RDFFormat.TURTLE).getBytes("UTF-8"))) {
 			model.read(in, null, "TTL");
-		} catch (UnsupportedEncodingException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.BAD_REQUEST.getStatusCode());
+		} catch (IOException e) {
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.BAD_REQUEST.getStatusCode());
 		}
-
 		accessor.add(annotationURL + annotation.getResourceAsString(), model);
 		return "Annotation Stored Succesfully";
 	}
 
+	/**
+	 * This is the method is used to create all the annotation from JSON.
+	 * a. This mehtod first creates all the Annotation Part
+	 * b. Secondly it creates Body part.
+	 * c. Finally it creates Target part.
+	 * All of the above parts are stored into annotation object.
+	 * 
+	 * @return annotation object 
+	 */
 	@Override
-	public Annotation convertJsonToAnnotation(AnnotationJson jsonObj)
-			throws RepositoryException, IllegalAccessException, InstantiationException, AnnotationExceptions {
+	public Annotation convertJsonToAnnotation(AnnotationJson jsonObj) throws AnnotationExceptions {
 
-		Annotation annotation = createAnnotations(jsonObj);
+		Annotation annotation = null;
+		annotation = createAnnotations(jsonObj);
 		createAndAddBody(annotation, jsonObj);
 		createAndAddTarget(annotation, jsonObj.getTarget());
 
 		return annotation;
 	}
 
-	private void createAndAddBody(Annotation annotation, AnnotationJson jsonObj) {
+	/**
+	 * This method is used to create the Body of Annotation.
+	 * @param annotation
+	 * @param jsonObj
+	 * @throws AnnotationExceptions
+	 */
+	private void createAndAddBody(Annotation annotation, AnnotationJson jsonObj) throws AnnotationExceptions {
 
 		for (Body bodies : jsonObj.getBody()) {
 			if (bodies.getType().equalsIgnoreCase("choice")) {
@@ -114,10 +149,10 @@ public class JsonMapperImp implements JsonMapper {
 					for (Item item : bodies.getItems()) {
 						if (item.getType().equalsIgnoreCase("TextualBody")) {
 							TextAnnotationBody textBody = anno4j.createObject(TextAnnotationBody.class);
-							
-							if (null != item.getPurpose())	
+
+							if (null != item.getPurpose())
 								textBody.addPurpose(getMotivationType(item.getPurpose()));
-							
+
 							if (null != item.getValue())
 								textBody.setValue(item.getValue());
 							if (null != item.getFormat())
@@ -151,11 +186,11 @@ public class JsonMapperImp implements JsonMapper {
 					annotation.addBody(choice);
 
 				} catch (RepositoryException e) {
-					e.printStackTrace();
+					throw new AnnotationExceptions(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
 				} catch (IllegalAccessException e) {
-					e.printStackTrace();
+					throw new AnnotationExceptions(e.getMessage(), StatusCode.SERVICE_UNAVAILABLE.getStatusCode());
 				} catch (InstantiationException e) {
-					e.printStackTrace();
+					throw new AnnotationExceptions(e.getMessage(), StatusCode.SERVICE_UNAVAILABLE.getStatusCode());
 				}
 
 			} else {
@@ -168,24 +203,31 @@ public class JsonMapperImp implements JsonMapper {
 						textBody.setUnit(bodies.getUnit());
 					if (null != bodies.getTitle())
 						textBody.setName(bodies.getTitle());
-					if (null != bodies.getPurpose())	
+					if (null != bodies.getPurpose())
 						textBody.addPurpose(getMotivationType(bodies.getPurpose()));
 					if (null != bodies.getCreator())
 						textBody.setCreator(getAgentType(bodies.getCreator()));
 
 					annotation.addBody(textBody);
 				} catch (RepositoryException e) {
-					e.printStackTrace();
+					throw new AnnotationExceptions(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
 				} catch (IllegalAccessException e) {
-					e.printStackTrace();
+					throw new AnnotationExceptions(e.getMessage(), StatusCode.SERVICE_UNAVAILABLE.getStatusCode());
 				} catch (InstantiationException e) {
-					e.printStackTrace();
+					throw new AnnotationExceptions(e.getMessage(), StatusCode.SERVICE_UNAVAILABLE.getStatusCode());
 				}
 			}
 		}
 	}
 
-	private RDFObject getSourceType(Source source) {
+	/**
+	 * This method returns the object of the matching source object defined in WADM.
+	 * 
+	 * @param source
+	 * @return source object
+	 * @throws AnnotationExceptions
+	 */
+	private RDFObject getSourceType(Source source) throws AnnotationExceptions {
 		try {
 			edu.kit.api.Source sourceObj = anno4j.createObject(edu.kit.api.Source.class);
 			if (null != source.getCreator())
@@ -201,17 +243,21 @@ public class JsonMapperImp implements JsonMapper {
 
 			return sourceObj;
 		} catch (RepositoryException e) {
-			e.printStackTrace();
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
 		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.SERVICE_UNAVAILABLE.getStatusCode());
 		} catch (InstantiationException e) {
-			e.printStackTrace();
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.SERVICE_UNAVAILABLE.getStatusCode());
 		}
-
-		return null;
 	}
 
-	private Agent getAgentType(Creator_ creator) {
+	/**
+	 * This method returns the agent with the specified type and added the required informations to agent properties.
+	 * @param creator
+	 * @return agent type software/person
+	 * @throws AnnotationExceptions
+	 */
+	private Agent getAgentType(Creator_ creator) throws AnnotationExceptions {
 
 		if (creator.getType().equalsIgnoreCase("person")) {
 
@@ -224,11 +270,11 @@ public class JsonMapperImp implements JsonMapper {
 				return personAgent;
 
 			} catch (RepositoryException e) {
-				e.printStackTrace();
+				throw new AnnotationExceptions(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
 			} catch (IllegalAccessException e) {
-				e.printStackTrace();
+				throw new AnnotationExceptions(e.getMessage(), StatusCode.SERVICE_UNAVAILABLE.getStatusCode());
 			} catch (InstantiationException e) {
-				e.printStackTrace();
+				throw new AnnotationExceptions(e.getMessage(), StatusCode.SERVICE_UNAVAILABLE.getStatusCode());
 			}
 
 		} else if (creator.getType().equalsIgnoreCase("software")) {
@@ -242,53 +288,70 @@ public class JsonMapperImp implements JsonMapper {
 				return softAgent;
 
 			} catch (RepositoryException e) {
-				e.printStackTrace();
+				throw new AnnotationExceptions(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
 			} catch (IllegalAccessException e) {
-				e.printStackTrace();
+				throw new AnnotationExceptions(e.getMessage(), StatusCode.SERVICE_UNAVAILABLE.getStatusCode());
 			} catch (InstantiationException e) {
-				e.printStackTrace();
+				throw new AnnotationExceptions(e.getMessage(), StatusCode.SERVICE_UNAVAILABLE.getStatusCode());
 			} catch (MalformedQueryException e) {
-				e.printStackTrace();
+				throw new AnnotationExceptions(e.getMessage(), StatusCode.BAD_REQUEST.getStatusCode());
 			} catch (UpdateExecutionException e) {
-				e.printStackTrace();
+				throw new AnnotationExceptions(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
 			}
 
 		}
 		return null;
 	}
 
+	/**
+	 * This method is used to create the annotation part and add all the required information to the annotation.
+	 * The ID present inside the JSON is skipped and ID generated by the anno4j is added automatically.
+	 * 
+	 *  @return Annotation object
+	 */
 	@Override
-	public Annotation createAnnotations(AnnotationJson jsonObj)
-			throws RepositoryException, IllegalAccessException, InstantiationException {
-		Annotation anno = anno4j.createObject(Annotation.class);
+	public Annotation createAnnotations(AnnotationJson jsonObj) throws AnnotationExceptions {
+		Annotation anno = null;
+		try {
+			anno = anno4j.createObject(Annotation.class);
+			if (null != jsonObj.getMotivation())
+				anno.addMotivation(getMotivationType(jsonObj.getMotivation()));
 
-		// if (null != jsonObj.getId())
-		// anno.setResourceAsString(jsonObj.getId());
+			if (null != jsonObj.getCreator())
+				anno.setCreator(getAgentType(jsonObj.getCreator()));
 
-		if (null != jsonObj.getMotivation())
-			anno.addMotivation(getMotivationType(jsonObj.getMotivation()));
+			if (null != jsonObj.getCreated())
+				anno.setCreated(jsonObj.getCreated());
 
-		if (null != jsonObj.getCreator())
-			anno.setCreator(getAgentType(jsonObj.getCreator()));
+			if (null != jsonObj.getGenerator())
+				anno.setGenerator(getAgentType(jsonObj.getGenerator()));
 
-		if (null != jsonObj.getCreated())
-			anno.setCreated(jsonObj.getCreated());
+			if (null != jsonObj.getGenerated())
+				anno.setGenerated(jsonObj.getGenerated());
 
-		if (null != jsonObj.getGenerator())
-			anno.setGenerator(getAgentType(jsonObj.getGenerator()));
+			if (null != jsonObj.getStylesheet())
+				anno.setStyledBy(getStyleType(jsonObj.getStylesheet()));
 
-		if (null != jsonObj.getGenerated())
-			anno.setGenerated(jsonObj.getGenerated());
-
-		if (null != jsonObj.getStylesheet())
-			anno.setStyledBy(getStyleType(jsonObj.getStylesheet()));
-
-		if (null != jsonObj.getModified())
-			anno.setModified(jsonObj.getModified());
+			if (null != jsonObj.getModified())
+				anno.setModified(jsonObj.getModified());
+		} catch (RepositoryException e) {
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
+		} catch (IllegalAccessException e) {
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.SERVICE_UNAVAILABLE.getStatusCode());
+		} catch (InstantiationException e) {
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.SERVICE_UNAVAILABLE.getStatusCode());
+		}
 
 		return anno;
 	}
 
+	/**
+	 * This method is used to create the target part of the complete Annotations.
+	 * 
+	 * @param annotation
+	 * @param target
+	 * @throws AnnotationExceptions
+	 */
 	private void createAndAddTarget(Annotation annotation, Target target) throws AnnotationExceptions {
 		try {
 			SpecificResource specific = anno4j.createObject(SpecificResource.class);
@@ -317,105 +380,123 @@ public class JsonMapperImp implements JsonMapper {
 			annotation.addTarget(specific);
 
 		} catch (RepositoryException e) {
-			e.printStackTrace();
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
 		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.SERVICE_UNAVAILABLE.getStatusCode());
 		} catch (InstantiationException e) {
-			e.printStackTrace();
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.SERVICE_UNAVAILABLE.getStatusCode());
 		} catch (MalformedQueryException e) {
-			e.printStackTrace();
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.BAD_REQUEST.getStatusCode());
 		} catch (UpdateExecutionException e) {
-			e.printStackTrace();
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
 		}
 
 	}
 
-	private Selector getSelector(edu.kit.jsoncore.Selector selector)
-			throws RepositoryException, IllegalAccessException, InstantiationException, AnnotationExceptions {
-		if (selector.getType().equalsIgnoreCase("FragmentSelector")) {
-			FragmentSelector fragmentSelector = anno4j.createObject(FragmentSelector.class);
-			if (null != selector.getConformsTo())
-				fragmentSelector.setConformsTo(selector.getConformsTo());
-			if (null != selector.getValue())
-				fragmentSelector.setValue(selector.getValue());
+	/**
+	 * This Method is used to return the object of the selector defined in the JSON.
+	 * 
+	 * @param selector
+	 * @return Selector returns the defined selector
+	 * @throws AnnotationExceptions
+	 */
+	private Selector getSelector(edu.kit.jsoncore.Selector selector) throws AnnotationExceptions {
+		try {
+			if (selector.getType().equalsIgnoreCase("FragmentSelector")) {
+				FragmentSelector fragmentSelector = anno4j.createObject(FragmentSelector.class);
+				if (null != selector.getConformsTo())
+					fragmentSelector.setConformsTo(selector.getConformsTo());
+				if (null != selector.getValue())
+					fragmentSelector.setValue(selector.getValue());
 
-			// if (null != selector.getRefinedBy()) {
-			// throw new AnnotationExceptions("RefinedBy Not Implemented",
-			// StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
-			// }
-			return fragmentSelector;
-		}
-		if (selector.getType().equalsIgnoreCase("CssSelector")) {
-			CSSSelector cssSelector = anno4j.createObject(CSSSelector.class);
-			if (null != selector.getValue())
-				cssSelector.setValue(selector.getValue());
-
-			return cssSelector;
-		}
-		if (selector.getType().equalsIgnoreCase("XPathSelector")) {
-			XPathSelector xpathSelector = anno4j.createObject(XPathSelector.class);
-			if (null != selector.getValue())
-				xpathSelector.setValue(selector.getValue());
-
-			return xpathSelector;
-		}
-		if (selector.getType().equalsIgnoreCase("TextQuoteSelector")) {
-			TextQuoteSelector textQuoteSelector = anno4j.createObject(TextQuoteSelector.class);
-			if (null != selector.getExact())
-				textQuoteSelector.setExact(selector.getExact());
-			if (null != selector.getPrefix())
-				textQuoteSelector.setPrefix(selector.getPrefix());
-			if (null != selector.getSuffix())
-				textQuoteSelector.setSuffix(selector.getSuffix());
-
-			return textQuoteSelector;
-		}
-		if (selector.getType().equalsIgnoreCase("TextPositionSelector")) {
-			TextPositionSelector textPositionSelector = anno4j.createObject(TextPositionSelector.class);
-			if (null != selector.getStart())
-				textPositionSelector.setStart(selector.getStart());
-			if (null != selector.getEnd())
-				textPositionSelector.setEnd(selector.getEnd());
-
-			return textPositionSelector;
-		}
-		if (selector.getType().equalsIgnoreCase("DataPositionSelector")) {
-			DataPositionSelector dataPositionSelector = anno4j.createObject(DataPositionSelector.class);
-			if (null != selector.getStart())
-				dataPositionSelector.setStart(selector.getStart());
-			if (null != selector.getEnd())
-				dataPositionSelector.setEnd(selector.getEnd());
-
-			return dataPositionSelector;
-		}
-		if (selector.getType().equalsIgnoreCase("SvgSelector")) {
-			SvgSelector svg = anno4j.createObject(SvgSelector.class);
-			if (null != selector.getValue())
-				svg.setValue(selector.getValue());
-
-			return svg;
-		}
-		if (selector.getType().equalsIgnoreCase("RangeSelector")) {
-			RangeSelector rangeSelector = anno4j.createObject(RangeSelector.class);
-			if (null != selector.getEndSelector()) {
-				EndSelector endSelector = anno4j.createObject(EndSelector.class);
-				endSelector.setType(selector.getStartSelector().getType());
-				endSelector.setValue(selector.getStartSelector().getValue());
-				rangeSelector.setEndSelector((Selector) endSelector);
+				// if (null != selector.getRefinedBy()) {
+				// throw new AnnotationExceptions("RefinedBy Not Implemented",
+				// StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
+				// }
+				return fragmentSelector;
 			}
-			if (null != selector.getStartSelector()) {
-				StartSelector startSelector = anno4j.createObject(StartSelector.class);
-				startSelector.setType(selector.getStartSelector().getType());
-				startSelector.setValue(selector.getValue());
-				rangeSelector.setStartSelector((Selector) startSelector);
-			}
-			return rangeSelector;
-		}
+			if (selector.getType().equalsIgnoreCase("CssSelector")) {
+				CSSSelector cssSelector = anno4j.createObject(CSSSelector.class);
+				if (null != selector.getValue())
+					cssSelector.setValue(selector.getValue());
 
+				return cssSelector;
+			}
+			if (selector.getType().equalsIgnoreCase("XPathSelector")) {
+				XPathSelector xpathSelector = anno4j.createObject(XPathSelector.class);
+				if (null != selector.getValue())
+					xpathSelector.setValue(selector.getValue());
+
+				return xpathSelector;
+			}
+			if (selector.getType().equalsIgnoreCase("TextQuoteSelector")) {
+				TextQuoteSelector textQuoteSelector = anno4j.createObject(TextQuoteSelector.class);
+				if (null != selector.getExact())
+					textQuoteSelector.setExact(selector.getExact());
+				if (null != selector.getPrefix())
+					textQuoteSelector.setPrefix(selector.getPrefix());
+				if (null != selector.getSuffix())
+					textQuoteSelector.setSuffix(selector.getSuffix());
+
+				return textQuoteSelector;
+			}
+			if (selector.getType().equalsIgnoreCase("TextPositionSelector")) {
+				TextPositionSelector textPositionSelector = anno4j.createObject(TextPositionSelector.class);
+				if (null != selector.getStart())
+					textPositionSelector.setStart(selector.getStart());
+				if (null != selector.getEnd())
+					textPositionSelector.setEnd(selector.getEnd());
+
+				return textPositionSelector;
+			}
+			if (selector.getType().equalsIgnoreCase("DataPositionSelector")) {
+				DataPositionSelector dataPositionSelector = anno4j.createObject(DataPositionSelector.class);
+				if (null != selector.getStart())
+					dataPositionSelector.setStart(selector.getStart());
+				if (null != selector.getEnd())
+					dataPositionSelector.setEnd(selector.getEnd());
+
+				return dataPositionSelector;
+			}
+			if (selector.getType().equalsIgnoreCase("SvgSelector")) {
+				SvgSelector svg = anno4j.createObject(SvgSelector.class);
+				if (null != selector.getValue())
+					svg.setValue(selector.getValue());
+
+				return svg;
+			}
+			if (selector.getType().equalsIgnoreCase("RangeSelector")) {
+				RangeSelector rangeSelector = anno4j.createObject(RangeSelector.class);
+				if (null != selector.getEndSelector()) {
+					EndSelector endSelector = anno4j.createObject(EndSelector.class);
+					endSelector.setType(selector.getStartSelector().getType());
+					endSelector.setValue(selector.getStartSelector().getValue());
+					rangeSelector.setEndSelector((Selector) endSelector);
+				}
+				if (null != selector.getStartSelector()) {
+					StartSelector startSelector = anno4j.createObject(StartSelector.class);
+					startSelector.setType(selector.getStartSelector().getType());
+					startSelector.setValue(selector.getValue());
+					rangeSelector.setStartSelector((Selector) startSelector);
+				}
+				return rangeSelector;
+			}
+
+		} catch (Exception e) {
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
+		}
 		return null;
 	}
+	
+	/**
+	 * This Method is used to get the object of the style defined in JSON.
+	 * 
+	 * @param stylesheet
+	 * @return Style Object used to defined the style
+	 * @throws AnnotationExceptions
+	 */
 
-	private Style getStyleType(Stylesheet stylesheet) {
+	private Style getStyleType(Stylesheet stylesheet) throws AnnotationExceptions {
 		try {
 
 			Style style = anno4j.createObject(Style.class);
@@ -425,20 +506,19 @@ public class JsonMapperImp implements JsonMapper {
 			return style;
 
 		} catch (RepositoryException e) {
-			e.printStackTrace();
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.SERVICE_UNAVAILABLE.getStatusCode());
 		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
 		} catch (InstantiationException e) {
-			e.printStackTrace();
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
 		} catch (MalformedQueryException e) {
-			e.printStackTrace();
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.BAD_REQUEST.getStatusCode());
 		} catch (UpdateExecutionException e) {
-			e.printStackTrace();
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.SERVICE_UNAVAILABLE.getStatusCode());
 		}
-		return null;
 	}
 
-	private Agent getAgentType(Generator generator) {
+	private Agent getAgentType(Generator generator) throws AnnotationExceptions {
 		if (generator.getType().equalsIgnoreCase("person")) {
 
 			Person personAgent;
@@ -460,11 +540,11 @@ public class JsonMapperImp implements JsonMapper {
 				return personAgent;
 
 			} catch (RepositoryException e) {
-				e.printStackTrace();
+				throw new AnnotationExceptions(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
 			} catch (IllegalAccessException e) {
-				e.printStackTrace();
+				throw new AnnotationExceptions(e.getMessage(), StatusCode.SERVICE_UNAVAILABLE.getStatusCode());
 			} catch (InstantiationException e) {
-				e.printStackTrace();
+				throw new AnnotationExceptions(e.getMessage(), StatusCode.SERVICE_UNAVAILABLE.getStatusCode());
 			}
 
 		} else if (generator.getType().equalsIgnoreCase("software")) {
@@ -488,22 +568,22 @@ public class JsonMapperImp implements JsonMapper {
 				return softAgent;
 
 			} catch (RepositoryException e) {
-				e.printStackTrace();
+				throw new AnnotationExceptions(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
 			} catch (IllegalAccessException e) {
-				e.printStackTrace();
+				throw new AnnotationExceptions(e.getMessage(), StatusCode.SERVICE_UNAVAILABLE.getStatusCode());
 			} catch (InstantiationException e) {
-				e.printStackTrace();
+				throw new AnnotationExceptions(e.getMessage(), StatusCode.SERVICE_UNAVAILABLE.getStatusCode());
 			} catch (MalformedQueryException e) {
-				e.printStackTrace();
+				throw new AnnotationExceptions(e.getMessage(), StatusCode.BAD_REQUEST.getStatusCode());
 			} catch (UpdateExecutionException e) {
-				e.printStackTrace();
+				throw new AnnotationExceptions(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
 			}
 
 		}
 		return null;
 	}
 
-	private Agent getAgentType(Creator creator) {
+	private Agent getAgentType(Creator creator) throws AnnotationExceptions {
 		if (creator.getType().equalsIgnoreCase("person")) {
 			Person personAgent;
 			try {
@@ -524,11 +604,11 @@ public class JsonMapperImp implements JsonMapper {
 				return personAgent;
 
 			} catch (RepositoryException e) {
-				e.printStackTrace();
+				throw new AnnotationExceptions(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
 			} catch (IllegalAccessException e) {
-				e.printStackTrace();
+				throw new AnnotationExceptions(e.getMessage(), StatusCode.SERVICE_UNAVAILABLE.getStatusCode());
 			} catch (InstantiationException e) {
-				e.printStackTrace();
+				throw new AnnotationExceptions(e.getMessage(), StatusCode.SERVICE_UNAVAILABLE.getStatusCode());
 			}
 
 		} else if (creator.getType().equalsIgnoreCase("software")) {
@@ -552,22 +632,22 @@ public class JsonMapperImp implements JsonMapper {
 				return softAgent;
 
 			} catch (RepositoryException e) {
-				e.printStackTrace();
+				throw new AnnotationExceptions(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
 			} catch (IllegalAccessException e) {
-				e.printStackTrace();
+				throw new AnnotationExceptions(e.getMessage(), StatusCode.SERVICE_UNAVAILABLE.getStatusCode());
 			} catch (InstantiationException e) {
-				e.printStackTrace();
+				throw new AnnotationExceptions(e.getMessage(), StatusCode.SERVICE_UNAVAILABLE.getStatusCode());
 			} catch (MalformedQueryException e) {
-				e.printStackTrace();
+				throw new AnnotationExceptions(e.getMessage(), StatusCode.BAD_REQUEST.getStatusCode());
 			} catch (UpdateExecutionException e) {
-				e.printStackTrace();
+				throw new AnnotationExceptions(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
 			}
 
 		}
 		return null;
 	}
 
-	public Motivation getMotivationType(String motivation) {
+	public Motivation getMotivationType(String motivation) throws AnnotationExceptions {
 
 		try {
 			if (motivation.equalsIgnoreCase("assessing"))
@@ -596,11 +676,11 @@ public class JsonMapperImp implements JsonMapper {
 				return MotivationFactory.getTagging(anno4j);
 
 		} catch (RepositoryException e) {
-			e.printStackTrace();
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
 		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.SERVICE_UNAVAILABLE.getStatusCode());
 		} catch (InstantiationException e) {
-			e.printStackTrace();
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.SERVICE_UNAVAILABLE.getStatusCode());
 		}
 		return null;
 
