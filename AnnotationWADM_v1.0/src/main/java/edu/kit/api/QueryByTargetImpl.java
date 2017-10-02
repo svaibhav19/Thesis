@@ -22,7 +22,7 @@ import edu.kit.util.QueryUtil;
  * 
  * @author Vaibhav
  *
- *         This class is used for executing all REST based queries JEAN to
+ *         This class is used for executing all REST based JEAN queries to
  *         Frontend.
  */
 public class QueryByTargetImpl implements QueryByTarget{
@@ -34,6 +34,14 @@ public class QueryByTargetImpl implements QueryByTarget{
 		queryUtil = new QueryUtil();
 	}
 
+	/**
+	 * This method is used to query the RDF Store.
+	 * The query formed is used to get the results based on the target.
+	 * 
+	 * @param	taret URL or the DOI
+	 * @param	format can be JSON-LD,RDF/XML,TURTLE,N-TRIPLES,...
+	 * @return	String Array result 
+	 */
 	@Override
 	public String getByTarget(String targetString, String format) {
 		String queryStr = queryUtil.getQueryByTarget(targetString);
@@ -64,6 +72,11 @@ public class QueryByTargetImpl implements QueryByTarget{
 		return finalResults.toString();
 	}
 
+	/**
+	 * This method is used to get the Object of the language format specified in the given input.
+	 * @param	String	format of the input string
+	 * @return	Lang object
+	 */
 	@Override
 	public Lang getFormat(String format) {
 		if (format.equals("TURTLE")) {
@@ -126,6 +139,12 @@ public class QueryByTargetImpl implements QueryByTarget{
 		return outputResults.toString();
 	}
 
+	/**
+	 * This Method is used to get the result by given Annotation ID.
+	 * @param	String	idStr id to finde
+	 * @param	String	format	output format for the given string
+	 * @return	String	result in specified format.
+	 */
 	@Override
 	public String getQueryResultsByID(String idStr, String format) {
 		String idString = null;

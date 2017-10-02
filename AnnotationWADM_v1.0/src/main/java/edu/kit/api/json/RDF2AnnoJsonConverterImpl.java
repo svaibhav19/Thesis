@@ -209,6 +209,13 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 		return jsonArray;
 	}
 
+	/**
+	 * This method is used to create the body of type ExternalWebResource.
+	 * 
+	 * @param	ExternalWebResourceType the body element
+	 * @return	JSONArray of body element 
+	 * 
+	 */
 	@Override
 	public JSONArray createExternalWebResource(ExternalWebResourceType externalWebResource) {
 
@@ -223,6 +230,12 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 		return jsonArray;
 	}
 
+	/**
+	 * This method is used to create the body of type ItemsType.
+	 * 
+	 * @param	ItemsType
+	 * @return	JSONObject
+	 */
 	@Override
 	public JSONObject checkItemsType(ItemsType externalItem) {
 
@@ -239,6 +252,12 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 		return null;
 	}
 
+	/**
+	 * This method is used to create the body of type ExternalWebResourceType.
+	 * 
+	 * @param	ExternalWebResourceType
+	 * @return	JSONObject
+	 */
 	@Override
 	public JSONObject externalWebResourceType(ExternalWebResourceType externalWebResource) {
 		JSONObject bodyitem = new JSONObject();
@@ -264,6 +283,12 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 		return bodyitem;
 	}
 
+	/**
+	 * This method is used to create the body of type ResourceBodyType.
+	 * 
+	 * @param	ResourceBodyType
+	 * @return	JSONObject
+	 */
 	@Override
 	public JSONObject getResourceType(ResourceBodyType resource) {
 		JSONObject bodyitem = new JSONObject();
@@ -289,6 +314,12 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 		return bodyitem;
 	}
 
+	/**
+	 * This method is used to create the body of type EmbeddedContentType.
+	 * 
+	 * @param	EmbeddedContentType
+	 * @return	JSONObject
+	 */
 	@Override
 	public JSONObject embeddedContent(EmbeddedContentType embeddedContent) {
 		JSONObject bodyitem = new JSONObject();
@@ -314,6 +345,12 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 		return bodyitem;
 	}
 
+	/**
+	 * This method is used to create the body of type CreationProvenanceType.
+	 * 
+	 * @param	CreationProvenanceType
+	 * @return	JSONObject
+	 */
 	@Override
 	public JSONObject creationProvenance(CreationProvenanceType creationProvenanceType) {
 		JSONObject bodyitem = new JSONObject();
@@ -355,6 +392,12 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 		return bodyitem;
 	}
 
+	/**
+	 * This method is used to build the creator which can be either Software/Person.
+	 * 
+	 * @param creator
+	 * @return JSONObject
+	 */
 	private JSONObject getCreator(Creator creator) {
 		JSONObject creatorJson = new JSONObject();
 		if (null != creator.getSoftwareAgent()) {
@@ -385,6 +428,12 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 		return creatorJson;
 	}
 
+	/**
+	 * This Method is used to get the creator.
+	 * The model is used to retreive the exsiting creator if any else new creator is created.
+	 * @param	CreatorType
+	 * @return	JSONObject
+	 */
 	@Override
 	public JSONObject getCreator(CreatorType creator) {
 
@@ -414,25 +463,12 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 		return creatorJson;
 	}
 
-	private void printFull(RDFtype rdf) {
-		System.out.println(rdf.getAnnotation().getAbout());
-		System.out.println(rdf.getAnnotation().getMotivatedBy().getResource().getAbout());
-		System.out.println(
-				rdf.getAnnotation().getHasTarget().getCreationProvenance().getHasSelector().getSelector().getValue());
-		// for (ItemsType item :
-		// rdf.getAnnotation().getHasBody().getCreationProvenance().getItems())
-		// {
-		// System.out.println(item.getCreationProvenance().getTitle());
-		// System.out.println(item.getCreationProvenance().getIdentifier());
-		// System.out.println(item.getCreationProvenance().getSubject());
-		// System.out.println(item.getCreationProvenance().getValue());
-		// System.out.println("----------------------------------------");
-		// }
-		System.out.println(rdf.getAnnotation().getCreated());
-		System.out.println(rdf.getAnnotation().getModified());
-		System.out.println(rdf.getAnnotation().getCreator().getSoftwareAgent().getName());
-	}
-
+	/**
+	 * This Method is used to unmarshal the RDF/XML using the JAXB and mapped to the pojo classes.
+	 * 
+	 * @param	String	RDF/XML
+	 * @return	RDFtype JAXBObject
+	 */
 	@Override
 	public RDFtype getParser(String xmlStr) {
 		Source source = new StreamSource(new StringReader(xmlStr));

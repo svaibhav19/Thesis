@@ -1,15 +1,10 @@
 package edu.kit.api.page;
 
-import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStreamWriter;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -75,6 +70,9 @@ import edu.kit.util.QueryUtil;
 /**
  * 
  * @author Vaibhav
+ *	
+ *	This method is used to parse and transform the PAGE to annotation model.
+ *	The corresponding classes are specific to the PAGE 2017 specification. 
  *
  */
 
@@ -96,6 +94,13 @@ public class PageAnnotationGeneratorImpl implements PageAnnotationGenerator {
 		qureyUtil = new QueryUtil();
 	}
 
+	/**
+	 * This method performs operation like transforming the string to JAXBObject, convert the annotation and store into WADM.
+	 * 
+	 * @param	String DigitalObject id
+	 * @param	String PAGE-XML
+	 * @return	String Success message 
+	 */
 	@Override
 	public String parseAnnotations(String digitalObjID, String annotationString) throws AnnotationExceptions {
 
@@ -132,6 +137,10 @@ public class PageAnnotationGeneratorImpl implements PageAnnotationGenerator {
 		createOtherAnnotations(pcgtsTypeObj, softAgentResourceID, digitalObjID);
 	}
 
+	/**
+	 * 	This Method is required to create the annotation part. 
+	 * 
+	 */
 	@Override
 	public List<Model> createOtherAnnotations(PcGtsType pcgtsTypeObj, String softAgentResourceID, String digitalObjID)
 			throws AnnotationExceptions {
@@ -146,6 +155,15 @@ public class PageAnnotationGeneratorImpl implements PageAnnotationGenerator {
 
 	}
 
+	/**
+	 * This method is used create the annotation of body and target of the body.
+	 * 
+	 * @param	Annotation
+	 * @param	RegionType
+	 * @param	String
+	 * @return	Model
+	 * 
+	 */
 	@Override
 	public Model createOtherBodyTarget(Annotation annoations, RegionType regions, String digitalObjID) throws AnnotationExceptions {
 
@@ -189,6 +207,13 @@ public class PageAnnotationGeneratorImpl implements PageAnnotationGenerator {
 		}
 	}
 
+	/**
+	 * This method is used to get the Specific Region Type.
+	 * Different region types.
+	 * 
+	 * @param	RegionType
+	 * @return	String
+	 */
 	@Override
 	public String getRegionType(RegionType regionType) {
 		if (regionType.getClass().equals(TextRegionType.class))
@@ -221,6 +246,14 @@ public class PageAnnotationGeneratorImpl implements PageAnnotationGenerator {
 		return null;
 	}
 
+	/**
+	 * This method is used to create the Annotation part using the PAGE XML.
+	 *  
+	 *  @param	PcGtsType 	PAGE XML object
+	 *  @param	String	Agent id
+	 *  @param	String	Digital Object ID DOI
+	 *	@return	Model	RDF model
+	 */
 	@Override
 	public Model createPageAnnotation(PcGtsType pcgtsTypeObj, String softAgentResourceID, String digitalObjID)
 			throws AnnotationExceptions {
@@ -234,6 +267,14 @@ public class PageAnnotationGeneratorImpl implements PageAnnotationGenerator {
 
 	}
 
+	/**
+	 * This method is only used to create the body and target part of the Annotations.
+	 * @param	Annotation this object will be keep on using to create the annotations.
+	 * @param	PageType	This object from PAGE XML
+	 * @param	String Digital Object id
+	 * @return	Model	RDF MODEL	
+	 * 
+	 */
 	@Override
 	public Model createBodyTarget(Annotation annoations, PageType page, String digitalObjID)
 			throws AnnotationExceptions {
@@ -288,7 +329,7 @@ public class PageAnnotationGeneratorImpl implements PageAnnotationGenerator {
 
 	}
 
-	private void writeTofile(Annotation annoations, String fileName) {
+	/*private void writeTofile(Annotation annoations, String fileName) {
 		File f = new File("C:\\Users\\Vaibhav\\Desktop\\AnnotationOutPut\\" + fileName + ".xml");
 		if (!f.exists()) {
 			try {
@@ -309,11 +350,18 @@ public class PageAnnotationGeneratorImpl implements PageAnnotationGenerator {
 			try {
 				writer.close();
 			} catch (Exception ex) {
-				/* ignore */}
+				 ignore }
 		}
 
-	}
+	}*/
 
+	/**
+	 * This method is responsible to get the Specific resource of the given type.
+	 * 
+	 * @param	String	cordinates points
+	 * @param	String	Digital object id or the target URL
+	 * @return	SpecificResource Object.
+	 */
 	@Override
 	public SpecificResource getTarget(String points, String digitalObjID) throws AnnotationExceptions {
 		SpecificResource specific;
@@ -343,6 +391,14 @@ public class PageAnnotationGeneratorImpl implements PageAnnotationGenerator {
 		
 	}
 
+	/**
+	 * This method is used to create Annotation part using the metadata present inside the PAGE XML.
+	 * 
+	 * @param	MetadataType
+	 * @param	String
+	 * @return	Annotation
+	 * 
+	 */
 	@Override
 	public Annotation createAnnoataionPart(MetadataType metadata, String softAgentResourceID)
 			throws AnnotationExceptions {
@@ -408,17 +464,16 @@ public class PageAnnotationGeneratorImpl implements PageAnnotationGenerator {
 			throw new AnnotationExceptions(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
 		}
 
-		// agentModel =
-		// getJenaModel(softwareAgent.getTriples(RDFFormat.NTRIPLES));
-		// agentFlag = true;
-		// DatasetAccessor accessor =
-		// DatasetAccessorFactory.createHTTP(ServiceURI);
-		// Model model =
-		// getJenaModel(softwareAgent.getTriples(RDFFormat.NTRIPLES));
-		// accessor.add(annotationURL + "agents", model);
 		return softwareAgent.getResourceAsString();
 	}
 
+	/**
+	 * 
+	 * This method is used to convert the formed annotation string to RDF representations using JENA Model.
+	 * 
+	 * @param	String annotation string using anno4j in TURTLE FORMAT
+	 * @return	Model	
+	 */
 	@Override
 	public Model getJenaModel(String triples) {
 		Model model = ModelFactory.createDefaultModel();
@@ -455,6 +510,11 @@ public class PageAnnotationGeneratorImpl implements PageAnnotationGenerator {
 		}
 	}
 
+	/**
+	 * This method is used to store the annotation id into Annotation Registry
+	 * 
+	 *  @return	String	conforming message.	
+	 */
 	@Override
 	public String postToJenaStore() {
 		int counter = 0;
