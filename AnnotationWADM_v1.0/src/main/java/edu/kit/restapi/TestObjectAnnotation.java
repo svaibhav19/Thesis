@@ -25,6 +25,7 @@ import com.github.anno4j.model.Annotation;
 import edu.kit.api.json.AnnotationGenerator;
 import edu.kit.api.json.AnnotationGeneratorImpl;
 import edu.kit.api.json.RDF2AnnoJsonConverterImpl;
+import edu.kit.exceptions.AnnotationExceptions;
 
 public class TestObjectAnnotation {
 
@@ -41,15 +42,19 @@ public class TestObjectAnnotation {
 		// * "N3" N3
 		// * "RDF/JSON" RDFJSON
 
-		StringWriter input = new StringWriter();
-//		 AnnotationGenerator annoGen = new AnnotationGeneratorImpl();
+		String input = readFile("resources/format.xml", StandardCharsets.UTF_8);
+		
+		 AnnotationGenerator annoGen = new AnnotationGeneratorImpl();
 //		 annoGen.validateNStoreJSONLD(input);
 //		 annoGen.validateNStoreRDFXML(input);
-//		 annoGen.validateNStoreTURTLE(input);
+		 try {
+			System.out.println(annoGen.validateNStoreTURTLE(input));
+		} catch (AnnotationExceptions e) {
+			e.printStackTrace();
+		}
 //		 annoGen.validateNStoreNTriple(input);
 
 		// Create JSONLD of the Annotation
-		String jsonld = readFile("resources/jsonldfull.json", StandardCharsets.UTF_8);
 		// Parse the JSONLD String
 //		ObjectParser parser = new ObjectParser();
 //		// Parse Annotations with boolean flag "clear" -> false

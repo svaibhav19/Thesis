@@ -8,6 +8,9 @@ import java.io.UnsupportedEncodingException;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 
+import edu.kit.exceptions.AnnotationExceptions;
+import edu.kit.exceptions.StatusCode;
+
 /**
  * 
  * @author Vaibhav
@@ -20,84 +23,97 @@ public class AnnotationGeneratorImpl implements AnnotationGenerator{
 	 * This method is used to accept the JSON-LD as input generated from Apache-Jena.
 	 * Further it passes to JsonMapper for mapping to Anno4j for all the operation like transforming to WADM adding ID and storing to JENA 
 	 * @param inputStr JSON-LD 
+	 * @throws AnnotationExceptions 
 	 * 
 	 */
 	@Override
-	public String validateNStoreJSONLD(String inputStr) {
-//		TODO: to pass the value to jsonMapper for further operations like mapping to anno4j and stoing
+	public String validateNStoreJSONLD(String inputStr) throws AnnotationExceptions {
 		
 		Model model = ModelFactory.createDefaultModel();
 		try (final InputStream in = new ByteArrayInputStream(inputStr.getBytes("UTF-8"))) {
 			model.read(in, null, "JSON-LD");
-		} catch (UnsupportedEncodingException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.BAD_REQUEST.getStatusCode());
+		} catch (IOException e) {
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
 		}
-		return null;
+		AnnotationGeneratorSupports annoSupport = new AnnotationGeneratorSupports();
+		String message = annoSupport.convertStore(model,serviceURL);
+		
+		return message;
 	}
 
 	/**
 	 * This method is used to accept the RDF/XML as input generated from Apache-Jena.
 	 * Further it passes to JsonMapper for mapping to Anno4j for all the operation like transforming to WADM adding ID and storing to JENA 
 	 * @param inputStr RDF/XML
+	 * @throws AnnotationExceptions 
 	 * 
 	 */
 	@Override
-	public String validateNStoreRDFXML(String inputStr) {
-//		TODO: to pass the value to jsonMapper for further operations like mapping to anno4j and stoing
+	public String validateNStoreRDFXML(String inputStr) throws AnnotationExceptions {
 
 		Model model = ModelFactory.createDefaultModel();
 		try (final InputStream in = new ByteArrayInputStream(inputStr.getBytes("UTF-8"))) {
 			model.read(in, null, "RDF/XML");
-		} catch (UnsupportedEncodingException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.BAD_REQUEST.getStatusCode());
+		} catch (IOException e) {
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
 		}
-		return null;
+		AnnotationGeneratorSupports annoSupport = new AnnotationGeneratorSupports();
+		String message = annoSupport.convertStore(model,serviceURL);
+		
+		return message;
 	}
 
 	/**
 	 * This method is used to accept the TURTLE as input generated from Apache-Jena.
 	 * Further it passes to JsonMapper for mapping to Anno4j for all the operation like transforming to WADM adding ID and storing to JENA 
 	 * @param inputStr TURTLE
+	 * @throws AnnotationExceptions 
 	 * 
 	 */
 	@Override
-	public String validateNStoreTURTLE(String inputStr) {
-//		TODO: to pass the value to jsonMapper for further operations like mapping to anno4j and stoing
+	public String validateNStoreTURTLE(String inputStr) throws AnnotationExceptions {
 		
 		Model model = ModelFactory.createDefaultModel();
+		
 		try (final InputStream in = new ByteArrayInputStream(inputStr.getBytes("UTF-8"))) {
 			model.read(in, null, "TURTLE");
-		} catch (UnsupportedEncodingException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.BAD_REQUEST.getStatusCode());
+		} catch (IOException e) {
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
 		}
-		return null;
+		AnnotationGeneratorSupports annoSupport = new AnnotationGeneratorSupports();
+		String message = annoSupport.convertStore(model,serviceURL);
+		
+		return message;
 	}
 
 	/**
 	 * This method is used to accept the N-TRIPLE as input generated from Apache-Jena.
 	 * Further it passes to JsonMapper for mapping to Anno4j for all the operation like transforming to WADM adding ID and storing to JENA 
 	 * @param inputStr N-TRIPLE
+	 * @throws AnnotationExceptions 
 	 * 
 	 */
 	@Override
-	public String validateNStoreNTriple(String inputStr) {
-//		TODO: to pass the value to jsonMapper for further operations like mapping to anno4j and stoing
+	public String validateNStoreNTriple(String inputStr) throws AnnotationExceptions {
 		
 		Model model = ModelFactory.createDefaultModel();
 		try (final InputStream in = new ByteArrayInputStream(inputStr.getBytes("UTF-8"))) {
 			model.read(in, null, "N-TRIPLE");
-		} catch (UnsupportedEncodingException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.BAD_REQUEST.getStatusCode());
+		} catch (IOException e) {
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
 		}
-		return null;
+		AnnotationGeneratorSupports annoSupport = new AnnotationGeneratorSupports();
+		String message = annoSupport.convertStore(model,serviceURL);
+		
+		return message;
 	}
 
 }

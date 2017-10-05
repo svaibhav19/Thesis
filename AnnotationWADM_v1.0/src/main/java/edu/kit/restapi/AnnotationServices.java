@@ -6,6 +6,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 
 import org.openrdf.repository.RepositoryException;
@@ -13,9 +15,12 @@ import org.openrdf.repository.config.RepositoryConfigException;
 
 import edu.kit.api.QueryByTarget;
 import edu.kit.api.QueryByTargetImpl;
+import edu.kit.api.json.JsonMapper;
+import edu.kit.api.json.JsonMapperImp;
 import edu.kit.api.page.PageAnnotationGenerator;
 import edu.kit.api.page.PageAnnotationGeneratorImpl;
 import edu.kit.exceptions.AnnotationExceptions;
+import edu.kit.exceptions.StatusCode;
 
 @Path("/")
 public class AnnotationServices {
@@ -29,7 +34,7 @@ public class AnnotationServices {
 	@Path("test")
 	@Produces(MediaType.TEXT_PLAIN)
 	public String checkConnection() {
-		return "Connection Found Status : OK";
+		return "Connection To Annotation Store Found Status : OK";
 	}
 
 	/**
@@ -44,19 +49,29 @@ public class AnnotationServices {
 	@POST
 	@Path("store")
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public String checkJsonLD(@QueryParam("digitalObjID") String digitalObjID, String dataToStore)
+	public String checkJsonLD(@Context HttpHeaders headers,@QueryParam("digitalObjID") String digitalObjID, String dataToStore)
 			throws AnnotationExceptions {
-
+		String mediaType = headers.getRequestHeaders().get("content-type").get(0);
+		
 		try {
-			PageAnnotationGenerator generator = new PageAnnotationGeneratorImpl();
-			return generator.parseAnnotations(digitalObjID, dataToStore);
+			if(mediaType.equals("application/xml")){
+				PageAnnotationGenerator generator = new PageAnnotationGeneratorImpl();
+				return generator.parseAnnotations(digitalObjID, dataToStore);
+			}else if(mediaType.equals("application/json")){
+				JsonMapper jsonMapper = new JsonMapperImp();
+				return jsonMapper.parseJson(dataToStore);
+			}
+			
 		} catch (RepositoryException e) {
-			e.printStackTrace();
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
 		} catch (RepositoryConfigException e) {
-			e.printStackTrace();
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
+		} catch (IllegalAccessException e) {
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.SERVICE_UNAVAILABLE.getStatusCode());
+		} catch (InstantiationException e) {
+			throw new AnnotationExceptions(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
 		}
-
-		return "No Annotation Created";
+		return "Error : Please check data and retry again";
 	}
 
 	/**

@@ -1,0 +1,97 @@
+<urn:anno4j:d533d4f1-d579-4665-b348-a3b8f4b7cc57>
+        a                             <https://github.com/anno4j/ns#Resource> , <https://github.com/anno4j/ns#ExternalWebResource> , <http://www.w3.org/ns/oa#TextualBody> , <https://github.com/anno4j/ns#CreationProvenance> , <http://www.w3.org/ns/oa#EmbeddedContent> ;
+        <http://www.w3.org/1999/02/22-rdf-syntax-ns#value>
+                "2.54501023289795" ;
+        <http://purl.org/dc/elements/1.1/format>
+                "xsd:string" ;
+        <http://purl.org/dc/elements/1.1/identifier>
+                "r1" ;
+        <http://purl.org/dc/elements/1.1/subject>
+                "TextRegion" ;
+        <http://purl.org/dc/elements/1.1/title>
+                "SaturationBGColorHue_STD_DEV" ;
+        <http://qudt.org/vocab/unit>  "deg" .
+
+<urn:anno4j:bf05cd1b-0ce4-4619-ad26-828f5c431080>
+        a                             <https://github.com/anno4j/ns#Resource> , <http://www.w3.org/ns/oa#TextualBody> , <https://github.com/anno4j/ns#ExternalWebResource> , <https://github.com/anno4j/ns#CreationProvenance> , <http://www.w3.org/ns/oa#EmbeddedContent> ;
+        <http://www.w3.org/1999/02/22-rdf-syntax-ns#value>
+                "6.567055336383978" ;
+        <http://purl.org/dc/elements/1.1/format>
+                "xsd:string" ;
+        <http://purl.org/dc/elements/1.1/identifier>
+                "r1" ;
+        <http://purl.org/dc/elements/1.1/subject>
+                "TextRegion" ;
+        <http://purl.org/dc/elements/1.1/title>
+                "SaturationFGColorHue_STD_DEV" ;
+        <http://qudt.org/vocab/unit>  "deg" .
+
+<http://www.w3.org/ns/oa#describing>
+        a       <http://www.w3.org/ns/oa#Motivation> , <https://github.com/anno4j/ns#Resource> .
+
+<urn:anno4j:ea24fdb4-9b52-439a-ba50-7c3606f1d949>
+        a                             <https://github.com/anno4j/ns#Resource> , <http://www.w3.org/ns/oa#EmbeddedContent> , <http://www.w3.org/ns/oa#TextualBody> , <https://github.com/anno4j/ns#ExternalWebResource> , <https://github.com/anno4j/ns#CreationProvenance> ;
+        <http://www.w3.org/1999/02/22-rdf-syntax-ns#value>
+                "26.27450980392157" ;
+        <http://purl.org/dc/elements/1.1/format>
+                "xsd:string" ;
+        <http://purl.org/dc/elements/1.1/identifier>
+                "r1" ;
+        <http://purl.org/dc/elements/1.1/subject>
+                "TextRegion" ;
+        <http://purl.org/dc/elements/1.1/title>
+                "BrightnessFGColorSaturation_MEDIAN" ;
+        <http://qudt.org/vocab/unit>  "pct" .
+
+<urn:anno4j:897a5be9-e8ae-4495-bec9-f93315480ace>
+        a       <https://github.com/anno4j/ns#Agent> , <https://github.com/anno4j/ns#Resource> , <http://www.w3.org/ns/prov/SoftwareAgent> ;
+        <http://xmlns.com/foaf/0.1/name>
+                "SWATI Workflow-Version 1.3" .
+
+<urn:anno4j:f6707640-c503-4fac-8db2-b970c5951365>
+        a       <http://www.w3.org/ns/oa#Annotation> ;
+        <http://purl.org/dc/terms/created>
+                "2017-08-17T11:35:02z" ;
+        <http://purl.org/dc/terms/creator>
+                <urn:anno4j:897a5be9-e8ae-4495-bec9-f93315480ace> ;
+        <http://purl.org/dc/terms/modified>
+                "2017-08-17T11:35:02z" ;
+        <http://www.w3.org/ns/oa#hasBody>
+                <urn:anno4j:44e2ea93-9319-46fb-94a0-a9b3811df1d4> ;
+        <http://www.w3.org/ns/oa#hasTarget>
+                <urn:anno4j:8d5cd6ec-a1b8-4bbd-a162-9405eb2256a4> ;
+        <http://www.w3.org/ns/oa#motivatedBy>
+                <http://www.w3.org/ns/oa#describing> .
+
+<urn:anno4j:44e2ea93-9319-46fb-94a0-a9b3811df1d4>
+        a       <https://github.com/anno4j/ns#Resource> , <http://www.w3.org/ns/oa#Choice> , <https://github.com/anno4j/ns#ExternalWebResource> , <https://github.com/anno4j/ns#CreationProvenance> ;
+        <http://www.w3.org/ns/activitystreams#items>
+                <urn:anno4j:ea24fdb4-9b52-439a-ba50-7c3606f1d949> , <urn:anno4j:d533d4f1-d579-4665-b348-a3b8f4b7cc57> , <urn:anno4j:871f6337-21d3-4e99-91ef-08aa24557c51> , <urn:anno4j:bf05cd1b-0ce4-4619-ad26-828f5c431080> .
+
+<urn:anno4j:26c3ffc4-83d7-4404-83ba-1de7e60da872>
+        a       <http://www.w3.org/ns/oa#SvgSelector> , <https://github.com/anno4j/ns#Resource> , <https://github.com/anno4j/ns#Selector> ;
+        <http://www.w3.org/1999/02/22-rdf-syntax-ns#value>
+                "1087,363 1262,363 1262,462 1087,462" ;
+        <http://purl.org/dc/terms/conformsTo>
+                "http://www.w3.org/TR/SVG/" .
+
+<urn:anno4j:871f6337-21d3-4e99-91ef-08aa24557c51>
+        a                             <https://github.com/anno4j/ns#CreationProvenance> , <http://www.w3.org/ns/oa#EmbeddedContent> , <http://www.w3.org/ns/oa#TextualBody> , <https://github.com/anno4j/ns#ExternalWebResource> , <https://github.com/anno4j/ns#Resource> ;
+        <http://www.w3.org/1999/02/22-rdf-syntax-ns#value>
+                "5.46130090158393" ;
+        <http://purl.org/dc/elements/1.1/format>
+                "xsd:string" ;
+        <http://purl.org/dc/elements/1.1/identifier>
+                "r1" ;
+        <http://purl.org/dc/elements/1.1/subject>
+                "TextRegion" ;
+        <http://purl.org/dc/elements/1.1/title>
+                "BrightnessFGColorHue_STD_DEV" ;
+        <http://qudt.org/vocab/unit>  "deg" .
+
+<urn:anno4j:8d5cd6ec-a1b8-4bbd-a162-9405eb2256a4>
+        a       <http://www.w3.org/ns/oa#SpecificResource> , <https://github.com/anno4j/ns#Resource> , <https://github.com/anno4j/ns#ExternalWebResource> , <https://github.com/anno4j/ns#CreationProvenance> ;
+        <http://www.w3.org/ns/oa#hasSelector>
+                <urn:anno4j:26c3ffc4-83d7-4404-83ba-1de7e60da872> ;
+        <http://www.w3.org/ns/oa#hasSource>
+                <http://example.org/source1> .

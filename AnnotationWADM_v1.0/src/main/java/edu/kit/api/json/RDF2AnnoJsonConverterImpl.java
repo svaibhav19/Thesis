@@ -491,4 +491,9 @@ public class RDF2AnnoJsonConverterImpl implements RDF2AnnoJsonConverter {
 		this.idString = idString;
 		this.serviceurl = serviceurl;
 	}
+
+	public void setModel(Model model, String serviceurl) {
+		this.model = model;
+		this.serviceurl = serviceurl;
+	}
 }
