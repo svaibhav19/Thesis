@@ -59,11 +59,11 @@ This service is used to execute the custom (SPARQ) queries and fetch the result 
 
 ### PRE-REQUISITES
 1. Apache Tomcat (any web server)
-2. Apache JEAN
+2. Apache JENA
 
 ### Installation
 #### 1. Setup APACHE Jena
-Download Apache Jean https://jena.apache.org/ follow the instruction provided on the site to install and configure.
+Download Apache Jena https://jena.apache.org/ follow the instruction provided on the site to install and configure.
 Run JENA and create dataset (by default the annotation store has been configure to kit  dataset )
 #### 2. Deploy Annotation Store
 Buil the project to generate the ANNOTATION.war file. Deploy into tomcat (web server) and call the REST services.
