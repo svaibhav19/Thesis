@@ -71,5 +71,5 @@ Even the Annotation Store can be access via web browser by visiting following li
 e.g. http://localhost:8080/AnnotationWADM
 
 #### Note :
-In case if new dataset has been created in JEAN with different name or the Annotation Store has been deployed to different system, 
+In case if new dataset has been created in JENA with different name or the Annotation Store has been deployed to different system, 
 then you have to set this information in properties file. This location can be found in the web server /AnnotationWADM/WEB-INF/classes/jenaService.properties
