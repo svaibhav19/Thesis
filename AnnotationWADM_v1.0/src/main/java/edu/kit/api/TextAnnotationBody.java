@@ -68,12 +68,6 @@ public interface TextAnnotationBody extends Body, TextualBody {
     @Iri("http://qudt.org/vocab/unit")
     void setUnit(String unit);
     
-//    @Iri(DC.NS+"purpose")
-//    String purpose();
-//    
-//    @Iri(DC.NS+"purpose")
-//    void setPurpose(String purpose);
-    
     @Iri(DCTERMS.CREATOR)
     Agent getCreator();
 

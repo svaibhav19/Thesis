@@ -147,7 +147,6 @@ public class PageAnnotationGeneratorImpl implements PageAnnotationGenerator {
 		for (RegionType regions : pcgtsTypeObj.getPage().getTextRegionOrImageRegionOrLineDrawingRegion()) {
 			Annotation annoations = createAnnoataionPart(pcgtsTypeObj.getMetadata(), softAgentResourceID);
 			Model otherModel = createOtherBodyTarget(annoations, regions, digitalObjID);
-			// modelMap.put(annoations.getResourceAsString(), otherModel);
 			accessor.add(annotationURL + annoations.getResourceAsString(), otherModel);
 			resourceIDList.add(annoations.getResourceAsString());
 		}
@@ -196,7 +195,6 @@ public class PageAnnotationGeneratorImpl implements PageAnnotationGenerator {
 			
 
 			Model model = getJenaModel(annoations.getTriples(RDFFormat.NTRIPLES));
-			// writeTofile(annoations, "New_" + regions.getId());
 			return model;
 		} catch (RepositoryException e) {
 			throw new AnnotationExceptions(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
@@ -317,7 +315,6 @@ public class PageAnnotationGeneratorImpl implements PageAnnotationGenerator {
 			annoations.addTarget(specific);
 			Model model = getJenaModel(annoations.getTriples(RDFFormat.NTRIPLES));
 
-			// writeTofile(annoations, "pageAnnotation");
 			return model;
 		} catch (RepositoryException e) {
 			throw new AnnotationExceptions(e.getMessage(), StatusCode.INTERNAL_SERVER_ERROR.getStatusCode());
@@ -329,31 +326,6 @@ public class PageAnnotationGeneratorImpl implements PageAnnotationGenerator {
 
 	}
 
-	/*private void writeTofile(Annotation annoations, String fileName) {
-		File f = new File("C:\\Users\\Vaibhav\\Desktop\\AnnotationOutPut\\" + fileName + ".xml");
-		if (!f.exists()) {
-			try {
-				f.createNewFile();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
-		Writer writer = null;
-
-		try {
-			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f), "utf-8"));
-			writer.write(annoations.getTriples(RDFFormat.RDFXML));
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			try {
-				writer.close();
-			} catch (Exception ex) {
-				 ignore }
-		}
-
-	}*/
 
 	/**
 	 * This method is responsible to get the Specific resource of the given type.
